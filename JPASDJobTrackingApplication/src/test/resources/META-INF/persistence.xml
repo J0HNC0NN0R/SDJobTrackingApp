@@ -4,22 +4,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<persistence-unit name="BarLouieMealTracker">
+	<persistence-unit name="trackerPU">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
 		<!-- entities here -->
-		<class> com.skilldistillery.barlouiemealtracker.entities.Meal</class>
+		<class> com.skilldistillery.jobtracking.entities.User</class>
 		<!-- entities here -->
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/barlouiemealtrackerdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
+				value="jdbc:mysql://localhost:3306/trackerdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
 
 			<property name="javax.persistence.jdbc.user"
-				value="admin" /> 
+				value="tracker" /> 
 			<property name="javax.persistence.jdbc.password"
-				value="admind" /> 
+				value="tracker" /> 
 
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />

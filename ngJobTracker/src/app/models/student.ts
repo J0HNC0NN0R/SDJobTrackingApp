@@ -35,7 +35,7 @@ export class Student {
     clearance?: string
   ) {
     this.id = id;
-    this.studentId = userId;
+    this.studentId = studentId;
     this.cohortId = cohortId;
     this.firstName = firstName;
     this.lastName = lastName;

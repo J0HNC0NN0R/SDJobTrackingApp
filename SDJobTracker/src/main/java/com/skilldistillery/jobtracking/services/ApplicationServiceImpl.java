@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Application;
+import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
+import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
@@ -14,6 +16,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired
 	private ApplicationRepository apprepo;
 	
+	@Autowired
+	private StudentRepository sturepo;
 	
 	
 	@Override
@@ -30,8 +34,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public Application create(Application application, Integer id) {
 		if(application != null) {
-			// TODO add application to user using find user by id
-			
+			Student student = sturepo.findById(id).get();
+			// set student application.setUserId();
+			Application app = apprepo.saveAndFlush(application);
 		}
 		return application;
 	}

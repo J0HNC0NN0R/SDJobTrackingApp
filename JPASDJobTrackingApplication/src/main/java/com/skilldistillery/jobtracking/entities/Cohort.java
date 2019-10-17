@@ -13,18 +13,24 @@ public class Cohort {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="start_date")
+	@Column(name = "start_date")
 	private Date startDate;
-	@Column(name="end_date")
+	@Column(name = "end_date")
 	private Date endDate;
-	
-	public Cohort() {}
+	private String name;
+	private String nickname;
 
-	public Cohort(int id, Date startDate, Date endDate) {
+	public Cohort(int id, Date startDate, Date endDate, String name, String nickname) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.name = name;
+		this.nickname = nickname;
+	}
+
+	public Cohort() {
+		super();
 	}
 
 	public int getId() {
@@ -51,9 +57,20 @@ public class Cohort {
 		this.endDate = endDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Cohort [id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + "]";
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	@Override
@@ -77,6 +94,22 @@ public class Cohort {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Cohort [id=");
+		builder.append(id);
+		builder.append(", startDate=");
+		builder.append(startDate);
+		builder.append(", endDate=");
+		builder.append(endDate);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", nickname=");
+		builder.append(nickname);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="company_location")
+@Table(name = "company_location")
 public class CompanyLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="company_id")
+	@Column(name = "company_id")
 	private int companyId;
 	private String city;
 	private String state;
-	
+
 	public CompanyLocation() {
-		
+
 	}
 
 	public CompanyLocation(int id, int companyId, String city, String state) {
@@ -98,6 +98,5 @@ public class CompanyLocation {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

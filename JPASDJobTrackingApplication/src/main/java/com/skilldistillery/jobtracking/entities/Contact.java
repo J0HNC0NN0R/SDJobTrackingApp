@@ -2,14 +2,16 @@ package com.skilldistillery.jobtracking.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Contact {
 
-	// F I E L D S
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	int id;
 	@Column(name = "application_id")
 	private int applicationId;
@@ -17,8 +19,6 @@ public class Contact {
 	private String email;
 	private int phone;
 	private String position;
-
-	// C O N S T R U C T O R S
 
 	public Contact(int id, int applicationId, String name, String email, int phone, String position) {
 		super();
@@ -29,8 +29,6 @@ public class Contact {
 		this.phone = phone;
 		this.position = position;
 	}
-	
-	// M E T H O D S
 
 	public int getId() {
 		return id;

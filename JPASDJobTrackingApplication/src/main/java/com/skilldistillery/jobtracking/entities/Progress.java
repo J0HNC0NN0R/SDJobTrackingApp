@@ -9,8 +9,6 @@ import javax.persistence.Id;
 @Entity
 public class Progress {
 
-	// F I E L D S
-
 	@Id
 	private int id;
 
@@ -19,20 +17,20 @@ public class Progress {
 
 	private String State;
 
-	@Column(name = "updated_date")
-	private Date updatedDate;
+	@Column(name = "updated")
+	private Date updated;
 
-	// C O N S T R U C T O R S
-
-	public Progress(int id, int applicationId, String state, Date updatedDate) {
+	public Progress(int id, int applicationId, String state, Date updated) {
 		super();
 		this.id = id;
 		this.applicationId = applicationId;
 		State = state;
-		this.updatedDate = updatedDate;
+		this.updated = updated;
 	}
 
-	// M E T H O D S
+	public Progress() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -58,12 +56,12 @@ public class Progress {
 		State = state;
 	}
 
-	public Date getUpdatedDate() {
-		return updatedDate;
+	public Date getUpdated() {
+		return updated;
 	}
 
-	public void setUpdatedDate(Date updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setUpdated(Date updated) {
+		this.updated = updated;
 	}
 
 	@Override
@@ -97,8 +95,8 @@ public class Progress {
 		builder.append(applicationId);
 		builder.append(", State=");
 		builder.append(State);
-		builder.append(", updatedDate=");
-		builder.append(updatedDate);
+		builder.append(", updated=");
+		builder.append(updated);
 		builder.append("]");
 		return builder.toString();
 	}

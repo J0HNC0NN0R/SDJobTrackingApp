@@ -12,12 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+class EventTest {
 
-class UserTest {
-	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Student user;
+	private Event event;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,18 +31,19 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(Student.class, 1);
+		event = em.find(Event.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		event = null;
 	}
 
 	@Test
 	void test() {
-		assertEquals(1, user.getId());
+		assertEquals(1, event.getId());
+		assertNotNull(event);
 	}
 
 }

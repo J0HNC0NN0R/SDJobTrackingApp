@@ -29,7 +29,7 @@
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/trackerdb?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=MST" />
 
-			<property name="javax.persistence.jdbc.user" value="tracker" />
+			<property name="javax.persistence.jdbc.user" value="trackerdb" />
 			<property name="javax.persistence.jdbc.password"
 				value="tracker" />
 

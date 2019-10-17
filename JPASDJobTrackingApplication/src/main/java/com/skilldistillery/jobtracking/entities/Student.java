@@ -11,49 +11,69 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="first_name")
+	@Column(name = "user_id")
+	private int userId;
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
+
 	private String email;
-	@Column(name="cohort_id")
-	private int cohortId;
+
+	@Column(name = "github_username")
+	private String githubUsername;
+
+	@Column(name = "is_vettec")
 	private boolean isVettec;
+
+	@Column(name = "is_gi_bill")
+	private boolean isGIBill;
+
+	@Column(name = "is_employed")
 	private boolean isEmployed;
-	private String clearance;
-	@Column(name="education_level")
+
+	@Column(name = "is_accepted")
+	private boolean isAccepted;
+
+	@Column(name = "deposit_paid")
+	private boolean deposit_paid;
+
+	@Column(name = "needs_loaner_laptop")
+	private boolean needsLoanerLaptop;
+
+	@Column(name = "education_level")
 	private String educationLevel;
-	@Column(name="open_to_relocation")
-	private boolean relocation;
-	@Column(name="home_of_record")
-	private String homeOfRecord;
-	@Column(name="desired_locations")
-	private String desiredLocations;
-	private String role;
-	private boolean enabled;
-	private String password;
 
-	public Student() {}
+	@Column(name = "open_to_relocation")
+	private String openToRelocation;
 
-	public Student(int id, String firstName, String lastName, String email, int cohortId, boolean isVettec,
-			boolean isEmployed, String clearance, String educationLevel, boolean relocation, String homeOfRecord,
-			String desiredLocations, String role, boolean enabled, String password) {
+	private String clearance;
+
+	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
+			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,
+			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance) {
 		super();
 		this.id = id;
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.cohortId = cohortId;
+		this.githubUsername = githubUsername;
 		this.isVettec = isVettec;
+		this.isGIBill = isGIBill;
 		this.isEmployed = isEmployed;
-		this.clearance = clearance;
+		this.isAccepted = isAccepted;
+		this.deposit_paid = deposit_paid;
+		this.needsLoanerLaptop = needsLoanerLaptop;
 		this.educationLevel = educationLevel;
-		this.relocation = relocation;
-		this.homeOfRecord = homeOfRecord;
-		this.desiredLocations = desiredLocations;
-		this.role = role;
-		this.enabled = enabled;
-		this.password = password;
+		this.openToRelocation = openToRelocation;
+		this.clearance = clearance;
+	}
+
+	public Student(int id) {
+		super();
+		this.id = id;
 	}
 
 	public int getId() {
@@ -62,6 +82,14 @@ public class Student {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -88,12 +116,12 @@ public class Student {
 		this.email = email;
 	}
 
-	public int getCohortId() {
-		return cohortId;
+	public String getGithubUsername() {
+		return githubUsername;
 	}
 
-	public void setCohortId(int cohortId) {
-		this.cohortId = cohortId;
+	public void setGithubUsername(String githubUsername) {
+		this.githubUsername = githubUsername;
 	}
 
 	public boolean isVettec() {
@@ -104,6 +132,14 @@ public class Student {
 		this.isVettec = isVettec;
 	}
 
+	public boolean isGIBill() {
+		return isGIBill;
+	}
+
+	public void setGIBill(boolean isGIBill) {
+		this.isGIBill = isGIBill;
+	}
+
 	public boolean isEmployed() {
 		return isEmployed;
 	}
@@ -112,12 +148,28 @@ public class Student {
 		this.isEmployed = isEmployed;
 	}
 
-	public String getClearance() {
-		return clearance;
+	public boolean isAccepted() {
+		return isAccepted;
 	}
 
-	public void setClearance(String clearance) {
-		this.clearance = clearance;
+	public void setAccepted(boolean isAccepted) {
+		this.isAccepted = isAccepted;
+	}
+
+	public boolean isDeposit_paid() {
+		return deposit_paid;
+	}
+
+	public void setDeposit_paid(boolean deposit_paid) {
+		this.deposit_paid = deposit_paid;
+	}
+
+	public boolean isNeedsLoanerLaptop() {
+		return needsLoanerLaptop;
+	}
+
+	public void setNeedsLoanerLaptop(boolean needsLoanerLaptop) {
+		this.needsLoanerLaptop = needsLoanerLaptop;
 	}
 
 	public String getEducationLevel() {
@@ -128,56 +180,22 @@ public class Student {
 		this.educationLevel = educationLevel;
 	}
 
-	public boolean isRelocation() {
-		return relocation;
+	public String getOpenToRelocation() {
+		return openToRelocation;
 	}
 
-	public void setRelocation(boolean relocation) {
-		this.relocation = relocation;
+	public void setOpenToRelocation(String openToRelocation) {
+		this.openToRelocation = openToRelocation;
 	}
 
-	public String getHomeOfRecord() {
-		return homeOfRecord;
+	public String getClearance() {
+		return clearance;
 	}
 
-	public void setHomeOfRecord(String homeOfRecord) {
-		this.homeOfRecord = homeOfRecord;
+	public void setClearance(String clearance) {
+		this.clearance = clearance;
 	}
 
-	public String getDesiredLocations() {
-		return desiredLocations;
-	}
-
-	public void setDesiredLocations(String desiredLocations) {
-		this.desiredLocations = desiredLocations;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -205,39 +223,36 @@ public class Student {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Student [id=");
 		builder.append(id);
+		builder.append(", userId=");
+		builder.append(userId);
 		builder.append(", firstName=");
 		builder.append(firstName);
 		builder.append(", lastName=");
 		builder.append(lastName);
 		builder.append(", email=");
 		builder.append(email);
-		builder.append(", cohortId=");
-		builder.append(cohortId);
+		builder.append(", githubUsername=");
+		builder.append(githubUsername);
 		builder.append(", isVettec=");
 		builder.append(isVettec);
+		builder.append(", isGIBill=");
+		builder.append(isGIBill);
 		builder.append(", isEmployed=");
 		builder.append(isEmployed);
-		builder.append(", clearance=");
-		builder.append(clearance);
+		builder.append(", isAccepted=");
+		builder.append(isAccepted);
+		builder.append(", deposit_paid=");
+		builder.append(deposit_paid);
+		builder.append(", needsLoanerLaptop=");
+		builder.append(needsLoanerLaptop);
 		builder.append(", educationLevel=");
 		builder.append(educationLevel);
-		builder.append(", relocation=");
-		builder.append(relocation);
-		builder.append(", homeOfRecord=");
-		builder.append(homeOfRecord);
-		builder.append(", desiredLocations=");
-		builder.append(desiredLocations);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", password=");
-		builder.append(password);
+		builder.append(", openToRelocation=");
+		builder.append(openToRelocation);
+		builder.append(", clearance=");
+		builder.append(clearance);
 		builder.append("]");
 		return builder.toString();
 	}
 
-	
-	
-	
 }

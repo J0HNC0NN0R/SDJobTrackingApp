@@ -13,16 +13,16 @@ public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="student_id")
+	@Column(name = "student_id")
 	private int studentId;
 	private String title;
 	private String description;
 	private String location;
 	// TODO: Set temporal type
 	private Date date;
-	
+
 	public Event() {
-		
+
 	}
 
 	public Event(int id, int studentId, String title, String description, String locatin, Date date) {
@@ -123,6 +123,5 @@ public class Event {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

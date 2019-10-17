@@ -8,27 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="job_post")
+@Table(name = "job_post")
 public class JobPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="company_id")
+	@Column(name = "company_id")
 	private int companyId;
 	private String position;
-	@Column(name="post_url")
-	private String postURL;
-	
-	public JobPost() {
-		
-	}
 
-	public JobPost(int id, int companyId, String position, String postURL) {
+	private String description;
+
+	@Column(name = "post_url")
+	private String postURL;
+
+	public JobPost(int id, int companyId, String position, String description, String postURL) {
 		super();
 		this.id = id;
 		this.companyId = companyId;
 		this.position = position;
+		this.description = description;
 		this.postURL = postURL;
+	}
+
+	public JobPost() {
+		super();
 	}
 
 	public int getId() {
@@ -53,6 +57,14 @@ public class JobPost {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getPostURL() {
@@ -94,11 +106,12 @@ public class JobPost {
 		builder.append(companyId);
 		builder.append(", position=");
 		builder.append(position);
+		builder.append(", description=");
+		builder.append(description);
 		builder.append(", postURL=");
 		builder.append(postURL);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

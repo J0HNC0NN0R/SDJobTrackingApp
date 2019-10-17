@@ -16,7 +16,7 @@ class NoteTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Note note;
+	private ApplicationNote note;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,7 +31,7 @@ class NoteTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		note = em.find(Note.class, 1);
+		note = em.find(ApplicationNote.class, 1);
 	}
 
 	@AfterEach

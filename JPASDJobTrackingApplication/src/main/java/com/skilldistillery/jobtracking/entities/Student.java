@@ -20,9 +20,9 @@ public class Student {
 	private int cohortId;
 	private boolean isVettec;
 	private boolean isEmployed;
-	private Clearance clearance;
+	private String clearance;
 	@Column(name="education_level")
-	private EducationLevel educationLevel;
+	private String educationLevel;
 	@Column(name="open_to_relocation")
 	private boolean relocation;
 	@Column(name="home_of_record")
@@ -36,8 +36,8 @@ public class Student {
 	public Student() {}
 
 	public Student(int id, String firstName, String lastName, String email, int cohortId, boolean isVettec,
-			boolean isEmployed, Clearance clearance, EducationLevel educationLevel, boolean relocation,
-			String homeOfRecord, String desiredLocations, String role, boolean enabled, String password) {
+			boolean isEmployed, String clearance, String educationLevel, boolean relocation, String homeOfRecord,
+			String desiredLocations, String role, boolean enabled, String password) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -112,19 +112,19 @@ public class Student {
 		this.isEmployed = isEmployed;
 	}
 
-	public Clearance getClearance() {
+	public String getClearance() {
 		return clearance;
 	}
 
-	public void setClearance(Clearance clearance) {
+	public void setClearance(String clearance) {
 		this.clearance = clearance;
 	}
 
-	public EducationLevel getEducationLevel() {
+	public String getEducationLevel() {
 		return educationLevel;
 	}
 
-	public void setEducationLevel(EducationLevel educationLevel) {
+	public void setEducationLevel(String educationLevel) {
 		this.educationLevel = educationLevel;
 	}
 
@@ -176,6 +176,8 @@ public class Student {
 		this.password = password;
 	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -200,12 +202,42 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", cohortId=" + cohortId + ", isVettec=" + isVettec + ", isEmployed=" + isEmployed + ", clearance="
-				+ clearance + ", educationLevel=" + educationLevel + ", relocation=" + relocation + ", homeOfRecord="
-				+ homeOfRecord + ", desiredLocations=" + desiredLocations + ", role=" + role + ", enabled=" + enabled
-				+ ", password=" + password + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Student [id=");
+		builder.append(id);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", cohortId=");
+		builder.append(cohortId);
+		builder.append(", isVettec=");
+		builder.append(isVettec);
+		builder.append(", isEmployed=");
+		builder.append(isEmployed);
+		builder.append(", clearance=");
+		builder.append(clearance);
+		builder.append(", educationLevel=");
+		builder.append(educationLevel);
+		builder.append(", relocation=");
+		builder.append(relocation);
+		builder.append(", homeOfRecord=");
+		builder.append(homeOfRecord);
+		builder.append(", desiredLocations=");
+		builder.append(desiredLocations);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
 	
 	
 }

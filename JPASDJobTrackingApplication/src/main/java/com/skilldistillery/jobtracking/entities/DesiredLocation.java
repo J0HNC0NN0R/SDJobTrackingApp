@@ -1,38 +1,33 @@
 package com.skilldistillery.jobtracking.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Event {
+@Table(name="student_desired_location")
+public class DesiredLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="student_id")
 	private int studentId;
-	private String title;
-	private String description;
-	private String locatin;
-	// TODO: Set temporal type
-	private Date date;
+	private String city;
+	private String state;
 	
-	public Event() {
+	public DesiredLocation() {
 		
 	}
 
-	public Event(int id, int studentId, String title, String description, String locatin, Date date) {
+	public DesiredLocation(int id, int studentId, String city, String state) {
 		super();
 		this.id = id;
 		this.studentId = studentId;
-		this.title = title;
-		this.description = description;
-		this.locatin = locatin;
-		this.date = date;
+		this.city = city;
+		this.state = state;
 	}
 
 	public int getId() {
@@ -51,38 +46,24 @@ public class Event {
 		this.studentId = studentId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getCity() {
+		return city;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getState() {
+		return state;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setState(String state) {
+		this.state = state;
 	}
 
-	public String getLocatin() {
-		return locatin;
-	}
-
-	public void setLocatin(String locatin) {
-		this.locatin = locatin;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,7 +80,7 @@ public class Event {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Event other = (Event) obj;
+		DesiredLocation other = (DesiredLocation) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -108,21 +89,18 @@ public class Event {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Event [id=");
+		builder.append("DesiredLocation [id=");
 		builder.append(id);
 		builder.append(", studentId=");
 		builder.append(studentId);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", locatin=");
-		builder.append(locatin);
-		builder.append(", date=");
-		builder.append(date);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 	
 }

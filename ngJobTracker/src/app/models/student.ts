@@ -1,6 +1,6 @@
 export class Student {
   id: number;
-  userId: number;
+  studentId: number;
   cohortId: number;
   firstName: string;
   lastName: string;
@@ -18,7 +18,7 @@ export class Student {
 
   constructor(
     id?: number,
-    userId?: number,
+    studentId?: number,
     cohortId?: number,
     firstName?: string,
     lastName?: string,
@@ -35,7 +35,7 @@ export class Student {
     clearance?: string
   ) {
     this.id = id;
-    this.userId = userId;
+    this.studentId = studentId;
     this.cohortId = cohortId;
     this.firstName = firstName;
     this.lastName = lastName;

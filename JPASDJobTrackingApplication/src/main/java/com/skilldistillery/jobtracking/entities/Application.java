@@ -13,8 +13,8 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "user_id")
-	private int userId;
+	@Column(name = "student_id")
+	private int studentId;
 
 	@Column(name = "company_id")
 	private int companyId;
@@ -26,10 +26,11 @@ public class Application {
 
 	private int interestLevel;
 
-	public Application(int id, int userId, int companyId, String position, String descriptionURL, int interestLevel) {
+	public Application(int id, int studentId, int companyId, String position, String descriptionURL,
+			int interestLevel) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.studentId = studentId;
 		this.companyId = companyId;
 		this.position = position;
 		this.descriptionURL = descriptionURL;
@@ -48,12 +49,12 @@ public class Application {
 		this.id = id;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 
 	public int getCompanyId() {
@@ -115,8 +116,8 @@ public class Application {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Application [id=");
 		builder.append(id);
-		builder.append(", userId=");
-		builder.append(userId);
+		builder.append(", studentId=");
+		builder.append(studentId);
 		builder.append(", companyId=");
 		builder.append(companyId);
 		builder.append(", position=");
@@ -128,5 +129,4 @@ public class Application {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }

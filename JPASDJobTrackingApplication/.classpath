@@ -22,12 +22,14 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+
 	<classpathentry kind="lib" path="/Users/modx/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.1.10.RELEASE/f81a8bb5edeee61484ad916d8bc1dac55e994f1c/spring-context-5.1.10.RELEASE.jar" sourcepath="/Users/modx/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.1.10.RELEASE/4a037daaeb0c860082eb12820129a385abfbb5a0/spring-context-5.1.10.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/modx/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.1.11.RELEASE/b774364187f5e68379b8c3121232a04686a0325c/spring-data-jpa-2.1.11.RELEASE.jar" sourcepath="/Users/modx/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-jpa/2.1.11.RELEASE/e76d52492d4530002dfb399eeaee95c5341ea6b4/spring-data-jpa-2.1.11.RELEASE-sources.jar">
+
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>

@@ -1,5 +1,7 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,29 +9,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class User {
+public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name="student_id")
 	private int studentId;
-	private String role;
-	private boolean enabled;
-	private String password;
-	private String username;
-
-	public User() {
+	private String title;
+	private String description;
+	private String locatin;
+	// TODO: Set temporal type
+	private Date date;
+	
+	public Event() {
 		
 	}
 
-	public User(int id, int studentId, String role, boolean enabled, String password, String username) {
+	public Event(int id, int studentId, String title, String description, String locatin, Date date) {
 		super();
 		this.id = id;
 		this.studentId = studentId;
-		this.role = role;
-		this.enabled = enabled;
-		this.password = password;
-		this.username = username;
+		this.title = title;
+		this.description = description;
+		this.locatin = locatin;
+		this.date = date;
 	}
 
 	public int getId() {
@@ -48,36 +51,36 @@ public class User {
 		this.studentId = studentId;
 	}
 
-	public String getRole() {
-		return role;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getLocatin() {
+		return locatin;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLocatin(String locatin) {
+		this.locatin = locatin;
 	}
 
-	public String getUsername() {
-		return username;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override
@@ -96,7 +99,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Event other = (Event) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -105,22 +108,21 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
+		builder.append("Event [id=");
 		builder.append(id);
 		builder.append(", studentId=");
 		builder.append(studentId);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", username=");
-		builder.append(username);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", locatin=");
+		builder.append(locatin);
+		builder.append(", date=");
+		builder.append(date);
 		builder.append("]");
 		return builder.toString();
 	}
 	
 	
-
 }

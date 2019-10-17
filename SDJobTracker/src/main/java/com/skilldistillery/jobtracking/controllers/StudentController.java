@@ -17,35 +17,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.jobtracking.entities.Student;
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http:localhost:4201" })
-public class JobPostController {
+public class StudentController {
 	@Autowired
-	private JobPostService serv;
+	private StudentService serv;
 
-	@GetMapping("jobPosts")
-	public List<JobPost> index(Principal principal) {
+	@GetMapping("students")
+	public List<Student> index(Principal principal) {
 		return serv.index(principal.getName());
 	}
 
-	@GetMapping("jobPosts/{tid}")
-	public JobPost show(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
-		JobPost jobPost = serv.show(principal.getName(), tid);
-		if (jobPost != null) {
+	@GetMapping("students/{id}")
+	public Student show(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+		Student student = serv.show(principal.getName(), id);
+		if (student != null) {
 			resp.setStatus(200);
 		} else {
 			resp.setStatus(404);
 		}
-		return jobPost;
+		return student;
 	}
 
-	@PostMapping("jobPosts")
-	public JobPost create(@RequestBody JobPost jobPost, HttpServletResponse resp, HttpServletRequest req,
+	@PostMapping("students")
+	public Student create(@RequestBody Student student, HttpServletResponse resp, HttpServletRequest req,
 			Principal principal) {
-		JobPost created = null;
+		Student created = null;
 		try {
-			created = serv.create(principal.getName(), jobPost);
+			created = serv.create(principal.getName(), student);
 			StringBuffer url = req.getRequestURL();
 			url.append("/" + created.getId());
 			resp.setStatus(201);
@@ -58,12 +60,12 @@ public class JobPostController {
 		return created;
 	}
 
-	@PutMapping("jobPosts/{tid}")
-	public JobPost update(@PathVariable("tid") int tid, @RequestBody JobPost jobPost, HttpServletResponse resp,
+	@PutMapping("students/{id}")
+	public Student update(@PathVariable("id") int id, @RequestBody Student student, HttpServletResponse resp,
 			Principal principal) {
-		JobPost updated = null;
+		Student updated = null;
 		try {
-			updated = serv.update(principal.getName(), tid, jobPost);
+			updated = serv.update(principal.getName(), id, student);
 			if (updated != null) {
 				resp.setStatus(200);
 			} else {
@@ -77,10 +79,10 @@ public class JobPostController {
 		return updated;
 	}
 
-	@DeleteMapping("jobPosts/{tid}")
-	public void delete(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
+	@DeleteMapping("students/{id}")
+	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
 		try {
-			if (!serv.destroy(principal.getName(), tid)) {
+			if (!serv.destroy(principal.getName(), id)) {
 				resp.setStatus(204);
 			} else {
 				resp.setStatus(404);
@@ -90,4 +92,5 @@ public class JobPostController {
 			resp.setStatus(400);
 		}
 	}
+
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.jobtracking.entities.Application;
+
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http:localhost:4201" })
@@ -29,9 +31,9 @@ public class ApplicationController {
 		return serv.index(principal.getName());
 	}
 
-	@GetMapping("applications/{tid}")
-	public Application show(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
-		Application application = serv.show(principal.getName(), tid);
+	@GetMapping("applications/{id}")
+	public Application show(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+		Application application = serv.show(principal.getName(), id);
 		if (application != null) {
 			resp.setStatus(200);
 		} else {
@@ -58,12 +60,12 @@ public class ApplicationController {
 		return created;
 	}
 
-	@PutMapping("applications/{tid}")
-	public Application update(@PathVariable("tid") int tid, @RequestBody Application application, HttpServletResponse resp,
+	@PutMapping("applications/{id}")
+	public Application update(@PathVariable("id") int id, @RequestBody Application application, HttpServletResponse resp,
 			Principal principal) {
 		Application updated = null;
 		try {
-			updated = serv.update(principal.getName(), tid, application);
+			updated = serv.update(principal.getName(), id, application);
 			if (updated != null) {
 				resp.setStatus(200);
 			} else {
@@ -77,10 +79,10 @@ public class ApplicationController {
 		return updated;
 	}
 
-	@DeleteMapping("applications/{tid}")
-	public void delete(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
+	@DeleteMapping("applications/{id}")
+	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
 		try {
-			if (!serv.destroy(principal.getName(), tid)) {
+			if (!serv.destroy(principal.getName(), id)) {
 				resp.setStatus(204);
 			} else {
 				resp.setStatus(404);

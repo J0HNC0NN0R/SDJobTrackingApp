@@ -17,7 +17,7 @@ public class Event {
 	private int studentId;
 	private String title;
 	private String description;
-	private String locatin;
+	private String location;
 	// TODO: Set temporal type
 	private Date date;
 	
@@ -31,7 +31,7 @@ public class Event {
 		this.studentId = studentId;
 		this.title = title;
 		this.description = description;
-		this.locatin = locatin;
+		this.location = locatin;
 		this.date = date;
 	}
 
@@ -68,11 +68,11 @@ public class Event {
 	}
 
 	public String getLocatin() {
-		return locatin;
+		return location;
 	}
 
 	public void setLocatin(String locatin) {
-		this.locatin = locatin;
+		this.location = locatin;
 	}
 
 	public Date getDate() {
@@ -117,7 +117,7 @@ public class Event {
 		builder.append(", description=");
 		builder.append(description);
 		builder.append(", locatin=");
-		builder.append(locatin);
+		builder.append(location);
 		builder.append(", date=");
 		builder.append(date);
 		builder.append("]");

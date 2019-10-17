@@ -30,6 +30,8 @@ public class DesiredLocation {
 		this.state = state;
 	}
 
+	
+
 	public int getId() {
 		return id;
 	}

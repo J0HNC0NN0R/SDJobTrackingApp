@@ -103,22 +103,22 @@ DROP TABLE IF EXISTS `application` ;
 
 CREATE TABLE IF NOT EXISTS `application` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_id` INT NOT NULL,
   `company_id` INT NOT NULL,
+  `student_id` INT NOT NULL,
   `position` VARCHAR(400) NULL,
   `desc_url` TEXT NULL,
   `interest_level` TINYINT(5) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_application_user1_idx` (`user_id` ASC),
   INDEX `fk_application_company1_idx` (`company_id` ASC),
-  CONSTRAINT `fk_application_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `student` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_application_student1_idx` (`student_id` ASC),
   CONSTRAINT `fk_application_company1`
     FOREIGN KEY (`company_id`)
     REFERENCES `company` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_application_student1`
+    FOREIGN KEY (`student_id`)
+    REFERENCES `student` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -237,11 +237,12 @@ DROP TABLE IF EXISTS `student_address` ;
 CREATE TABLE IF NOT EXISTS `student_address` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `student_id` INT NOT NULL,
-  `address_type` VARCHAR(200) NULL,
+  `street` VARCHAR(200) NULL,
   `city` VARCHAR(100) NULL,
   `state` CHAR(2) NULL,
   `zip` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
+  `address_type` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_contact_student1_idx` (`student_id` ASC),
   CONSTRAINT `fk_contact_student1`
@@ -381,9 +382,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `application` (`id`, `user_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (1, 1, 1, 'Dev', 'www.desc.com', 3);
-INSERT INTO `application` (`id`, `user_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (2, 1, 2, 'Jr Dev', 'www.test.com', 5);
-INSERT INTO `application` (`id`, `user_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (3, 2, 1, 'Dev', 'www.jobapp.com', 1);
+INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (1, 1, 1, 'Dev', 'www.desc.com', 3);
+INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (2, 2, 1, 'Jr Dev', 'www.test.com', 5);
+INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (3, 1, 2, 'Dev', 'www.jobapp.com', 1);
 
 COMMIT;
 
@@ -455,9 +456,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `student_address` (`id`, `student_id`, `address_type`, `city`, `state`, `zip`, `phone`) VALUES (1, 1, '123 Student St', 'Denver', 'CO', '80202', '111-111-1111');
-INSERT INTO `student_address` (`id`, `student_id`, `address_type`, `city`, `state`, `zip`, `phone`) VALUES (2, 1, '456 Home Rd', 'Denver', 'CO', '80204', '222-222-2222');
-INSERT INTO `student_address` (`id`, `student_id`, `address_type`, `city`, `state`, `zip`, `phone`) VALUES (3, 2, '789 Other Ln', 'Texas', 'TX', '80206', '333-333-3333');
+INSERT INTO `student_address` (`id`, `student_id`, `street`, `city`, `state`, `zip`, `phone`, `address_type`) VALUES (1, 1, '123 Student St', 'Denver', 'CO', '80202', '111-111-1111', 'Home');
+INSERT INTO `student_address` (`id`, `student_id`, `street`, `city`, `state`, `zip`, `phone`, `address_type`) VALUES (2, 1, '456 Home Rd', 'Denver', 'CO', '80204', '222-222-2222', 'Home');
+INSERT INTO `student_address` (`id`, `student_id`, `street`, `city`, `state`, `zip`, `phone`, `address_type`) VALUES (3, 2, '789 Other Ln', 'Texas', 'TX', '80206', '333-333-3333', 'Home');
 
 COMMIT;
 

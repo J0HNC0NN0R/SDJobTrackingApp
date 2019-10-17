@@ -2,29 +2,27 @@ package com.skilldistillery.jobtracking.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Company {
-	
-	// F I E L D S
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 	private String name;
-	@Column(name="site_url")
+	@Column(name = "site_url")
 	private String siteURL;
-	
-	// C O N S T R U C T O R S
-	
+
 	public Company(int id, String name, String siteURL) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.siteURL = siteURL;
 	}
-	
-	// M E T H O D S
 
 	public int getId() {
 		return id;
@@ -84,5 +82,5 @@ public class Company {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

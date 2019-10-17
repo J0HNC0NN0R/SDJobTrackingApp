@@ -2,36 +2,41 @@ package com.skilldistillery.jobtracking.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="company_note")
+@Table(name = "company_note")
 public class CompanyNote {
-	
-	// F I E L D S
-	
-	@Id
-	private int id;
-	
-	@Column(name="company_id")
-	private int companyId;
-	
-	private String city;
-	
-	private String state;
-	
-	// C O N S T R U C T O R S
 
-	public CompanyNote(int id, int companyId, String city, String state) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Column(name = "student_id")
+	private int studentId;
+
+	@Column(name = "company_id")
+	private int companyId;
+
+	private String title;
+
+	private String body;
+
+	public CompanyNote(int id, int studentId, int companyId, String title, String body) {
 		super();
 		this.id = id;
+		this.studentId = studentId;
 		this.companyId = companyId;
-		this.city = city;
-		this.state = state;
+		this.title = title;
+		this.body = body;
 	}
-	
-	// M E T H O D S
+
+	public CompanyNote() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -39,6 +44,14 @@ public class CompanyNote {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 
 	public int getCompanyId() {
@@ -49,20 +62,20 @@ public class CompanyNote {
 		this.companyId = companyId;
 	}
 
-	public String getCity() {
-		return city;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getState() {
-		return state;
+	public String getBody() {
+		return body;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
 	@Override
@@ -92,12 +105,14 @@ public class CompanyNote {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyNote [id=");
 		builder.append(id);
+		builder.append(", studentId=");
+		builder.append(studentId);
 		builder.append(", companyId=");
 		builder.append(companyId);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", body=");
+		builder.append(body);
 		builder.append("]");
 		return builder.toString();
 	}

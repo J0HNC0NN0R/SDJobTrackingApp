@@ -8,36 +8,37 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="student_address")
+@Table(name = "student_address")
 public class StudentAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String street;
-	@Column(name="student_id")
+	@Column(name = "student_id")
 	private int studentId;
-	@Column(name="company_id")
-	private int companyId;
 	private String city;
-	@Column(name="zip")
+	private String state;
+	@Column(name = "zip")
 	private String zipcode;
-	@Column()
-	private String phoneNumber;
-	private String email;
-	
-	public StudentAddress() {}
+	private String phone;
+	@Column(name = "address_type")
+	private String addressType;
+	private String street;
 
-	public StudentAddress(int id, String street, int studentId, int companyId, String city, String zipcode, String phoneNumber,
-			String email) {
+	public StudentAddress(int id, int studentId, String city, String state, String zipcode, String phone,
+			String addressType, String street) {
 		super();
 		this.id = id;
-		this.street = street;
 		this.studentId = studentId;
-		this.companyId = companyId;
 		this.city = city;
+		this.state = state;
 		this.zipcode = zipcode;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
+		this.phone = phone;
+		this.addressType = addressType;
+		this.street = street;
+	}
+
+	public StudentAddress() {
+		super();
 	}
 
 	public int getId() {
@@ -48,28 +49,12 @@ public class StudentAddress {
 		this.id = id;
 	}
 
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
 	public int getStudentId() {
 		return studentId;
 	}
 
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getCity() {
@@ -80,6 +65,14 @@ public class StudentAddress {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getZipcode() {
 		return zipcode;
 	}
@@ -88,20 +81,28 @@ public class StudentAddress {
 		this.zipcode = zipcode;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getAddressType() {
+		return addressType;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	@Override
@@ -129,26 +130,24 @@ public class StudentAddress {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Address [id=");
+		builder.append("StudentAddress [id=");
 		builder.append(id);
-		builder.append(", street=");
-		builder.append(street);
 		builder.append(", studentId=");
 		builder.append(studentId);
-		builder.append(", companyId=");
-		builder.append(companyId);
 		builder.append(", city=");
 		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
 		builder.append(", zipcode=");
 		builder.append(zipcode);
-		builder.append(", phoneNumber=");
-		builder.append(phoneNumber);
-		builder.append(", email=");
-		builder.append(email);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", addressType=");
+		builder.append(addressType);
+		builder.append(", street=");
+		builder.append(street);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 
 }

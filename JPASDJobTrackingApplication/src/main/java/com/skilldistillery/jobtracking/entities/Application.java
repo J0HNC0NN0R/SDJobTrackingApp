@@ -1,17 +1,16 @@
 package com.skilldistillery.jobtracking.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Application {
 
-	// F I E L D S
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "user_id")
@@ -20,35 +19,26 @@ public class Application {
 	@Column(name = "company_id")
 	private int companyId;
 
-	@Column(name = "notes_id")
-	private int notesId;
-
 	private String position;
 
 	@Column(name = "desc_url")
-	private String describeURL;
-
-	@Column(name = "date_applied")
-	private Date dateApplied;
+	private String descriptionURL;
 
 	private int interestLevel;
 
-	// C O N S T R U C T O R S
-
-	public Application(int id, int userId, int companyId, int notesId, String position, String describeURL,
-			Date dateApplied, int interestLevel) {
+	public Application(int id, int userId, int companyId, String position, String descriptionURL, int interestLevel) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.companyId = companyId;
-		this.notesId = notesId;
 		this.position = position;
-		this.describeURL = describeURL;
-		this.dateApplied = dateApplied;
+		this.descriptionURL = descriptionURL;
 		this.interestLevel = interestLevel;
 	}
 
-	// M E T H O D S
+	public Application() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -74,14 +64,6 @@ public class Application {
 		this.companyId = companyId;
 	}
 
-	public int getNotesId() {
-		return notesId;
-	}
-
-	public void setNotesId(int notesId) {
-		this.notesId = notesId;
-	}
-
 	public String getPosition() {
 		return position;
 	}
@@ -90,20 +72,12 @@ public class Application {
 		this.position = position;
 	}
 
-	public String getDescribeURL() {
-		return describeURL;
+	public String getDescriptionURL() {
+		return descriptionURL;
 	}
 
-	public void setDescribeURL(String describeURL) {
-		this.describeURL = describeURL;
-	}
-
-	public Date getDateApplied() {
-		return dateApplied;
-	}
-
-	public void setDateApplied(Date dateApplied) {
-		this.dateApplied = dateApplied;
+	public void setDescriptionURL(String descriptionURL) {
+		this.descriptionURL = descriptionURL;
 	}
 
 	public int getInterestLevel() {
@@ -145,14 +119,10 @@ public class Application {
 		builder.append(userId);
 		builder.append(", companyId=");
 		builder.append(companyId);
-		builder.append(", notesId=");
-		builder.append(notesId);
 		builder.append(", position=");
 		builder.append(position);
-		builder.append(", describeURL=");
-		builder.append(describeURL);
-		builder.append(", dateApplied=");
-		builder.append(dateApplied);
+		builder.append(", descriptionURL=");
+		builder.append(descriptionURL);
 		builder.append(", interestLevel=");
 		builder.append(interestLevel);
 		builder.append("]");

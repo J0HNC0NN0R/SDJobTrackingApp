@@ -9,5 +9,7 @@ public class SdJobTrackerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SdJobTrackerApplication.class, args);
 	}
+	
+	
 
 }

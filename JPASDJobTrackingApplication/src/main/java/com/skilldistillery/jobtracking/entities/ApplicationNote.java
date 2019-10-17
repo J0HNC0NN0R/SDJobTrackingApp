@@ -8,24 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="application_note")
+@Table(name = "application_note")
 public class ApplicationNote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(name = "application_id")
+	private int applicationId;
 	private String title;
 	private String body;
-	@Column(name="user_id")
-	private int userId;
 
-	public ApplicationNote() {}
-
-	public ApplicationNote(int id, String title, String body, int userId) {
+	public ApplicationNote(int id, int applicationId, String title, String body) {
 		super();
 		this.id = id;
+		this.applicationId = applicationId;
 		this.title = title;
 		this.body = body;
-		this.userId = userId;
+	}
+
+	public ApplicationNote() {
+		super();
 	}
 
 	public int getId() {
@@ -34,6 +36,14 @@ public class ApplicationNote {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getApplicationId() {
+		return applicationId;
+	}
+
+	public void setApplicationId(int applicationId) {
+		this.applicationId = applicationId;
 	}
 
 	public String getTitle() {
@@ -50,14 +60,6 @@ public class ApplicationNote {
 
 	public void setBody(String body) {
 		this.body = body;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	@Override
@@ -84,8 +86,17 @@ public class ApplicationNote {
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", title=" + title + ", body=" + body + ", userId=" + userId + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ApplicationNote [id=");
+		builder.append(id);
+		builder.append(", applicationId=");
+		builder.append(applicationId);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", body=");
+		builder.append(body);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
+
 }

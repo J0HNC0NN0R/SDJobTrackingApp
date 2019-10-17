@@ -8,29 +8,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="student_desired_location")
-public class DesiredLocation {
+@Table(name = "student_desired_location")
+public class StudentDesiredLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="student_id")
+	@Column(name = "student_id")
 	private int studentId;
 	private String city;
 	private String state;
-	
-	public DesiredLocation() {
-		
+
+	public StudentDesiredLocation() {
+
 	}
 
-	public DesiredLocation(int id, int studentId, String city, String state) {
+	public StudentDesiredLocation(int id, int studentId, String city, String state) {
 		super();
 		this.id = id;
 		this.studentId = studentId;
 		this.city = city;
 		this.state = state;
 	}
-
-	
 
 	public int getId() {
 		return id;
@@ -64,8 +62,6 @@ public class DesiredLocation {
 		this.state = state;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,7 +78,7 @@ public class DesiredLocation {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DesiredLocation other = (DesiredLocation) obj;
+		StudentDesiredLocation other = (StudentDesiredLocation) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -102,7 +98,5 @@ public class DesiredLocation {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
+
 }

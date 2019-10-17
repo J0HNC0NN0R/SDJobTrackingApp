@@ -3,8 +3,10 @@ package com.skilldistillery.jobtracking.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="company_note")
 public class CompanyNote {
 	
 	// F I E L D S

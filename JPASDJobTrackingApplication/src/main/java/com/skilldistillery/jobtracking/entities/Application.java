@@ -1,6 +1,9 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -28,13 +31,14 @@ public class Application {
 	@Column(name="date_applied")
 	private Date dateApplied;
 	
-	@Column(name="interest_level")
-	private InterestLevel interestLevel;
+	//@Column(name="interest_level")
+	List<Integer> interestLevel = new ArrayList<Integer>();
 	
+
 	// C O N S T R U C T O R S
 	
 	public Application(int id, int userId, int companyId, int notesId, String position, String describeUrl,
-			Date dateApplied, InterestLevel interestLevel) {
+			Date dateApplied) {
 		super();
 		this.id = id;
 		this.userId = userId;

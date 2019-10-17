@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
@@ -28,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public Student findByStudentId(Integer id) {
-		return sturepo.findById(id);
+		return sturepo.findById(id).get();
 	}
 	
 	@Override
@@ -37,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
 		if(student != null && user != null) {
 			// TODO setuser to student and flush 
 		}
+		return student;
 		
 	}
 	

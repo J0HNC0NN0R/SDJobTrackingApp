@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Note {
+@Table(name="application_note")
+public class ApplicationNote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -16,9 +18,9 @@ public class Note {
 	@Column(name="user_id")
 	private int userId;
 
-	public Note() {}
+	public ApplicationNote() {}
 
-	public Note(int id, String title, String body, int userId) {
+	public ApplicationNote(int id, String title, String body, int userId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -74,7 +76,7 @@ public class Note {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Note other = (Note) obj;
+		ApplicationNote other = (ApplicationNote) obj;
 		if (id != other.id)
 			return false;
 		return true;

@@ -11,49 +11,25 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="first_name")
-	private String firstName;
-	@Column(name="last_name")
-	private String lastName;
-	private String email;
-	@Column(name="cohort_id")
-	private int cohortId;
-	private boolean isVettec;
-	private boolean isEmployed;
-	private Clearance clearance;
-	@Column(name="education_level")
-	private EducationLevel educationLevel;
-	@Column(name="open_to_relocation")
-	private boolean relocation;
-	@Column(name="home_of_record")
-	private String homeOfRecord;
-	@Column(name="desired_locations")
-	private String desiredLocations;
+	@Column(name="student_id")
+	private int studentId;
 	private String role;
 	private boolean enabled;
 	private String password;
+	private String username;
 
-	public User() {}
+	public User() {
+		
+	}
 
-	public User(int id, String firstName, String lastName, String email, int cohortId, boolean isVettec,
-			boolean isEmployed, Clearance clearance, EducationLevel educationLevel, boolean relocation,
-			String homeOfRecord, String desiredLocations, String role, boolean enabled, String password) {
+	public User(int id, int studentId, String role, boolean enabled, String password, String username) {
 		super();
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.cohortId = cohortId;
-		this.isVettec = isVettec;
-		this.isEmployed = isEmployed;
-		this.clearance = clearance;
-		this.educationLevel = educationLevel;
-		this.relocation = relocation;
-		this.homeOfRecord = homeOfRecord;
-		this.desiredLocations = desiredLocations;
+		this.studentId = studentId;
 		this.role = role;
 		this.enabled = enabled;
 		this.password = password;
+		this.username = username;
 	}
 
 	public int getId() {
@@ -64,92 +40,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getCohortId() {
-		return cohortId;
-	}
-
-	public void setCohortId(int cohortId) {
-		this.cohortId = cohortId;
-	}
-
-	public boolean isVettec() {
-		return isVettec;
-	}
-
-	public void setVettec(boolean isVettec) {
-		this.isVettec = isVettec;
-	}
-
-	public boolean isEmployed() {
-		return isEmployed;
-	}
-
-	public void setEmployed(boolean isEmployed) {
-		this.isEmployed = isEmployed;
-	}
-
-	public Clearance getClearance() {
-		return clearance;
-	}
-
-	public void setClearance(Clearance clearance) {
-		this.clearance = clearance;
-	}
-
-	public EducationLevel getEducationLevel() {
-		return educationLevel;
-	}
-
-	public void setEducationLevel(EducationLevel educationLevel) {
-		this.educationLevel = educationLevel;
-	}
-
-	public boolean isRelocation() {
-		return relocation;
-	}
-
-	public void setRelocation(boolean relocation) {
-		this.relocation = relocation;
-	}
-
-	public String getHomeOfRecord() {
-		return homeOfRecord;
-	}
-
-	public void setHomeOfRecord(String homeOfRecord) {
-		this.homeOfRecord = homeOfRecord;
-	}
-
-	public String getDesiredLocations() {
-		return desiredLocations;
-	}
-
-	public void setDesiredLocations(String desiredLocations) {
-		this.desiredLocations = desiredLocations;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
 
 	public String getRole() {
@@ -176,6 +72,14 @@ public class User {
 		this.password = password;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -200,12 +104,23 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", cohortId=" + cohortId + ", isVettec=" + isVettec + ", isEmployed=" + isEmployed + ", clearance="
-				+ clearance + ", educationLevel=" + educationLevel + ", relocation=" + relocation + ", homeOfRecord="
-				+ homeOfRecord + ", desiredLocations=" + desiredLocations + ", role=" + role + ", enabled=" + enabled
-				+ ", password=" + password + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", studentId=");
+		builder.append(studentId);
+		builder.append(", role=");
+		builder.append(role);
+		builder.append(", enabled=");
+		builder.append(enabled);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", username=");
+		builder.append(username);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	
+
 }

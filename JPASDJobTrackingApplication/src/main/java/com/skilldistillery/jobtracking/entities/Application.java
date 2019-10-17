@@ -1,51 +1,53 @@
 package com.skilldistillery.jobtracking.entities;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Application {
-	
+
 	// F I E L D S
-	
+
+	@Id
 	private int id;
-	
-	@Column(name="user_id")
+
+	@Column(name = "user_id")
 	private int userId;
-	
-	@Column(name="company_id")
+
+	@Column(name = "company_id")
 	private int companyId;
-	
-	@Column(name="notes_id")
+
+	@Column(name = "notes_id")
 	private int notesId;
-	
+
 	private String position;
-	
-	@Column(name="desc_url")
-	private String describeUrl;
-	
-	@Column(name="date_applied")
+
+	@Column(name = "desc_url")
+	private String describeURL;
+
+	@Column(name = "date_applied")
 	private Date dateApplied;
-	
-	@Column(name="interest_level")
-	private InterestLevel interestLevel;
-	
+
+	private int interestLevel;
+
 	// C O N S T R U C T O R S
-	
-	public Application(int id, int userId, int companyId, int notesId, String position, String describeUrl,
-			Date dateApplied, InterestLevel interestLevel) {
+
+	public Application(int id, int userId, int companyId, int notesId, String position, String describeURL,
+			Date dateApplied, int interestLevel) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.companyId = companyId;
 		this.notesId = notesId;
 		this.position = position;
-		this.describeUrl = describeUrl;
+		this.describeURL = describeURL;
 		this.dateApplied = dateApplied;
 		this.interestLevel = interestLevel;
 	}
-	
+
 	// M E T H O D S
 
 	public int getId() {
@@ -88,12 +90,12 @@ public class Application {
 		this.position = position;
 	}
 
-	public String getDescribeUrl() {
-		return describeUrl;
+	public String getDescribeURL() {
+		return describeURL;
 	}
 
-	public void setDescribeUrl(String describeUrl) {
-		this.describeUrl = describeUrl;
+	public void setDescribeURL(String describeURL) {
+		this.describeURL = describeURL;
 	}
 
 	public Date getDateApplied() {
@@ -104,11 +106,11 @@ public class Application {
 		this.dateApplied = dateApplied;
 	}
 
-	public InterestLevel getInterestLevel() {
+	public int getInterestLevel() {
 		return interestLevel;
 	}
 
-	public void setInterestLevel(InterestLevel interestLevel) {
+	public void setInterestLevel(int interestLevel) {
 		this.interestLevel = interestLevel;
 	}
 
@@ -147,8 +149,8 @@ public class Application {
 		builder.append(notesId);
 		builder.append(", position=");
 		builder.append(position);
-		builder.append(", describeUrl=");
-		builder.append(describeUrl);
+		builder.append(", describeURL=");
+		builder.append(describeURL);
 		builder.append(", dateApplied=");
 		builder.append(dateApplied);
 		builder.append(", interestLevel=");

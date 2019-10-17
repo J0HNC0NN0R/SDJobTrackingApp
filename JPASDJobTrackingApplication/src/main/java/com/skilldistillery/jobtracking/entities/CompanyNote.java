@@ -2,35 +2,36 @@ package com.skilldistillery.jobtracking.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="student_desired_location")
-public class DesiredLocation {
+@Table(name="company_note")
+public class CompanyNote {
+	
+	// F I E L D S
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="student_id")
-	private int studentId;
+	
+	@Column(name="company_id")
+	private int companyId;
+	
 	private String city;
+	
 	private String state;
 	
-	public DesiredLocation() {
-		
-	}
+	// C O N S T R U C T O R S
 
-	public DesiredLocation(int id, int studentId, String city, String state) {
+	public CompanyNote(int id, int companyId, String city, String state) {
 		super();
 		this.id = id;
-		this.studentId = studentId;
+		this.companyId = companyId;
 		this.city = city;
 		this.state = state;
 	}
-
 	
+	// M E T H O D S
 
 	public int getId() {
 		return id;
@@ -40,12 +41,12 @@ public class DesiredLocation {
 		this.id = id;
 	}
 
-	public int getStudentId() {
-		return studentId;
+	public int getCompanyId() {
+		return companyId;
 	}
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 	public String getCity() {
@@ -64,8 +65,6 @@ public class DesiredLocation {
 		this.state = state;
 	}
 
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,7 +81,7 @@ public class DesiredLocation {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DesiredLocation other = (DesiredLocation) obj;
+		CompanyNote other = (CompanyNote) obj;
 		if (id != other.id)
 			return false;
 		return true;
@@ -91,10 +90,10 @@ public class DesiredLocation {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("DesiredLocation [id=");
+		builder.append("CompanyNote [id=");
 		builder.append(id);
-		builder.append(", studentId=");
-		builder.append(studentId);
+		builder.append(", companyId=");
+		builder.append(companyId);
 		builder.append(", city=");
 		builder.append(city);
 		builder.append(", state=");
@@ -102,7 +101,5 @@ public class DesiredLocation {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
+
 }

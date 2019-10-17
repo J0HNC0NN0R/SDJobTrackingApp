@@ -1,7 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,10 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CohortTest {
+class NoteTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Cohort cohort;
+	private Note note;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,20 +31,20 @@ class CohortTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		cohort = em.find(Cohort.class, 1);
+		note = em.find(Note.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		cohort = null;
+		note = null;
 	}
 
 	@Test
-	void test_Cohort_entity_mapping() {
-		assertEquals(1, cohort.getId());
-		assertNotNull(cohort);
-
+	void test() {
+		assertEquals(1, note.getId());
+		assertNotNull(note);
 	}
+
 
 }

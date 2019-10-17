@@ -13,10 +13,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CohortTest {
+class ApplicationTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Cohort cohort;
+	private Application app;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,19 +31,19 @@ class CohortTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		cohort = em.find(Cohort.class, 1);
+		app = em.find(Application.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		cohort = null;
+		app = null;
 	}
 
 	@Test
 	void test_Cohort_entity_mapping() {
-		assertEquals(1, cohort.getId());
-		assertNotNull(cohort);
+		assertEquals(1, app.getId());
+		assertNotNull(app);
 
 	}
 

@@ -14,7 +14,9 @@ import com.skilldistillery.jobtracking.entities.StudentAddress;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.repositories.CohortRepository;
 import com.skilldistillery.jobtracking.repositories.CompanyNoteRepository;
+import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 import com.skilldistillery.jobtracking.repositories.EventRepository;
+import com.skilldistillery.jobtracking.repositories.StudentAddressRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 import com.skilldistillery.jobtracking.repositories.UserRepository;
 
@@ -35,6 +37,12 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private EventRepository evenrepo;
+	
+	@Autowired
+	private CompanyRepository comrepo;
+	
+	@Autowired 
+	private StudentAddressRepository stuaddrepo;
 
 	@Override
 	public Student findByUserName(String username) {
@@ -133,31 +141,65 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public CompanyNote getCompanyNote(String companyName, Integer studentId) {
-		return comnoterepo.getCompanyNote(companyName, studentId);
+	public CompanyNote getCompanyNote(Integer companyId, Integer studentId) {
+		return comnoterepo.getCompanyNote(companyId, studentId);
 	}
 
 	@Override
-	public CompanyNote addCompanyNote(Integer companyId, Integer studentId) {
-		// TODO Auto-generated method stub
-		return null;
+	public CompanyNote addCompanyNote(CompanyNote companynote, Integer companyId, Integer studentId) {
+		CompanyNote newCNote = null;
+		
+		if (companynote != null) {
+			
+			companynote.setCompany(comrepo.findById(companyId).get());
+			companynote.setStudent(sturepo.findById(studentId).get());
+			newCNote = comnoterepo.saveAndFlush(companynote);
+		}
+		return newCNote;
 	}
 
 	@Override
-	public CompanyNote updateCompanyNote(Integer cNoteId) {
-		// TODO Auto-generated method stub
-		return null;
+	public CompanyNote updateCompanyNote(CompanyNote companynote, Integer cNoteId) {
+		CompanyNote actualCNote = null;
+		Optional<CompanyNote> managedCNote = comnoterepo.findById(cNoteId);
+		if(managedCNote.isPresent()) {
+			 actualCNote = managedCNote.get();
+			actualCNote.setBody(companynote.getBody());
+			actualCNote.setTitle(companynote.getTitle());
+			comnoterepo.saveAndFlush(actualCNote);
+		}
+		return actualCNote;
 	}
 
 	@Override
 	public StudentAddress addStudentAddress(StudentAddress address, Integer studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		StudentAddress newAddress = null;
+		
+		if(address != null) {
+			Student newStudent = sturepo.findById(studentId).get();
+			address.setStudent(newStudent);
+			newAddress = stuaddrepo.saveAndFlush(address);
+		}
+		
+		
+		return newAddress;
 	}
 
 	@Override
-	public StudentAddress updateStudentAddress(Integer addressId) {
-		return null;
+	public StudentAddress updateStudentAddress(StudentAddress address, Integer addressId) {
+		StudentAddress actualAddress = null;
+		Optional<StudentAddress> managedAddress = stuaddrepo.findById(addressId);
+		if(managedAddress.isPresent()) {
+			actualAddress.setStreet(address.getStreet());
+			actualAddress.setCity(address.getCity());
+			actualAddress.setState(address.getState());
+			actualAddress.setZipcode(address.getZipcode());
+			actualAddress.setPhone(address.getPhone());
+			stuaddrepo.saveAndFlush(actualAddress);
+		}
+		
+		
+		return actualAddress;
 	}
 
 	@Override

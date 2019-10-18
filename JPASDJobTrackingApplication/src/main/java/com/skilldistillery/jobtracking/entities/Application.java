@@ -27,7 +27,7 @@ public class Application {
 	@OneToMany(mappedBy = "application")
 	private List<Contact> contacts;
 	@OneToMany(mappedBy = "application")
-	private List<ApplicationNote> applicatinNotes;
+	private List<ApplicationNote> applicationNotes;
 	@ManyToOne
 //	@Column(name = "student_id")
 //	private int studentId;
@@ -42,9 +42,9 @@ public class Application {
 	public Application() {
 		
 	}
-	
+
 	public Application(int id, String position, String descriptionURL, int interestLevel, List<Progress> progress,
-			List<Contact> contacts, List<ApplicationNote> applicatinNotes, Student student, Company company) {
+			List<Contact> contacts, List<ApplicationNote> applicationNotes, Student student, Company company) {
 		super();
 		this.id = id;
 		this.position = position;
@@ -52,7 +52,7 @@ public class Application {
 		this.interestLevel = interestLevel;
 		this.progress = progress;
 		this.contacts = contacts;
-		this.applicatinNotes = applicatinNotes;
+		this.applicationNotes = applicationNotes;
 		this.student = student;
 		this.company = company;
 	}
@@ -105,12 +105,12 @@ public class Application {
 		this.contacts = contacts;
 	}
 
-	public List<ApplicationNote> getApplicatinNotes() {
-		return applicatinNotes;
+	public List<ApplicationNote> getApplicationNotes() {
+		return applicationNotes;
 	}
 
-	public void setApplicatinNotes(List<ApplicationNote> applicatinNotes) {
-		this.applicatinNotes = applicatinNotes;
+	public void setApplicationNotes(List<ApplicationNote> applicationNotes) {
+		this.applicationNotes = applicationNotes;
 	}
 
 	public Student getStudent() {
@@ -211,8 +211,8 @@ public class Application {
 		builder.append(progress);
 		builder.append(", contacts=");
 		builder.append(contacts);
-		builder.append(", applicatinNotes=");
-		builder.append(applicatinNotes);
+		builder.append(", applicationNotes=");
+		builder.append(applicationNotes);
 		builder.append(", student=");
 		builder.append(student);
 		builder.append(", company=");

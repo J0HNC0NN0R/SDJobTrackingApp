@@ -1,0 +1,7 @@
+<div id="dummyNav">
+  <span>
+    <img id="SDLogo" src="https://i.imgur.com/FbtlrXK.png">
+  </span>
+  <span *ngIf="!checkLogin()" class="float-right"><app-login></app-login></span>
+  <span *ngIf="checkLogin()" class="float-right"><app-logout></app-logout></span>
+</div>

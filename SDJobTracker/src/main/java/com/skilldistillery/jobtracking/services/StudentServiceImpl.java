@@ -62,6 +62,8 @@ public class StudentServiceImpl implements StudentService {
 	public Student findByStudentId(Integer id) {
 		return sturepo.findById(id).get();
 	}
+	
+
 
 	@Override
 	public Student create(Student student, User user) {
@@ -69,7 +71,7 @@ public class StudentServiceImpl implements StudentService {
 
 		if (student != null && user != null) {
 			User newUser = userrepo.saveAndFlush(user);
-			student.setUserId(newUser.getId());
+			student.setUser(user);
 			newStudent = sturepo.saveAndFlush(student);
 
 		}

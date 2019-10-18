@@ -14,14 +14,15 @@ public interface ApplicationService {
 
 	List<Application> getStudentApplications(Integer id);
 
-	Application create(Application application, Company company, Integer id);
+	Application create(Application application);
 
-	Application update(Application application);
+	Application update(Application application, Integer appId);
 
 	Progress addProgressOnApplication(Progress progress, Integer appId);
 	
 	Contact addContactOnApplication(Contact contact, Integer appId);
 	
 	ApplicationNote addAppNoteOnApplication(ApplicationNote applicationnote, Integer appId);
+
 	
 }

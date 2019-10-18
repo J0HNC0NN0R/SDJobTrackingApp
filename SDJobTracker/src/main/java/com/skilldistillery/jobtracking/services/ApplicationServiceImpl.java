@@ -1,6 +1,7 @@
 package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
+import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
@@ -23,7 +25,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired
 	private StudentRepository sturepo;
 	
-
+	@Autowired 
+	private CompanyRepository comrepo;
+	
+	
 	
 	@Override
 	public Application findByApplicationId(Integer id) {
@@ -37,25 +42,34 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application,Company company, Integer id) {
-		// check if company
+	public Application create(Application application) {
+		Application newApplication = null;
 		if(application != null) {
-			Student student = sturepo.findById(id).get();
-			// set student application.setUserId();
-			Application app = apprepo.saveAndFlush(application);
+			newApplication = apprepo.saveAndFlush(application);
 		}
-		return application;
+		return newApplication;
 	}
 	
 	@Override
-	public Application update(Application application) {
-		return application;
-		//TODO
+	public Application update(Application application, Integer appId) {
+		Application actualApplication = null;
+		Optional<Application> managedApplication = apprepo.findById(appId);
+		
+		if(managedApplication.isPresent()) {
+			actualApplication = managedApplication.get();
+			actualApplication.setPosition(application.getPosition());
+			actualApplication.setDescriptionURL(application.getDescriptionURL());
+			actualApplication.setInterestLevel(application.getInterestLevel());
+			
+			apprepo.saveAndFlush(actualApplication);
+		
+	}
+		return actualApplication;
 	}
 
 	@Override
 	public Progress addProgressOnApplication(Progress progress, Integer appId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

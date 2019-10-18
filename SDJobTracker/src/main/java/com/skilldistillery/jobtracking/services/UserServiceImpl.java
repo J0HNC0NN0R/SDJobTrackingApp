@@ -61,7 +61,7 @@ Optional<User> use = userrepo.findById(id);
 	}
 	
 	@Override
-	public User deleteUserById(Integer id) {
+	public Boolean deleteUserById(Integer id) {
 	
 		Optional<User> use = userrepo.findById(id);
 		User deleteUser = null;
@@ -69,8 +69,9 @@ Optional<User> use = userrepo.findById(id);
 			 deleteUser = use.get();
 			deleteUser.setEnabled(false);
 			userrepo.saveAndFlush(deleteUser);
+			return true;
 		}
-		return deleteUser;
+		return false;
 	}
 	
 	

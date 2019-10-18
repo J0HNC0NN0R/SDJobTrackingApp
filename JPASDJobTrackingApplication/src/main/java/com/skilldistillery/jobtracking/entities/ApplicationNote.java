@@ -1,31 +1,37 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="application_note")
+@Table(name = "application_note")
 public class ApplicationNote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+//	@Column(name = "application_id")
+//	private int applicationId;
+	@ManyToOne
+	@JoinColumn(name = "application_id")
+	private Application application;
 	private String title;
 	private String body;
-	@Column(name="user_id")
-	private int userId;
 
-	public ApplicationNote() {}
-
-	public ApplicationNote(int id, String title, String body, int userId) {
+	public ApplicationNote(int id, Application application, String title, String body) {
 		super();
 		this.id = id;
+		this.application = application;
 		this.title = title;
 		this.body = body;
-		this.userId = userId;
+	}
+
+	public ApplicationNote() {
+		super();
 	}
 
 	public int getId() {
@@ -34,6 +40,14 @@ public class ApplicationNote {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplicationId(Application application) {
+		this.application = application;
 	}
 
 	public String getTitle() {
@@ -50,14 +64,6 @@ public class ApplicationNote {
 
 	public void setBody(String body) {
 		this.body = body;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	@Override
@@ -84,8 +90,17 @@ public class ApplicationNote {
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", title=" + title + ", body=" + body + ", userId=" + userId + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ApplicationNote [id=");
+		builder.append(id);
+		builder.append(", applicationId=");
+		builder.append(application);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", body=");
+		builder.append(body);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
+
 }

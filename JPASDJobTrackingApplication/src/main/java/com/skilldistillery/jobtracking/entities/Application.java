@@ -1,54 +1,61 @@
 package com.skilldistillery.jobtracking.entities;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Application {
 
-	// F I E L D S
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "user_id")
-	private int userId;
-
-	@Column(name = "company_id")
-	private int companyId;
-
-	@Column(name = "notes_id")
-	private int notesId;
-
 	private String position;
-
 	@Column(name = "desc_url")
-	private String describeURL;
-
-	@Column(name = "date_applied")
-	private Date dateApplied;
-
+	private String descriptionURL;
+	@Column(name = "interest_level")
 	private int interestLevel;
+	@OneToMany(mappedBy = "application")
+	private List<Progress> progress;
+	@OneToMany(mappedBy = "application")
+	private List<Contact> contacts;
+	@OneToMany(mappedBy = "application")
+	private List<ApplicationNote> applicatinNotes;
+	@ManyToOne
+//	@Column(name = "student_id")
+//	private int studentId;
+	@JoinColumn(name = "student_id")
+	private Student student;
+//	@Column(name = "company_id")
+//	private int companyId;
+	@ManyToOne
+	@JoinColumn(name = "company_id")
+	private Company company;
 
-	// C O N S T R U C T O R S
-
-	public Application(int id, int userId, int companyId, int notesId, String position, String describeURL,
-			Date dateApplied, int interestLevel) {
+	public Application() {
+		
+	}
+	
+	public Application(int id, String position, String descriptionURL, int interestLevel, List<Progress> progress,
+			List<Contact> contacts, List<ApplicationNote> applicatinNotes, Student student, Company company) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.companyId = companyId;
-		this.notesId = notesId;
 		this.position = position;
-		this.describeURL = describeURL;
-		this.dateApplied = dateApplied;
+		this.descriptionURL = descriptionURL;
 		this.interestLevel = interestLevel;
+		this.progress = progress;
+		this.contacts = contacts;
+		this.applicatinNotes = applicatinNotes;
+		this.student = student;
+		this.company = company;
 	}
-
-	// M E T H O D S
 
 	public int getId() {
 		return id;
@@ -56,30 +63,6 @@ public class Application {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
-	}
-
-	public int getNotesId() {
-		return notesId;
-	}
-
-	public void setNotesId(int notesId) {
-		this.notesId = notesId;
 	}
 
 	public String getPosition() {
@@ -90,20 +73,12 @@ public class Application {
 		this.position = position;
 	}
 
-	public String getDescribeURL() {
-		return describeURL;
+	public String getDescriptionURL() {
+		return descriptionURL;
 	}
 
-	public void setDescribeURL(String describeURL) {
-		this.describeURL = describeURL;
-	}
-
-	public Date getDateApplied() {
-		return dateApplied;
-	}
-
-	public void setDateApplied(Date dateApplied) {
-		this.dateApplied = dateApplied;
+	public void setDescriptionURL(String descriptionURL) {
+		this.descriptionURL = descriptionURL;
 	}
 
 	public int getInterestLevel() {
@@ -114,11 +89,59 @@ public class Application {
 		this.interestLevel = interestLevel;
 	}
 
+	public List<Progress> getProgress() {
+		return progress;
+	}
+
+	public void setProgress(List<Progress> progress) {
+		this.progress = progress;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	public List<ApplicationNote> getApplicatinNotes() {
+		return applicatinNotes;
+	}
+
+	public void setApplicatinNotes(List<ApplicationNote> applicatinNotes) {
+		this.applicatinNotes = applicatinNotes;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((applicatinNotes == null) ? 0 : applicatinNotes.hashCode());
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((contacts == null) ? 0 : contacts.hashCode());
+		result = prime * result + ((descriptionURL == null) ? 0 : descriptionURL.hashCode());
 		result = prime * result + id;
+		result = prime * result + interestLevel;
+		result = prime * result + ((position == null) ? 0 : position.hashCode());
+		result = prime * result + ((progress == null) ? 0 : progress.hashCode());
+		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		return result;
 	}
 
@@ -131,7 +154,44 @@ public class Application {
 		if (getClass() != obj.getClass())
 			return false;
 		Application other = (Application) obj;
+		if (applicatinNotes == null) {
+			if (other.applicatinNotes != null)
+				return false;
+		} else if (!applicatinNotes.equals(other.applicatinNotes))
+			return false;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
+			return false;
+		if (contacts == null) {
+			if (other.contacts != null)
+				return false;
+		} else if (!contacts.equals(other.contacts))
+			return false;
+		if (descriptionURL == null) {
+			if (other.descriptionURL != null)
+				return false;
+		} else if (!descriptionURL.equals(other.descriptionURL))
+			return false;
 		if (id != other.id)
+			return false;
+		if (interestLevel != other.interestLevel)
+			return false;
+		if (position == null) {
+			if (other.position != null)
+				return false;
+		} else if (!position.equals(other.position))
+			return false;
+		if (progress == null) {
+			if (other.progress != null)
+				return false;
+		} else if (!progress.equals(other.progress))
+			return false;
+		if (student == null) {
+			if (other.student != null)
+				return false;
+		} else if (!student.equals(other.student))
 			return false;
 		return true;
 	}
@@ -141,22 +201,25 @@ public class Application {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Application [id=");
 		builder.append(id);
-		builder.append(", userId=");
-		builder.append(userId);
-		builder.append(", companyId=");
-		builder.append(companyId);
-		builder.append(", notesId=");
-		builder.append(notesId);
 		builder.append(", position=");
 		builder.append(position);
-		builder.append(", describeURL=");
-		builder.append(describeURL);
-		builder.append(", dateApplied=");
-		builder.append(dateApplied);
+		builder.append(", descriptionURL=");
+		builder.append(descriptionURL);
 		builder.append(", interestLevel=");
 		builder.append(interestLevel);
+		builder.append(", progress=");
+		builder.append(progress);
+		builder.append(", contacts=");
+		builder.append(contacts);
+		builder.append(", applicatinNotes=");
+		builder.append(applicatinNotes);
+		builder.append(", student=");
+		builder.append(student);
+		builder.append(", company=");
+		builder.append(company);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 
 }

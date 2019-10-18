@@ -1,6 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,12 +10,15 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-class DesiredLocationTest {
+class MappingTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private DesiredLocation dL;
+	private Contact contact;
+	private Application app;
+	private Progress progress;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,18 +33,30 @@ class DesiredLocationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		dL = em.find(DesiredLocation.class, 1);
+		contact = em.find(Contact.class, 1);
+		app = em.find(Application.class, 1);
+		progress = em.find(Progress.class, 1);
+		
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		dL = null;
+		contact = null;
+		app = null;
+	}
+
+	@Disabled
+	@Test
+	void mapping_Contact_to_Application_test() {
+		assertEquals("Dev", contact.getApplication().getPosition());
+		assertEquals("contact name", app.getContacts().get(0).getName());
+
 	}
 
 	@Test
-	void test() {
-		assertEquals(1, dL.getId());
-		assertNotNull(dL);
+	void mapping_Progress_to_Application_test() {
+		assertEquals(3, progress.getApplication().getInterestLevel());
+		assertEquals("Phone Interview", app.getProgress().get(1).getState());
 	}
 }

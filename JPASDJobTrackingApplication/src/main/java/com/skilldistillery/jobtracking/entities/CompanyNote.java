@@ -1,37 +1,45 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="company_note")
+@Table(name = "company_note")
 public class CompanyNote {
-	
-	// F I E L D S
-	
-	@Id
-	private int id;
-	
-	@Column(name="company_id")
-	private int companyId;
-	
-	private String city;
-	
-	private String state;
-	
-	// C O N S T R U C T O R S
 
-	public CompanyNote(int id, int companyId, String city, String state) {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String title;
+	private String body;
+//	@Column(name = "company_id")
+//	private int companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
+//	@Column(name = "student_id")
+//	private int studentId;
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private Student student;
+	
+	public CompanyNote() {
+		
+	}
+
+	public CompanyNote(int id, String title, String body, Company company, Student student) {
 		super();
 		this.id = id;
-		this.companyId = companyId;
-		this.city = city;
-		this.state = state;
+		this.title = title;
+		this.body = body;
+		this.company = company;
+		this.student = student;
 	}
-	
-	// M E T H O D S
 
 	public int getId() {
 		return id;
@@ -41,28 +49,36 @@ public class CompanyNote {
 		this.id = id;
 	}
 
-	public int getCompanyId() {
-		return companyId;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getCity() {
-		return city;
+	public String getBody() {
+		return body;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setBody(String body) {
+		this.body = body;
 	}
 
-	public String getState() {
-		return state;
+	public Company getCompany() {
+		return company;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	@Override
@@ -92,12 +108,14 @@ public class CompanyNote {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyNote [id=");
 		builder.append(id);
-		builder.append(", companyId=");
-		builder.append(companyId);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", body=");
+		builder.append(body);
+		builder.append(", company=");
+		builder.append(company);
+		builder.append(", student=");
+		builder.append(student);
 		builder.append("]");
 		return builder.toString();
 	}

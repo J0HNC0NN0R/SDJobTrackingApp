@@ -1,33 +1,37 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="company_location")
+@Table(name = "company_location")
 public class CompanyLocation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name="company_id")
-	private int companyId;
 	private String city;
 	private String state;
-	
+//	@Column(name = "company_id")
+//	private int companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
+
 	public CompanyLocation() {
-		
+
 	}
 
-	public CompanyLocation(int id, int companyId, String city, String state) {
+	public CompanyLocation(int id, String city, String state, Company company) {
 		super();
 		this.id = id;
-		this.companyId = companyId;
 		this.city = city;
 		this.state = state;
+		this.company = company;
 	}
 
 	public int getId() {
@@ -36,14 +40,6 @@ public class CompanyLocation {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getCity() {
@@ -60,6 +56,14 @@ public class CompanyLocation {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override
@@ -89,15 +93,15 @@ public class CompanyLocation {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyLocation [id=");
 		builder.append(id);
-		builder.append(", companyId=");
-		builder.append(companyId);
 		builder.append(", city=");
 		builder.append(city);
 		builder.append(", state=");
 		builder.append(state);
+		builder.append(", company=");
+		builder.append(company);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	
 }

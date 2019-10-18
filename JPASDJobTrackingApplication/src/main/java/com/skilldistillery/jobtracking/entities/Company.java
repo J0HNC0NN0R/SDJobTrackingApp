@@ -23,6 +23,12 @@ public class Company {
 		this.siteURL = siteURL;
 	}
 
+	public Company() {
+		super();
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

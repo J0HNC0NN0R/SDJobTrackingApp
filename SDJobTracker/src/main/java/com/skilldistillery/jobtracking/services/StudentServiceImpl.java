@@ -66,12 +66,15 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public Student create(Student student, User user) {
+	public Student create(Student student, User user, Integer cohortId) {
 		Student newStudent = null;
-
+		Cohort newCohort = null;
+		
 		if (student != null && user != null) {
+			newCohort = cohorepo.findById(cohortId).get();
 			User newUser = userrepo.saveAndFlush(user);
 			student.setUser(user);
+			student.setCohort(newCohort);
 			newStudent = sturepo.saveAndFlush(student);
 
 		}
@@ -98,6 +101,8 @@ public class StudentServiceImpl implements StudentService {
 			actualStudent.setEducationLevel(student.getEducationLevel());
 			actualStudent.setOpenToRelocation(student.getOpenToRelocation());
 			actualStudent.setClearance(student.getClearance());
+			actualStudent.setCohort(student.getCohort());
+			actualStudent.setUser(student.getUser());
 		}
 		
 		return student;

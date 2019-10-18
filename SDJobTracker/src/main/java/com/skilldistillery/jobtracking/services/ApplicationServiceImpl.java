@@ -12,6 +12,7 @@ import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
+import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
@@ -23,7 +24,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired
 	private StudentRepository sturepo;
 	
-
+	@Autowired 
+	private CompanyRepository comrepo;
+	
+	
 	
 	@Override
 	public Application findByApplicationId(Integer id) {
@@ -37,14 +41,17 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application,Company company, Integer id) {
-		// check if company
+	public Application create(Application application) {
+		Application newApplication = null;
+		
+	
+		
 		if(application != null) {
-			Student student = sturepo.findById(id).get();
-			// set student application.setUserId();
-			Application app = apprepo.saveAndFlush(application);
+		
+			
+			newApplication = apprepo.saveAndFlush(application);
 		}
-		return application;
+		return newApplication;
 	}
 	
 	@Override

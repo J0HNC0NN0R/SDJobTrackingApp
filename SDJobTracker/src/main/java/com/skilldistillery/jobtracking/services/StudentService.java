@@ -25,15 +25,15 @@ public interface StudentService {
 
 	Event updateEvent(Integer eventId);
 
-	CompanyNote addCompanyNote(Integer companyId, Integer studentId);
+	CompanyNote addCompanyNote(CompanyNote companynote, Integer companyId, Integer studentId);
 
-	CompanyNote updateCompanyNote(Integer cNoteId);
+	CompanyNote updateCompanyNote(CompanyNote companynote, Integer cNoteId);
 
-	CompanyNote getCompanyNote(String companyName, Integer studentId);
+	CompanyNote getCompanyNote(Integer companyId, Integer studentId);
 
 	StudentAddress addStudentAddress(StudentAddress address, Integer studentId);
 
-	StudentAddress updateStudentAddress(Integer addressId);
+	StudentAddress updateStudentAddress(StudentAddress address, Integer addressId);
 
 	Cohort findById(Integer cohortId);
 

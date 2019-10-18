@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.jobtracking.entities.Cohort;
+import com.skilldistillery.jobtracking.entities.CompanyNote;
 import com.skilldistillery.jobtracking.entities.Event;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
@@ -45,7 +46,7 @@ public class StudentController {
 
 	@GetMapping("students")
 	public List<Student> searchStudentsByName(@RequestParam(value="name") String name, Principal principal){
-		return serv.getStudentsByName(name);
+		return serv.getStudentsByName("%" + name + "%");
 	}
 	
 	@GetMapping("cohorts")
@@ -63,6 +64,10 @@ public class StudentController {
 		return serv.getEventsByStudentId(id);
 	}
 	
+	@GetMapping("students/{id}/notes/companies/{cid}")
+	public CompanyNote getNoteByCaompanyName(@PathVariable("sid") int sid, @PathVariable("cid") int cid) {
+		return serv.getCompanyNote(cid, sid);
+	}
 
 	@GetMapping("students/{id}")
 	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
@@ -116,6 +121,27 @@ public class StudentController {
 		return created;
 	}
 	
+	@PostMapping("students/{sid}/notes/companies/{cid}")
+	public CompanyNote createCompanyNote(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
+			@RequestBody CompanyNote note, HttpServletResponse resp, HttpServletRequest req) {
+		CompanyNote created = null;
+		
+		try {
+			created = serv.addCompanyNote(note, cid, sid);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+
+		return created;
+	}
+
+	
 	@PostMapping("students/{id}/events")
 	public Event createEvent(@PathVariable("id") int id, @RequestBody Event event, HttpServletResponse resp, HttpServletRequest req,
 			Principal principal) {
@@ -135,6 +161,26 @@ public class StudentController {
 		}
 		return created;
 	}
+	
+		
+	@PutMapping("students/{sid}/notes/companies/{cid}")
+	public CompanyNote updateCompanyNote(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
+			@RequestBody CompanyNote note, HttpServletResponse resp) {
+		CompanyNote updated = null;
+		try {
+			updated = serv.updateCompanyNote(note, cid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return updated;
+	}
+
 
 	@PutMapping("cohorts/{cid}/students/{sid}")
 	public Student update(@PathVariable("sid") int sid, @PathVariable("cid") int cid, @RequestBody Student student, HttpServletResponse resp,

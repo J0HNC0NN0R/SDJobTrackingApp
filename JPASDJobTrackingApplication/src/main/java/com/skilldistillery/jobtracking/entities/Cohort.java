@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Cohort {
 	@Id
@@ -22,6 +24,7 @@ public class Cohort {
 	private String name;
 	private String nickname;
 	@OneToMany(mappedBy = "cohort")
+	@JsonIgnore
 	private List<Student> students;
 
 	public Cohort(int id, Date startDate, Date endDate, String name, String nickname, List<Student> students) {

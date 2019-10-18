@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Event {
 	@Id
@@ -23,6 +25,7 @@ public class Event {
 //	private int studentId;
 	@ManyToOne
 	@JoinColumn(name="student_id")
+	@JsonIgnore
 	private Student student;
 
 	public Event() {

@@ -42,7 +42,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application) {
+	public Application create(Application application, Company compnay, Integer studentId) {
 		Application newApplication = null;
 		if(application != null) {
 			newApplication = apprepo.saveAndFlush(application);

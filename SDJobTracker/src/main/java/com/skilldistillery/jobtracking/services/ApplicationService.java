@@ -14,7 +14,7 @@ public interface ApplicationService {
 
 	List<Application> getStudentApplications(Integer id);
 
-	Application create(Application application);
+	Application create(Application application, Company compnay, Integer Id);
 
 	Application update(Application application, Integer appId);
 
@@ -23,6 +23,7 @@ public interface ApplicationService {
 	Contact addContactOnApplication(Contact contact, Integer appId);
 	
 	ApplicationNote addAppNoteOnApplication(ApplicationNote applicationnote, Integer appId);
+
 
 	
 }

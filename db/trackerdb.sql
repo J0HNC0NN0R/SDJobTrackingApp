@@ -103,22 +103,22 @@ DROP TABLE IF EXISTS `application` ;
 
 CREATE TABLE IF NOT EXISTS `application` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `company_id` INT NOT NULL,
   `student_id` INT NOT NULL,
+  `company_id` INT NOT NULL,
   `position` VARCHAR(400) NULL,
   `desc_url` TEXT NULL,
   `interest_level` TINYINT(5) NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_application_company1_idx` (`company_id` ASC),
   INDEX `fk_application_student1_idx` (`student_id` ASC),
-  CONSTRAINT `fk_application_company1`
-    FOREIGN KEY (`company_id`)
-    REFERENCES `company` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_application_company1_idx` (`company_id` ASC),
   CONSTRAINT `fk_application_student1`
     FOREIGN KEY (`student_id`)
     REFERENCES `student` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_application_company1`
+    FOREIGN KEY (`company_id`)
+    REFERENCES `company` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -382,9 +382,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (1, 1, 1, 'Dev', 'www.desc.com', 3);
-INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (2, 2, 1, 'Jr Dev', 'www.test.com', 5);
-INSERT INTO `application` (`id`, `company_id`, `student_id`, `position`, `desc_url`, `interest_level`) VALUES (3, 1, 2, 'Dev', 'www.jobapp.com', 1);
+INSERT INTO `application` (`id`, `student_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (1, 1, 1, 'Dev', 'www.desc.com', 3);
+INSERT INTO `application` (`id`, `student_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (2, 1, 2, 'Jr Dev', 'www.test.com', 5);
+INSERT INTO `application` (`id`, `student_id`, `company_id`, `position`, `desc_url`, `interest_level`) VALUES (3, 2, 1, 'Dev', 'www.jobapp.com', 1);
 
 COMMIT;
 
@@ -482,6 +482,19 @@ USE `trackerdb`;
 INSERT INTO `company_note` (`id`, `student_id`, `company_id`, `title`, `body`) VALUES (1, 1, 1, 'Company Note', 'wqr wer r qwrweq r we r wer wqerqwer. qwe r qwr we rqw er qwe r ewr qwer w erwqerwq re ');
 INSERT INTO `company_note` (`id`, `student_id`, `company_id`, `title`, `body`) VALUES (2, 1, 2, 'Comp2 Note', 'bnmbnm bnmb nbm nnmb mb b nmb nbmbmn mb mn bmn mbnb bmn bmnb mnb mb mnb m. nmbnbmb bmnb mnbbmnbmnbnmb mnb mb nbm nbmnbm nmb nb nmb bnmbmnb mnbmb nmbnmb mnbnmb mnb mn');
 INSERT INTO `company_note` (`id`, `student_id`, `company_id`, `title`, `body`) VALUES (3, 2, 1, 'My Note', 'drgdr rdg rd gdrg drg rdgrgdrd gdr. grdrgdrgdrg rdrg drgdrgdrg drg gd gdr g drg rgrgddgdr gr grrgd rg rgdrg rg rg grgdrgrg rgdrgd g rgr g');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `student_desired_location`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `trackerdb`;
+INSERT INTO `student_desired_location` (`id`, `student_id`, `city`, `state`) VALUES (1, 1, 'Denver', 'CO');
+INSERT INTO `student_desired_location` (`id`, `student_id`, `city`, `state`) VALUES (2, 1, 'Austin', 'TX');
+INSERT INTO `student_desired_location` (`id`, `student_id`, `city`, `state`) VALUES (3, 1, 'Seattle', 'WA');
+INSERT INTO `student_desired_location` (`id`, `student_id`, `city`, `state`) VALUES (4, 2, 'Colorado Springs', 'CO');
 
 COMMIT;
 

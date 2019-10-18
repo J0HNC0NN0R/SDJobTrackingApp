@@ -29,12 +29,12 @@ public class UserController {
 
 	@GetMapping("users")
 	public List<User> index(Principal principal) {
-		return serv.index(principal.getName());
+		return serv.index();
 	}
 
-	@GetMapping("users/{tid}")
-	public User show(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
-		User user = serv.show(principal.getName(), tid);
+	@GetMapping("users/{id}")
+	public User show(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+		User user = serv.show(id);
 		if (user != null) {
 			resp.setStatus(200);
 		} else {
@@ -48,7 +48,7 @@ public class UserController {
 			Principal principal) {
 		User created = null;
 		try {
-			created = serv.create(principal.getName(), user);
+			created = serv.create(user);
 			StringBuffer url = req.getRequestURL();
 			url.append("/" + created.getId());
 			resp.setStatus(201);
@@ -61,12 +61,12 @@ public class UserController {
 		return created;
 	}
 
-	@PutMapping("users/{tid}")
-	public User update(@PathVariable("tid") int tid, @RequestBody User user, HttpServletResponse resp,
+	@PutMapping("users/{id}")
+	public User update(@PathVariable("id") int id, @RequestBody User user, HttpServletResponse resp,
 			Principal principal) {
 		User updated = null;
 		try {
-			updated = serv.update(principal.getName(), tid, user);
+			updated = serv.updateUserById(id, user);
 			if (updated != null) {
 				resp.setStatus(200);
 			} else {
@@ -80,18 +80,18 @@ public class UserController {
 		return updated;
 	}
 
-	@DeleteMapping("users/{tid}")
-	public void delete(@PathVariable("tid") int tid, HttpServletResponse resp, Principal principal) {
-		try {
-			if (!serv.destroy(principal.getName(), tid)) {
-				resp.setStatus(204);
-			} else {
-				resp.setStatus(404);
-			}
-
-		} catch (Exception e) {
-			resp.setStatus(400);
-		}
-	}
+//	@DeleteMapping("users/{id}")
+//	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+//		try {
+//			if (!serv.deleteUserById(id)) {
+//				resp.setStatus(204);
+//			} else {
+//				resp.setStatus(404);
+//			}
+//
+//		} catch (Exception e) {
+//			resp.setStatus(400);
+//		}
+//	}
 
 }

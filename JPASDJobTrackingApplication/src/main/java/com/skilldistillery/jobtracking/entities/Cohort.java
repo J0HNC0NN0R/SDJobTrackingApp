@@ -21,16 +21,17 @@ public class Cohort {
 	private Date endDate;
 	private String name;
 	private String nickname;
-	@OneToMany(mappedBy="cohort")
+	@OneToMany(mappedBy = "cohort")
 	private List<Student> students;
 
-	public Cohort(int id, Date startDate, Date endDate, String name, String nickname) {
+	public Cohort(int id, Date startDate, Date endDate, String name, String nickname, List<Student> students) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.name = name;
 		this.nickname = nickname;
+		this.students = students;
 	}
 
 	public Cohort() {
@@ -77,6 +78,14 @@ public class Cohort {
 		this.nickname = nickname;
 	}
 
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -112,6 +121,8 @@ public class Cohort {
 		builder.append(name);
 		builder.append(", nickname=");
 		builder.append(nickname);
+		builder.append(", students=");
+		builder.append(students);
 		builder.append("]");
 		return builder.toString();
 	}

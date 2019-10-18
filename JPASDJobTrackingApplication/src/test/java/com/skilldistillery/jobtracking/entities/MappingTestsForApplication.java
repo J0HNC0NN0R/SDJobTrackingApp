@@ -106,7 +106,7 @@ class MappingTestsForApplication {
 	@Test
 	void mapping_Application_Note_To_Application_Tests() {
 		assertEquals(1, appNote.getApplication().getId());
-		assertEquals("I need a job", app.getApplicationNotes().get(1));
+		assertEquals("I need a job", app.getApplicationNotes().get(0).getBody());
 
 	}
 

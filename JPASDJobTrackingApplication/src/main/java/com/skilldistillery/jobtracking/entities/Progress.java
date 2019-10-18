@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Progress {
 
@@ -17,6 +19,7 @@ public class Progress {
 //	private int applicationId;
 	@ManyToOne
 	@JoinColumn(name = "application_id")
+	@JsonIgnore
 	private Application application;
 	private String State;
 	@Column(name = "updated")

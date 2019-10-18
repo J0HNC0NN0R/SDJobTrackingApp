@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Student {
 	@Id
@@ -44,6 +46,7 @@ public class Student {
 	private String openToRelocation;
 	private String clearance;
 	@OneToMany(mappedBy = "student")
+	@JsonIgnore
 	private List<Application> applications;
 	@ManyToOne
 	@JoinColumn(name = "cohort_id")

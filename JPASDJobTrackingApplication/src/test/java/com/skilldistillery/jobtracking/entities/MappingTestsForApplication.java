@@ -25,6 +25,7 @@ class MappingTestsForApplication {
 	private Progress progress;
 	private ApplicationNote appNote;
 	private Company company;
+	private Student student;
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -56,6 +57,9 @@ class MappingTestsForApplication {
 
 		// C O M P A N Y
 		company = em.find(Company.class, 1);
+
+		// S T U D E N T
+		student = em.find(Student.class, 1);
 	}
 
 	@AfterEach
@@ -77,10 +81,12 @@ class MappingTestsForApplication {
 		// C O M P A N Y
 		company = null;
 
+		// S T U D E N T
+		student = null;
+
 	}
 
 	// CONTACT TO APPLICATION TESTS
-	@Disabled
 	@Test
 	void mapping_Contact_To_Application_Tests() {
 		assertEquals("Dev", contact.getApplication().getPosition());
@@ -109,6 +115,13 @@ class MappingTestsForApplication {
 	void mapping_Company_To_Application_Tests() {
 		assertEquals(1, company.getApplications().get(0).getId());
 		assertEquals("Fake Company", app.getCompany().getName());
+
+	}
+
+	@Test
+	void mapping_Student_To_Application_Tests() {
+		assertEquals("Dev", student.getApplications().get(0).getPosition());
+		assertEquals("High School", app.getStudent().getEducationLevel());
 
 	}
 

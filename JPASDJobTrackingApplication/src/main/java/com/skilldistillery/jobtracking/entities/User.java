@@ -16,7 +16,7 @@ public class User {
 	private String username;
 	private String role;
 	@OneToOne(mappedBy="user")
-	private User student;
+	private Student student;
 
 	public User() {
 		super();
@@ -31,7 +31,7 @@ public class User {
 		this.role = role;
 	}
 	
-	public User(int id, boolean enabled, String password, String username, String role, User student) {
+	public User(int id, boolean enabled, String password, String username, String role, Student student) {
 		super();
 		this.id = id;
 		this.enabled = enabled;
@@ -80,12 +80,12 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	public User getStudent() {
+
+	public Student getStudent() {
 		return student;
 	}
 
-	public void setStudent(User student) {
+	public void setStudent(Student student) {
 		this.student = student;
 	}
 

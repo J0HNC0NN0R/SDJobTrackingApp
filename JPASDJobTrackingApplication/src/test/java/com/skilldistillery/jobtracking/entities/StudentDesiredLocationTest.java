@@ -40,7 +40,7 @@ class StudentDesiredLocationTest {
 		em.close();
 		dL = null;
 	}
-	@Disabled
+	//@Disabled
 	@Test
 	void test() {
 		assertEquals(1, dL.getId());

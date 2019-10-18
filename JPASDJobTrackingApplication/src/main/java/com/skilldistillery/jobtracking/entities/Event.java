@@ -2,37 +2,41 @@ package com.skilldistillery.jobtracking.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Event {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "student_id")
-	private int studentId;
 	private String title;
 	private String description;
 	private String location;
 	// TODO: Set temporal type
 	private Date date;
+//	@Column(name = "student_id")
+//	private int studentId;
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private Student student;
 
 	public Event() {
 
 	}
 
-	public Event(int id, int studentId, String title, String description, String locatin, Date date) {
+	public Event(int id, String title, String description, String location, Date date, Student student) {
 		super();
 		this.id = id;
-		this.studentId = studentId;
 		this.title = title;
 		this.description = description;
-		this.location = locatin;
+		this.location = location;
 		this.date = date;
+		this.student = student;
 	}
 
 	public int getId() {
@@ -41,14 +45,6 @@ public class Event {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
 	}
 
 	public String getTitle() {
@@ -67,12 +63,12 @@ public class Event {
 		this.description = description;
 	}
 
-	public String getLocatin() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocatin(String locatin) {
-		this.location = locatin;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public Date getDate() {
@@ -81,6 +77,14 @@ public class Event {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	@Override
@@ -110,16 +114,16 @@ public class Event {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Event [id=");
 		builder.append(id);
-		builder.append(", studentId=");
-		builder.append(studentId);
 		builder.append(", title=");
 		builder.append(title);
 		builder.append(", description=");
 		builder.append(description);
-		builder.append(", locatin=");
+		builder.append(", location=");
 		builder.append(location);
 		builder.append(", date=");
 		builder.append(date);
+		builder.append(", student=");
+		builder.append(student);
 		builder.append("]");
 		return builder.toString();
 	}

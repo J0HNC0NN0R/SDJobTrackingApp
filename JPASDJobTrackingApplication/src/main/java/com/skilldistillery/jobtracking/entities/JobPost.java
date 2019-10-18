@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,26 +15,27 @@ public class JobPost {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "company_id")
-	private int companyId;
 	private String position;
-
 	private String description;
-
 	@Column(name = "post_url")
 	private String postURL;
-
-	public JobPost(int id, int companyId, String position, String description, String postURL) {
+//	@Column(name = "company_id")
+//	private int companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
+	
+	public JobPost() {
+		
+	}
+	
+	public JobPost(int id, String position, String description, String postURL, Company company) {
 		super();
 		this.id = id;
-		this.companyId = companyId;
 		this.position = position;
 		this.description = description;
 		this.postURL = postURL;
-	}
-
-	public JobPost() {
-		super();
+		this.company = company;
 	}
 
 	public int getId() {
@@ -41,14 +44,6 @@ public class JobPost {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getPosition() {
@@ -73,6 +68,14 @@ public class JobPost {
 
 	public void setPostURL(String postURL) {
 		this.postURL = postURL;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
 	@Override
@@ -102,16 +105,19 @@ public class JobPost {
 		StringBuilder builder = new StringBuilder();
 		builder.append("JobPost [id=");
 		builder.append(id);
-		builder.append(", companyId=");
-		builder.append(companyId);
 		builder.append(", position=");
 		builder.append(position);
 		builder.append(", description=");
 		builder.append(description);
 		builder.append(", postURL=");
 		builder.append(postURL);
+		builder.append(", company=");
+		builder.append(company);
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
+	
+	
+	
 }

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -14,7 +15,13 @@ public class User {
 	private String password;
 	private String username;
 	private String role;
+	@OneToOne(mappedBy="user")
+	private User student;
 
+	public User() {
+		super();
+	}
+	
 	public User(int id, boolean enabled, String password, String username, String role) {
 		super();
 		this.id = id;
@@ -23,9 +30,15 @@ public class User {
 		this.username = username;
 		this.role = role;
 	}
-
-	public User() {
+	
+	public User(int id, boolean enabled, String password, String username, String role, User student) {
 		super();
+		this.id = id;
+		this.enabled = enabled;
+		this.password = password;
+		this.username = username;
+		this.role = role;
+		this.student = student;
 	}
 
 	public int getId() {
@@ -66,6 +79,14 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public User getStudent() {
+		return student;
+	}
+
+	public void setStudent(User student) {
+		this.student = student;
 	}
 
 	@Override

@@ -1,10 +1,11 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,15 +14,18 @@ public class ApplicationNote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "application_id")
-	private int applicationId;
+//	@Column(name = "application_id")
+//	private int applicationId;
+	@ManyToOne
+	@JoinColumn(name = "application_id")
+	private Application application;
 	private String title;
 	private String body;
 
-	public ApplicationNote(int id, int applicationId, String title, String body) {
+	public ApplicationNote(int id, Application application, String title, String body) {
 		super();
 		this.id = id;
-		this.applicationId = applicationId;
+		this.application = application;
 		this.title = title;
 		this.body = body;
 	}
@@ -38,12 +42,12 @@ public class ApplicationNote {
 		this.id = id;
 	}
 
-	public int getApplicationId() {
-		return applicationId;
+	public Application getApplication() {
+		return application;
 	}
 
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
+	public void setApplicationId(Application application) {
+		this.application = application;
 	}
 
 	public String getTitle() {
@@ -90,7 +94,7 @@ public class ApplicationNote {
 		builder.append("ApplicationNote [id=");
 		builder.append(id);
 		builder.append(", applicationId=");
-		builder.append(applicationId);
+		builder.append(application);
 		builder.append(", title=");
 		builder.append(title);
 		builder.append(", body=");

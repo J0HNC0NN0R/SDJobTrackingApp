@@ -31,7 +31,7 @@ class CohortTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		cohort = em.find(Cohort.class, 1);
+		cohort = em.find(Cohort.class, 22);
 	}
 
 	@AfterEach
@@ -42,7 +42,8 @@ class CohortTest {
 
 	@Test
 	void test_Cohort_entity_mapping() {
-		assertEquals(1, cohort.getId());
+		System.out.println(cohort);
+		assertEquals(22, cohort.getId());
 		assertNotNull(cohort);
 
 	}

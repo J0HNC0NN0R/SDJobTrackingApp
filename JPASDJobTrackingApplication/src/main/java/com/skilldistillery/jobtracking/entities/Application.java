@@ -1,10 +1,13 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Application {
@@ -24,7 +27,17 @@ public class Application {
 	@Column(name = "desc_url")
 	private String descriptionURL;
 
+	@Column(name = "interest_level")
 	private int interestLevel;
+
+	@OneToMany(mappedBy = "application")
+	private List<Progress> progress;
+
+	@OneToMany(mappedBy = "application")
+	private List<Contact> contacts;
+	
+	@OneToMany(mappedBy="application")
+	private List<ApplicationNote> applicatinNotes;
 
 	public Application(int id, int studentId, int companyId, String position, String descriptionURL,
 			int interestLevel) {
@@ -37,8 +50,41 @@ public class Application {
 		this.interestLevel = interestLevel;
 	}
 
+	public Application(int id, int studentId, int companyId, String position, String descriptionURL, int interestLevel,
+			List<Contact> contacts) {
+		super();
+		this.id = id;
+		this.studentId = studentId;
+		this.companyId = companyId;
+		this.position = position;
+		this.descriptionURL = descriptionURL;
+		this.interestLevel = interestLevel;
+		this.contacts = contacts;
+	}
+
+	public Application(int id, int studentId, int companyId, String position, String descriptionURL, int interestLevel,
+			List<Progress> progress, List<Contact> contacts) {
+		super();
+		this.id = id;
+		this.studentId = studentId;
+		this.companyId = companyId;
+		this.position = position;
+		this.descriptionURL = descriptionURL;
+		this.interestLevel = interestLevel;
+		this.progress = progress;
+		this.contacts = contacts;
+	}
+
 	public Application() {
 		super();
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 
 	public int getId() {
@@ -89,6 +135,14 @@ public class Application {
 		this.interestLevel = interestLevel;
 	}
 
+	public List<Progress> getProgress() {
+		return progress;
+	}
+
+	public void setProgress(List<Progress> progress) {
+		this.progress = progress;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,7 +180,12 @@ public class Application {
 		builder.append(descriptionURL);
 		builder.append(", interestLevel=");
 		builder.append(interestLevel);
+//		builder.append(", progress=");
+//		builder.append(progress);
+		builder.append(", contacts=");
+		builder.append(contacts);
 		builder.append("]");
 		return builder.toString();
 	}
+
 }

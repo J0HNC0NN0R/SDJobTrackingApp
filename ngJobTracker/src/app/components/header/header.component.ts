@@ -14,8 +14,9 @@ export class HeaderComponent implements OnInit {
   }
 
 checkLogin() {
-  console.log('Header Component- checkLogin()');
-  // return this.auth.checkLogin();
+  // console.log('Header Component- checkLogin()');
+  console.log(this.auth.checkLogin());
+  return this.auth.checkLogin();
 }
 
 }

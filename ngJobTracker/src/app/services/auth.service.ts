@@ -11,7 +11,7 @@ export class AuthService {
   private baseUrl = 'http://localhost:8095/';
   logoutSuccess: boolean;
 
-  constructor(private http: HttpClient /*, private todoService: TodoService*/) { }
+  constructor(private http: HttpClient) { }
 
   login(username, password) {
     // Make credentials

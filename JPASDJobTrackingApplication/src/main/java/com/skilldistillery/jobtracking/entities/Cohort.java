@@ -121,8 +121,8 @@ public class Cohort {
 		builder.append(name);
 		builder.append(", nickname=");
 		builder.append(nickname);
-		builder.append(", students=");
-		builder.append(students);
+//		builder.append(", students=");
+//		builder.append(students);
 		builder.append("]");
 		return builder.toString();
 	}

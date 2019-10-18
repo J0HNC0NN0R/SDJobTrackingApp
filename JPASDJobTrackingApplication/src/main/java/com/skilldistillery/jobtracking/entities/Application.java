@@ -35,6 +35,9 @@ public class Application {
 
 	@OneToMany(mappedBy = "application")
 	private List<Contact> contacts;
+	
+	@OneToMany(mappedBy="application")
+	private List<ApplicationNote> applicatinNotes;
 
 	public Application(int id, int studentId, int companyId, String position, String descriptionURL,
 			int interestLevel) {

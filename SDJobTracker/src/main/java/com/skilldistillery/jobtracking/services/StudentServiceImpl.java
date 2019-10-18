@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student update(Student student, Integer studentId) {
+	public Student update(Student student, Integer studentId, Integer cohortId) {
 		
 		Optional<Student> managedStudent = sturepo.findById(studentId);
 		if(managedStudent.isPresent()) {
@@ -103,6 +103,8 @@ public class StudentServiceImpl implements StudentService {
 			actualStudent.setClearance(student.getClearance());
 			actualStudent.setCohort(student.getCohort());
 			actualStudent.setUser(student.getUser());
+			
+			sturepo.saveAndFlush(actualStudent);
 		}
 		
 		return student;

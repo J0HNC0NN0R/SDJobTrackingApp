@@ -19,7 +19,7 @@ public interface StudentService {
 
 	Student create(Student student, User user, Integer cohortId);
 
-	Student update(Student student, Integer studentId);
+	Student update(Student student, Integer studentId, Integer cohortId);
 
 	Event addEvent(Event event);
 

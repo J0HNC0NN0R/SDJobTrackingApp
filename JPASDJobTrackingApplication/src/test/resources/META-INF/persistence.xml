@@ -16,7 +16,7 @@
 		<class> com.skilldistillery.jobtracking.entities.CompanyLocation</class>
 		<class> com.skilldistillery.jobtracking.entities.CompanyNote</class>
 		<class> com.skilldistillery.jobtracking.entities.Contact</class>
-		<class> com.skilldistillery.jobtracking.entities.DesiredLocation</class>
+		<class> com.skilldistillery.jobtracking.entities.StudentDesiredLocation</class>
 		<class> com.skilldistillery.jobtracking.entities.Event</class>
 		<class> com.skilldistillery.jobtracking.entities.JobPost</class>
 		<class> com.skilldistillery.jobtracking.entities.Progress</class>

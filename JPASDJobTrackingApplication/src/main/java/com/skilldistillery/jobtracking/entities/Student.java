@@ -49,6 +49,10 @@ public class Student {
 	private String openToRelocation;
 
 	private String clearance;
+	
+	public Student() {
+		
+	}
 
 	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
 			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,

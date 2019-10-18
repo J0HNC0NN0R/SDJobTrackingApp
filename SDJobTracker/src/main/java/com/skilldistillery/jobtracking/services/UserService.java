@@ -15,7 +15,7 @@ public interface UserService {
 
 	User updateUserById(Integer id, User user);
 
-	User deleteUserById(Integer id);
+	Boolean deleteUserById(Integer id);
 
 
 	User findByUserName(String username);

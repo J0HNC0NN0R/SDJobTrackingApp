@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.Cohort;
 import com.skilldistillery.jobtracking.entities.Event;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
+import com.skilldistillery.jobtracking.services.ApplicationService;
+import com.skilldistillery.jobtracking.services.CompanyService;
 import com.skilldistillery.jobtracking.services.StudentService;
 
 @RestController
@@ -30,14 +32,19 @@ import com.skilldistillery.jobtracking.services.StudentService;
 public class StudentController {
 	@Autowired
 	private StudentService serv;
+	
+	@Autowired 
+	private CompanyService compServ;
+
+	@Autowired 
+	private ApplicationService appServ;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 
 	@GetMapping("students")
-	public List<Student> index(Principal principal) {
-		return serv.index();
-	}
-
-	@GetMapping("students")
-	public List<Student> searchStudentsByName(@RequestParam(value="name") String name){
+	public List<Student> searchStudentsByName(@RequestParam(value="name") String name, Principal principal){
 		return serv.getStudentsByName(name);
 	}
 	
@@ -47,12 +54,12 @@ public class StudentController {
 	}
 	
 	@GetMapping("cohorts/{cid}/students")
-	public List<Student> findStudentsByCohort(@PathVariable("cid") int cid) {
+	public List<Student> findStudentsByCohort(@PathVariable("cid") int cid, Principal principal) {
 		return serv.getStudentsByCohortId(cid);
 	}
 	
 	@GetMapping("students/{id}/events")
-	public List<Event> getAllEvents(@PathVariable("id") int id){
+	public List<Event> getAllEvents(@PathVariable("id") int id, Principal principal){
 		return serv.getEventsByStudentId(id);
 	}
 	
@@ -68,12 +75,35 @@ public class StudentController {
 		return student;
 	}
 
-	@PostMapping("students")
-	public Student create(@RequestBody Student student, HttpServletResponse resp, HttpServletRequest req,
-			Principal principal, User user) {
+	@PostMapping("cohorts/{id}/students")
+	public Student create(@RequestBody Student su, @PathVariable("id") int id, HttpServletResponse resp,
+			HttpServletRequest req, Principal principal) {
 		Student created = null;
+		
+		Student student = new Student();
+		User user = new User();
+
+		student.setAccepted(su.isAccepted());
+		student.setFirstName(su.getFirstName());
+		student.setLastName(su.getLastName());
+		student.setEmail(su.getEmail());
+		student.setGithubUsername(su.getGithubUsername());
+		student.setGIBill(su.isGIBill());
+		student.setVettec(su.isVettec());
+		student.setEmployed(su.isEmployed());
+		student.setDeposit_paid(su.isDeposit_paid());
+		student.setNeedsLoanerLaptop(su.isNeedsLoanerLaptop());
+		student.setEducationLevel(su.getEducationLevel());
+		student.setOpenToRelocation(su.getOpenToRelocation());
+		student.setClearance(su.getClearance());
+		
+		user.setEnabled(true);
+		user.setPassword(encoder.encode(su.getEmail()));
+		user.setRole("USER");
+		user.setUsername(su.getEmail());
+		
 		try {
-			created = serv.create(student, user);
+			created = serv.create(student, user, id);
 			StringBuffer url = req.getRequestURL();
 			url.append("/" + created.getId());
 			resp.setStatus(201);
@@ -106,12 +136,12 @@ public class StudentController {
 		return created;
 	}
 
-	@PutMapping("students/{id}")
-	public Student update(@PathVariable("id") int id, @RequestBody Student student, HttpServletResponse resp,
+	@PutMapping("cohorts/{cid}/students/{sid}")
+	public Student update(@PathVariable("sid") int sid, @PathVariable("cid") int cid, @RequestBody Student student, HttpServletResponse resp,
 			Principal principal) {
 		Student updated = null;
 		try {
-			updated = serv.update(student, id);
+			updated = serv.update(student, sid, cid);
 			if (updated != null) {
 				resp.setStatus(200);
 			} else {
@@ -168,13 +198,21 @@ public class StudentController {
 //		return serv.getApplicationById(sid, aid);
 //	}
 //	
+
 //	@PostMapping("students/{id}/applications")
-//	public Event createEvent(@PathVariable("id") int id, @RequestBody Application application, HttpServletResponse resp, HttpServletRequest req,
+//	public Application createApplication(@PathVariable("id") int id, @RequestBody Application application,
+//			@RequestBody Company company, HttpServletResponse resp, HttpServletRequest req, 
 //			Principal principal) {
-//		Event created = null;
+//		Application created = null;
+//		
+//		Company managedCompany = compServ.findByName(company.getName());
+//		if (managedCompany == null) {
+//			managedCompany = compServ.create(company);
+//		}
+//		
 //		try {
-//			event.setStudentId(id);
-//			created = serv.addEvent(event);
+//			application.setCompany(managedCompany);
+//			created = appServ.create(application);
 //			StringBuffer url = req.getRequestURL();
 //			url.append("/" + created.getId());
 //			resp.setStatus(201);
@@ -186,5 +224,5 @@ public class StudentController {
 //		}
 //		return created;
 //	}
-	
+//	
 }

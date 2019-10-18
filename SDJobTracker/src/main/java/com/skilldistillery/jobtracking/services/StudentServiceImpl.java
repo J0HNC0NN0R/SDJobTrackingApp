@@ -62,14 +62,19 @@ public class StudentServiceImpl implements StudentService {
 	public Student findByStudentId(Integer id) {
 		return sturepo.findById(id).get();
 	}
+	
+
 
 	@Override
-	public Student create(Student student, User user) {
+	public Student create(Student student, User user, Integer cohortId) {
 		Student newStudent = null;
-
+		Cohort newCohort = null;
+		
 		if (student != null && user != null) {
+			newCohort = cohorepo.findById(cohortId).get();
 			User newUser = userrepo.saveAndFlush(user);
-			student.setUserId(newUser.getId());
+			student.setUser(user);
+			student.setCohort(newCohort);
 			newStudent = sturepo.saveAndFlush(student);
 
 		}
@@ -78,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student update(Student student, Integer studentId) {
+	public Student update(Student student, Integer studentId, Integer cohortId) {
 		
 		Optional<Student> managedStudent = sturepo.findById(studentId);
 		if(managedStudent.isPresent()) {
@@ -96,6 +101,9 @@ public class StudentServiceImpl implements StudentService {
 			actualStudent.setEducationLevel(student.getEducationLevel());
 			actualStudent.setOpenToRelocation(student.getOpenToRelocation());
 			actualStudent.setClearance(student.getClearance());
+			actualStudent.setCohort(cohorepo.findById(cohortId).get());
+			
+			sturepo.saveAndFlush(actualStudent);
 		}
 		
 		return student;

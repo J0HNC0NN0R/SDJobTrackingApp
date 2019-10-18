@@ -1,29 +1,36 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Contact {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	int id;
-	@Column(name = "application_id")
-	private int applicationId;
+//	@Column(name = "application_id")
+//	private int applicationId;
+	@ManyToOne
+	@JoinColumn(name="application_id")
+	private Application application;
+	
 	private String name;
 	private String email;
 	private int phone;
 	private String position;
+	
+	public Contact() {
+		
+	}
 
-	public Contact(int id, int applicationId, String name, String email, int phone, String position) {
+	public Contact(int id, Application application, String name, String email, int phone, String position) {
 		super();
 		this.id = id;
-		this.applicationId = applicationId;
+		this.application = application;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -38,12 +45,12 @@ public class Contact {
 		this.id = id;
 	}
 
-	public int getApplicationId() {
-		return applicationId;
+	public Application getApplication() {
+		return application;
 	}
 
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 
 	public String getName() {
@@ -105,8 +112,8 @@ public class Contact {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Contact [id=");
 		builder.append(id);
-		builder.append(", applicationId=");
-		builder.append(applicationId);
+		builder.append(", application=");
+		builder.append(application);
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", email=");
@@ -118,5 +125,7 @@ public class Contact {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 
 }

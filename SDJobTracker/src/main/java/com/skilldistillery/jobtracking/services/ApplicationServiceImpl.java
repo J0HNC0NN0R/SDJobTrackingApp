@@ -1,6 +1,7 @@
 package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,26 +44,32 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Override
 	public Application create(Application application) {
 		Application newApplication = null;
-		
-	
-		
 		if(application != null) {
-		
-			
 			newApplication = apprepo.saveAndFlush(application);
 		}
 		return newApplication;
 	}
 	
 	@Override
-	public Application update(Application application) {
-		return application;
-		//TODO
+	public Application update(Application application, Integer appId) {
+		Application actualApplication = null;
+		Optional<Application> managedApplication = apprepo.findById(appId);
+		
+		if(managedApplication.isPresent()) {
+			actualApplication = managedApplication.get();
+			actualApplication.setPosition(application.getPosition());
+			actualApplication.setDescriptionURL(application.getDescriptionURL());
+			actualApplication.setInterestLevel(application.getInterestLevel());
+			
+			apprepo.saveAndFlush(actualApplication);
+		
+	}
+		return actualApplication;
 	}
 
 	@Override
 	public Progress addProgressOnApplication(Progress progress, Integer appId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

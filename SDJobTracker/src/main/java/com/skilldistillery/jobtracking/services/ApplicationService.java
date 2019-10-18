@@ -16,7 +16,7 @@ public interface ApplicationService {
 
 	Application create(Application application);
 
-	Application update(Application application);
+	Application update(Application application, Integer appId);
 
 	Progress addProgressOnApplication(Progress progress, Integer appId);
 	

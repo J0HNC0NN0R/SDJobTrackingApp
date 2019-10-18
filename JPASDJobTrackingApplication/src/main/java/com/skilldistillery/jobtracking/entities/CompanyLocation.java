@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "company_location")
 public class CompanyLocation {
@@ -20,6 +22,7 @@ public class CompanyLocation {
 //	private int companyId;
 	@ManyToOne
 	@JoinColumn(name="company_id")
+	@JsonIgnore
 	private Company company;
 
 	public CompanyLocation() {

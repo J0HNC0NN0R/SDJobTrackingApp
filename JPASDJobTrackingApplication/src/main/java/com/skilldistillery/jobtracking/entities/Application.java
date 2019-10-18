@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Application {
 
@@ -32,6 +34,7 @@ public class Application {
 //	@Column(name = "student_id")
 //	private int studentId;
 	@JoinColumn(name = "student_id")
+	@JsonIgnore
 	private Student student;
 //	@Column(name = "company_id")
 //	private int companyId;

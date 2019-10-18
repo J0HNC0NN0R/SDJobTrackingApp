@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Company {
 
@@ -19,6 +21,7 @@ public class Company {
 	@Column(name = "site_url")
 	private String siteURL;
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<Application> applications;
 	@OneToMany(mappedBy = "company")
 	private List<CompanyNote> companyNote;

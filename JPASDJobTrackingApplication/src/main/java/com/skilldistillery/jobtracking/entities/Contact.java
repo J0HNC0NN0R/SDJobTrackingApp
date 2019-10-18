@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Contact {
 	@Id
@@ -16,6 +18,7 @@ public class Contact {
 //	private int applicationId;
 	@ManyToOne
 	@JoinColumn(name="application_id")
+	@JsonIgnore
 	private Application application;
 	
 	private String name;

@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "company_note")
 public class CompanyNote {
@@ -21,11 +23,13 @@ public class CompanyNote {
 //	private int companyId;
 	@ManyToOne
 	@JoinColumn(name="company_id")
+	@JsonIgnore
 	private Company company;
 //	@Column(name = "student_id")
 //	private int studentId;
 	@ManyToOne
 	@JoinColumn(name="student_id")
+	@JsonIgnore
 	private Student student;
 	
 	public CompanyNote() {

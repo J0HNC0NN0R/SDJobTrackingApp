@@ -17,7 +17,7 @@ public interface StudentService {
 
 	Student findByStudentId(Integer id);
 
-	Student create(Student student, User user);
+	Student create(Student student, User user, Integer cohortId);
 
 	Student update(Student student, Integer studentId);
 

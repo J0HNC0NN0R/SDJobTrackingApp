@@ -1,10 +1,16 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Student {
@@ -15,48 +21,54 @@ public class Student {
 	private int userId;
 	@Column(name = "first_name")
 	private String firstName;
-
 	@Column(name = "last_name")
 	private String lastName;
-
 	private String email;
-
 	@Column(name = "github_username")
 	private String githubUsername;
-
 	@Column(name = "is_vettec")
 	private boolean isVettec;
-
 	@Column(name = "is_gi_bill")
 	private boolean isGIBill;
-
 	@Column(name = "is_employed")
 	private boolean isEmployed;
-
 	@Column(name = "is_accepted")
 	private boolean isAccepted;
-
 	@Column(name = "deposit_paid")
 	private boolean deposit_paid;
-
 	@Column(name = "needs_loaner_laptop")
 	private boolean needsLoanerLaptop;
-
 	@Column(name = "education_level")
 	private String educationLevel;
-
 	@Column(name = "open_to_relocation")
 	private String openToRelocation;
-
 	private String clearance;
+	@OneToMany(mappedBy="student")
+	private Application application;
+	@ManyToOne
+	@JoinColumn(name="cohort_id")
+	private Cohort cohort;
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	@OneToMany(mappedBy="student")
+	private List<CompanyNote> companyNotes;
+	@OneToMany(mappedBy="student")
+	private List<StudentDesiredLocation> studentDesiredLocations;
+	@OneToMany(mappedBy="student")
+	private List<Event> events;
+	@OneToMany(mappedBy="student")
+	private List<StudentAddress> address;
+	
 	
 	public Student() {
 		
 	}
-
+	
 	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
 			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,
-			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance) {
+			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance,
+			Application application, Cohort cohort, User user, List<CompanyNote> companyNotes) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -73,6 +85,10 @@ public class Student {
 		this.educationLevel = educationLevel;
 		this.openToRelocation = openToRelocation;
 		this.clearance = clearance;
+		this.application = application;
+		this.cohort = cohort;
+		this.user = user;
+		this.companyNotes = companyNotes;
 	}
 
 	public Student(int id) {
@@ -200,12 +216,44 @@ public class Student {
 		this.clearance = clearance;
 	}
 
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+	
+	public Cohort getCohort() {
+		return cohort;
+	}
+
+	public void setCohort(Cohort cohort) {
+		this.cohort = cohort;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
 		return result;
+	}
+	
+	public List<CompanyNote> getCompanyNotes() {
+		return companyNotes;
+	}
+
+	public void setCompanyNotes(List<CompanyNote> companyNotes) {
+		this.companyNotes = companyNotes;
 	}
 
 	@Override

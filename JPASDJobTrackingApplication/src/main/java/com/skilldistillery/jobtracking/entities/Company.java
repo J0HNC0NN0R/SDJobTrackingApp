@@ -1,10 +1,13 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Company {
@@ -15,12 +18,28 @@ public class Company {
 	private String name;
 	@Column(name = "site_url")
 	private String siteURL;
+	@OneToMany(mappedBy="company")
+	private Application application;
+	@OneToMany(mappedBy="company")
+	private List<CompanyNote> companyNote;
+	@OneToMany(mappedBy="company")
+	private List<CompanyLocation> companyLocations;
+	@OneToMany(mappedBy="company")
+	private List<JobPost> jopPosts;
+	
+	public Company() {
+		
+	}
 
-	public Company(int id, String name, String siteURL) {
+	public Company(int id, String name, String siteURL, Application application, List<CompanyNote> companyNote,
+			List<CompanyLocation> companyLocations) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.siteURL = siteURL;
+		this.application = application;
+		this.companyNote = companyNote;
+		this.companyLocations = companyLocations;
 	}
 
 	public int getId() {
@@ -45,6 +64,31 @@ public class Company {
 
 	public void setSiteURL(String siteURL) {
 		this.siteURL = siteURL;
+	}
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+	
+
+	public List<CompanyNote> getCompanyNote() {
+		return companyNote;
+	}
+
+	public void setCompanyNote(List<CompanyNote> companyNote) {
+		this.companyNote = companyNote;
+	}
+
+	public List<CompanyLocation> getCompanyLocations() {
+		return companyLocations;
+	}
+
+	public void setCompanyLocations(List<CompanyLocation> companyLocations) {
+		this.companyLocations = companyLocations;
 	}
 
 	@Override

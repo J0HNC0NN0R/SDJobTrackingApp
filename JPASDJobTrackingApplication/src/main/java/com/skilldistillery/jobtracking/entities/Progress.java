@@ -13,16 +13,12 @@ public class Progress {
 
 	@Id
 	private int id;
-
 //	@Column(name = "application_id")
 //	private int applicationId;
-
 	@ManyToOne
 	@JoinColumn(name = "application_id")
 	private Application application;
-
 	private String State;
-
 	@Column(name = "updated")
 	private Date updated;
 

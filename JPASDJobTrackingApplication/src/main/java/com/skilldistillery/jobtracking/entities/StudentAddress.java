@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +15,6 @@ public class StudentAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "student_id")
-	private int studentId;
 	private String city;
 	private String state;
 	@Column(name = "zip")
@@ -23,22 +23,14 @@ public class StudentAddress {
 	@Column(name = "address_type")
 	private String addressType;
 	private String street;
-
-	public StudentAddress(int id, int studentId, String city, String state, String zipcode, String phone,
-			String addressType, String street) {
-		super();
-		this.id = id;
-		this.studentId = studentId;
-		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.phone = phone;
-		this.addressType = addressType;
-		this.street = street;
-	}
+//	@Column(name = "student_id")
+//	private int studentId;
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private Student student;
 
 	public StudentAddress() {
-		super();
+		
 	}
 
 	public int getId() {
@@ -47,14 +39,6 @@ public class StudentAddress {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
 	}
 
 	public String getCity() {
@@ -105,6 +89,14 @@ public class StudentAddress {
 		this.street = street;
 	}
 
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -126,29 +118,6 @@ public class StudentAddress {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("StudentAddress [id=");
-		builder.append(id);
-		builder.append(", studentId=");
-		builder.append(studentId);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
-		builder.append(", zipcode=");
-		builder.append(zipcode);
-		builder.append(", phone=");
-		builder.append(phone);
-		builder.append(", addressType=");
-		builder.append(addressType);
-		builder.append(", street=");
-		builder.append(street);
-		builder.append("]");
-		return builder.toString();
-	}
-
+	
 }
 

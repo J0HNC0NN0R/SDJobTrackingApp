@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.Cohort;
+import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.Event;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
+import com.skilldistillery.jobtracking.services.ApplicationService;
+import com.skilldistillery.jobtracking.services.CompanyService;
 import com.skilldistillery.jobtracking.services.StudentService;
 
 @RestController
@@ -30,11 +33,13 @@ import com.skilldistillery.jobtracking.services.StudentService;
 public class StudentController {
 	@Autowired
 	private StudentService serv;
+	
+	@Autowired 
+	private CompanyService compServ;
 
-	@GetMapping("students")
-	public List<Student> index(Principal principal) {
-		return serv.index();
-	}
+	@Autowired 
+	private ApplicationService appServ;
+	
 
 	@GetMapping("students")
 	public List<Student> searchStudentsByName(@RequestParam(value="name") String name){
@@ -168,13 +173,21 @@ public class StudentController {
 //		return serv.getApplicationById(sid, aid);
 //	}
 //	
+
 //	@PostMapping("students/{id}/applications")
-//	public Event createEvent(@PathVariable("id") int id, @RequestBody Application application, HttpServletResponse resp, HttpServletRequest req,
+//	public Application createApplication(@PathVariable("id") int id, @RequestBody Application application,
+//			@RequestBody Company company, HttpServletResponse resp, HttpServletRequest req, 
 //			Principal principal) {
-//		Event created = null;
+//		Application created = null;
+//		
+//		Company managedCompany = compServ.findByName(company.getName());
+//		if (managedCompany == null) {
+//			managedCompany = compServ.create(company);
+//		}
+//		
 //		try {
-//			event.setStudentId(id);
-//			created = serv.addEvent(event);
+//			application.setCompany(managedCompany);
+//			created = appServ.create(application);
 //			StringBuffer url = req.getRequestURL();
 //			url.append("/" + created.getId());
 //			resp.setStatus(201);
@@ -186,5 +199,5 @@ public class StudentController {
 //		}
 //		return created;
 //	}
-	
+//	
 }

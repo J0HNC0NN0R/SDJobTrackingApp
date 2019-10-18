@@ -16,6 +16,10 @@ public class CompanyServiceImpl implements CompanyService {
 	@Autowired
 	private CompanyRepository comrepo;
 	
+	@Override
+	public Company findByName(String name) {
+		return comrepo.findByName(name);
+	}
 	
 	@Override
 	public List<Company> findallCompanies(){

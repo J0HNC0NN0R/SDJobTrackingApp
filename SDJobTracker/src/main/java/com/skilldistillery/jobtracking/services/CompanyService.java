@@ -18,6 +18,8 @@ public interface CompanyService {
 	CompanyLocation addCompanyLocation(Integer companyId);
 	
 	CompanyLocation updateCompanyLocation(Integer companyLocId);
+
+	Company findByName(String name);
 	
 	
 	

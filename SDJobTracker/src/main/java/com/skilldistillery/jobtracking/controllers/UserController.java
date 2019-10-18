@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.jobtracking.entities.User;
+import com.skilldistillery.jobtracking.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -28,12 +29,12 @@ public class UserController {
 
 	@GetMapping("users")
 	public List<User> index(Principal principal) {
-		return serv.index(principal.getName());
+		return serv.index();
 	}
 
 	@GetMapping("users/{id}")
 	public User show(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-		User user = serv.show(principal.getName(), id);
+		User user = serv.show(id);
 		if (user != null) {
 			resp.setStatus(200);
 		} else {
@@ -47,7 +48,7 @@ public class UserController {
 			Principal principal) {
 		User created = null;
 		try {
-			created = serv.create(principal.getName(), user);
+			created = serv.create(user);
 			StringBuffer url = req.getRequestURL();
 			url.append("/" + created.getId());
 			resp.setStatus(201);
@@ -65,7 +66,7 @@ public class UserController {
 			Principal principal) {
 		User updated = null;
 		try {
-			updated = serv.update(principal.getName(), id, user);
+			updated = serv.updateUserById(id, user);
 			if (updated != null) {
 				resp.setStatus(200);
 			} else {
@@ -79,18 +80,18 @@ public class UserController {
 		return updated;
 	}
 
-	@DeleteMapping("users/{id}")
-	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-		try {
-			if (!serv.destroy(principal.getName(), id)) {
-				resp.setStatus(204);
-			} else {
-				resp.setStatus(404);
-			}
-
-		} catch (Exception e) {
-			resp.setStatus(400);
-		}
-	}
+//	@DeleteMapping("users/{id}")
+//	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+//		try {
+//			if (!serv.deleteUserById(id)) {
+//				resp.setStatus(204);
+//			} else {
+//				resp.setStatus(404);
+//			}
+//
+//		} catch (Exception e) {
+//			resp.setStatus(400);
+//		}
+//	}
 
 }

@@ -39,10 +39,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Override 
 	public User create(User user) {
+		
+		User newUser = null;
 		if(user !=null ) {
-			User newUser = userrepo.saveAndFlush(user);
+			 newUser = userrepo.saveAndFlush(user);
 		}
-		return user;
+		return newUser;
 	}
 	
 	@Override 
@@ -60,8 +62,15 @@ Optional<User> use = userrepo.findById(id);
 	
 	@Override
 	public User deleteUserById(Integer id) {
-		userrepo.deleteById(id);
-		return null;
+	
+		Optional<User> use = userrepo.findById(id);
+		User deleteUser = null;
+		if(use.isPresent()) {
+			 deleteUser = use.get();
+			deleteUser.setEnabled(false);
+			userrepo.saveAndFlush(deleteUser);
+		}
+		return deleteUser;
 	}
 	
 	

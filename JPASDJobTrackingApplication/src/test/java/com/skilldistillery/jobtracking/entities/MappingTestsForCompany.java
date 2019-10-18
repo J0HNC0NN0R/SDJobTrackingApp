@@ -10,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class MappingTestsForCompany {
@@ -60,21 +61,23 @@ class MappingTestsForCompany {
 
 	@Test
 	void mapping_Job_Post_To_Company_Tests() {
-		// assertEquals(1, jobPost.getCompanyId());
-		assertEquals("Dev", jobPost.getPosition());
+		assertEquals("Fake Company", jobPost.getCompany().getName());
+		assertEquals("Dev", company.getJopPosts().get(0).getPosition());
 	}
 
 	@Test
 	void mapping_Company_Location_To_Company_Tests() {
-		assertEquals(1, companyLocation.getId());
-		assertEquals("Denver", companyLocation.getCity());
+		assertEquals("Fake Company", companyLocation.getCompany().getName());
+		assertEquals("Denver", company.getCompanyLocations().get(0).getCity());
 
 	}
 
 	@Test
 	void mapping_Company_Note_To_Company_Tests() {
-		assertEquals(1, companyNote.getId());
-		assertEquals("wqr wer r qwrweq r we r wer wqerqwer.", companyNote.getBody());
+		assertEquals("Fake Company", companyNote.getCompany().getName());
+		assertEquals("Company Note", company.getCompanyNote().get(0).getTitle());
 	}
+	
+	//NOTE: Company to application is in MappingTestsForApplication
 
 }

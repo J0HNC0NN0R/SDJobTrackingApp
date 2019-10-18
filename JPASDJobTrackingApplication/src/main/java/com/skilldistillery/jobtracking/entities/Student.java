@@ -17,8 +17,8 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "user_id")
-	private int userId;
+//	@Column(name = "user_id")
+//	private int userId;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
@@ -43,37 +43,48 @@ public class Student {
 	@Column(name = "open_to_relocation")
 	private String openToRelocation;
 	private String clearance;
+<<<<<<< HEAD
 	@OneToMany(mappedBy="student")
+=======
+	@OneToMany(mappedBy = "student")
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 	private List<Application> applications;
 	@ManyToOne
-	@JoinColumn(name="cohort_id")
+	@JoinColumn(name = "cohort_id")
 	private Cohort cohort;
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<CompanyNote> companyNotes;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<StudentDesiredLocation> studentDesiredLocations;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<Event> events;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<StudentAddress> address;
-	
-	
+
 	public Student() {
-		
+
 	}
 
+<<<<<<< HEAD
 
 	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
 			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,
 			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance,
 			List<Application> applications, Cohort cohort, User user, List<CompanyNote> companyNotes,
+=======
+	
+
+	public Student(int id, String firstName, String lastName, String email, String githubUsername, boolean isVettec,
+			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid, boolean needsLoanerLaptop,
+			String educationLevel, String openToRelocation, String clearance, List<Application> applications,
+			Cohort cohort, User user, List<CompanyNote> companyNotes,
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
 		this.id = id;
-		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -106,6 +117,7 @@ public class Student {
 		this.id = id;
 	}
 
+<<<<<<< HEAD
 
 	public int getUserId() {
 		return userId;
@@ -115,6 +127,9 @@ public class Student {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+=======
+
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 
 
 	public String getFirstName() {
@@ -246,16 +261,48 @@ public class Student {
 		this.clearance = clearance;
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 	public List<Application> getApplications() {
 		return applications;
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
 	}
 
+<<<<<<< HEAD
+=======
+	public List<StudentDesiredLocation> getStudentDesiredLocations() {
+		return studentDesiredLocations;
+	}
+
+	public void setStudentDesiredLocations(List<StudentDesiredLocation> studentDesiredLocations) {
+		this.studentDesiredLocations = studentDesiredLocations;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public List<StudentAddress> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<StudentAddress> address) {
+		this.address = address;
+	}
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 
 	public Cohort getCohort() {
 		return cohort;
@@ -324,6 +371,13 @@ public class Student {
 		result = prime * result + id;
 		return result;
 	}
+<<<<<<< HEAD
+=======
+
+	public List<CompanyNote> getCompanyNotes() {
+		return companyNotes;
+	}
+>>>>>>> 687d554072ad851f3951e24baf695e001f7a4457
 
 
 	@Override
@@ -346,8 +400,8 @@ public class Student {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Student [id=");
 		builder.append(id);
-		builder.append(", userId=");
-		builder.append(userId);
+//		builder.append(", userId=");
+//		builder.append(userId);
 		builder.append(", firstName=");
 		builder.append(firstName);
 		builder.append(", lastName=");

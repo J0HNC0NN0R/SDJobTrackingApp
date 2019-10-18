@@ -101,8 +101,7 @@ public class StudentServiceImpl implements StudentService {
 			actualStudent.setEducationLevel(student.getEducationLevel());
 			actualStudent.setOpenToRelocation(student.getOpenToRelocation());
 			actualStudent.setClearance(student.getClearance());
-			actualStudent.setCohort(student.getCohort());
-			actualStudent.setUser(student.getUser());
+			actualStudent.setCohort(cohorepo.findById(cohortId).get());
 			
 			sturepo.saveAndFlush(actualStudent);
 		}

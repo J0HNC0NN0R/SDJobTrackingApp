@@ -357,10 +357,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (1, 1, 'test', 'test', 'USER');
-INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (2, 1, 'test', 'user', 'USER');
-INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (3, 1, 'test', 'admin', 'ADMIN');
-INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (4, 1, 'test', 'guy', 'USER');
+INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (1, 1, '$2a$10$pI8LOacR05l56VT1u7Q/a.Nj7QWyf0TGXnrPe7YEdnYylzDKhKkny', 'test', 'USER');
+INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (2, 1, '$2a$10$pI8LOacR05l56VT1u7Q/a.Nj7QWyf0TGXnrPe7YEdnYylzDKhKkny', 'user', 'USER');
+INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (3, 1, '$2a$10$pI8LOacR05l56VT1u7Q/a.Nj7QWyf0TGXnrPe7YEdnYylzDKhKkny', 'admin', 'ADMIN');
+INSERT INTO `user` (`id`, `enabled`, `password`, `username`, `role`) VALUES (4, 1, '$2a$10$pI8LOacR05l56VT1u7Q/a.Nj7QWyf0TGXnrPe7YEdnYylzDKhKkny', 'guy', 'USER');
 
 COMMIT;
 

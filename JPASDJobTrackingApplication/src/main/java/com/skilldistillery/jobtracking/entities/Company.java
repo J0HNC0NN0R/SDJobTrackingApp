@@ -11,7 +11,6 @@ public class Company {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private int id;
 	private String name;
 	@Column(name = "site_url")

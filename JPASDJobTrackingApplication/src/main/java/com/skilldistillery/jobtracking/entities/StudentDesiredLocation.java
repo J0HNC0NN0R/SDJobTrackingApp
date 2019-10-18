@@ -1,5 +1,7 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class StudentDesiredLocation {
 //	private int studentId;
 	@ManyToOne
 	@JoinColumn(name="student_id")
-	private Student student;
+	private List<Student> students;
 	
 	
 	public StudentDesiredLocation() {
@@ -28,12 +30,12 @@ public class StudentDesiredLocation {
 	}
 
 
-	public StudentDesiredLocation(int id, String city, String state, Student student) {
+	public StudentDesiredLocation(int id, String city, String state, List<Student> students) {
 		super();
 		this.id = id;
 		this.city = city;
 		this.state = state;
-		this.student = student;
+		this.students = students;
 	}
 
 
@@ -67,13 +69,13 @@ public class StudentDesiredLocation {
 	}
 
 
-	public Student getStudent() {
-		return student;
+	public List<Student> getStudents() {
+		return students;
 	}
 
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 
 
@@ -81,10 +83,7 @@ public class StudentDesiredLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		result = prime * result + ((student == null) ? 0 : student.hashCode());
 		return result;
 	}
 
@@ -98,25 +97,11 @@ public class StudentDesiredLocation {
 		if (getClass() != obj.getClass())
 			return false;
 		StudentDesiredLocation other = (StudentDesiredLocation) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
 		if (id != other.id)
-			return false;
-		if (state == null) {
-			if (other.state != null)
-				return false;
-		} else if (!state.equals(other.state))
-			return false;
-		if (student == null) {
-			if (other.student != null)
-				return false;
-		} else if (!student.equals(other.student))
 			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
@@ -127,8 +112,8 @@ public class StudentDesiredLocation {
 		builder.append(city);
 		builder.append(", state=");
 		builder.append(state);
-		builder.append(", student=");
-		builder.append(student);
+		builder.append(", students=");
+		builder.append(students);
 		builder.append("]");
 		return builder.toString();
 	}

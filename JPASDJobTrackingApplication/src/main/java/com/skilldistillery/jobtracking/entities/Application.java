@@ -28,9 +28,9 @@ public class Application {
 	private List<Contact> contacts;
 	@OneToMany(mappedBy = "application")
 	private List<ApplicationNote> applicationNotes;
-	@ManyToOne
 //	@Column(name = "student_id")
 //	private int studentId;
+	@ManyToOne
 	@JoinColumn(name = "student_id")
 	private Student student;
 //	@Column(name = "company_id")

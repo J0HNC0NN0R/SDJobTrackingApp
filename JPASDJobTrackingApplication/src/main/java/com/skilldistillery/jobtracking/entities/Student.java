@@ -44,7 +44,7 @@ public class Student {
 	private String openToRelocation;
 	private String clearance;
 	@OneToMany(mappedBy="student")
-	private Application application;
+	private List<Application> applications;
 	@ManyToOne
 	@JoinColumn(name="cohort_id")
 	private Cohort cohort;
@@ -64,11 +64,13 @@ public class Student {
 	public Student() {
 		
 	}
-	
+
+
 	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
 			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,
 			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance,
-			Application application, Cohort cohort, User user, List<CompanyNote> companyNotes) {
+			List<Application> applications, Cohort cohort, User user, List<CompanyNote> companyNotes,
+			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -85,160 +87,235 @@ public class Student {
 		this.educationLevel = educationLevel;
 		this.openToRelocation = openToRelocation;
 		this.clearance = clearance;
-		this.application = application;
+		this.applications = applications;
 		this.cohort = cohort;
 		this.user = user;
 		this.companyNotes = companyNotes;
+		this.studentDesiredLocations = studentDesiredLocations;
+		this.events = events;
+		this.address = address;
 	}
 
-	public Student(int id) {
-		super();
-		this.id = id;
-	}
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public int getUserId() {
 		return userId;
 	}
 
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 	public String getGithubUsername() {
 		return githubUsername;
 	}
 
+
 	public void setGithubUsername(String githubUsername) {
 		this.githubUsername = githubUsername;
 	}
+
 
 	public boolean isVettec() {
 		return isVettec;
 	}
 
+
 	public void setVettec(boolean isVettec) {
 		this.isVettec = isVettec;
 	}
+
 
 	public boolean isGIBill() {
 		return isGIBill;
 	}
 
+
 	public void setGIBill(boolean isGIBill) {
 		this.isGIBill = isGIBill;
 	}
+
 
 	public boolean isEmployed() {
 		return isEmployed;
 	}
 
+
 	public void setEmployed(boolean isEmployed) {
 		this.isEmployed = isEmployed;
 	}
+
 
 	public boolean isAccepted() {
 		return isAccepted;
 	}
 
+
 	public void setAccepted(boolean isAccepted) {
 		this.isAccepted = isAccepted;
 	}
+
 
 	public boolean isDeposit_paid() {
 		return deposit_paid;
 	}
 
+
 	public void setDeposit_paid(boolean deposit_paid) {
 		this.deposit_paid = deposit_paid;
 	}
+
 
 	public boolean isNeedsLoanerLaptop() {
 		return needsLoanerLaptop;
 	}
 
+
 	public void setNeedsLoanerLaptop(boolean needsLoanerLaptop) {
 		this.needsLoanerLaptop = needsLoanerLaptop;
 	}
+
 
 	public String getEducationLevel() {
 		return educationLevel;
 	}
 
+
 	public void setEducationLevel(String educationLevel) {
 		this.educationLevel = educationLevel;
 	}
+
 
 	public String getOpenToRelocation() {
 		return openToRelocation;
 	}
 
+
 	public void setOpenToRelocation(String openToRelocation) {
 		this.openToRelocation = openToRelocation;
 	}
+
 
 	public String getClearance() {
 		return clearance;
 	}
 
+
 	public void setClearance(String clearance) {
 		this.clearance = clearance;
 	}
 
-	public Application getApplication() {
-		return application;
+
+	public List<Application> getApplications() {
+		return applications;
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
+
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
 	}
-	
+
+
 	public Cohort getCohort() {
 		return cohort;
 	}
+
 
 	public void setCohort(Cohort cohort) {
 		this.cohort = cohort;
 	}
 
+
 	public User getUser() {
 		return user;
 	}
 
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+	public List<CompanyNote> getCompanyNotes() {
+		return companyNotes;
+	}
+
+
+	public void setCompanyNotes(List<CompanyNote> companyNotes) {
+		this.companyNotes = companyNotes;
+	}
+
+
+	public List<StudentDesiredLocation> getStudentDesiredLocations() {
+		return studentDesiredLocations;
+	}
+
+
+	public void setStudentDesiredLocations(List<StudentDesiredLocation> studentDesiredLocations) {
+		this.studentDesiredLocations = studentDesiredLocations;
+	}
+
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+
+	public List<StudentAddress> getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(List<StudentAddress> address) {
+		this.address = address;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -247,14 +324,7 @@ public class Student {
 		result = prime * result + id;
 		return result;
 	}
-	
-	public List<CompanyNote> getCompanyNotes() {
-		return companyNotes;
-	}
 
-	public void setCompanyNotes(List<CompanyNote> companyNotes) {
-		this.companyNotes = companyNotes;
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -269,6 +339,7 @@ public class Student {
 			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
@@ -303,8 +374,24 @@ public class Student {
 		builder.append(openToRelocation);
 		builder.append(", clearance=");
 		builder.append(clearance);
+		builder.append(", applications=");
+		builder.append(applications);
+		builder.append(", cohort=");
+		builder.append(cohort);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", companyNotes=");
+		builder.append(companyNotes);
+		builder.append(", studentDesiredLocations=");
+		builder.append(studentDesiredLocations);
+		builder.append(", events=");
+		builder.append(events);
+		builder.append(", address=");
+		builder.append(address);
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 
 }

@@ -17,8 +17,8 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "user_id")
-	private int userId;
+//	@Column(name = "user_id")
+//	private int userId;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
@@ -43,35 +43,36 @@ public class Student {
 	@Column(name = "open_to_relocation")
 	private String openToRelocation;
 	private String clearance;
-	@OneToMany(mappedBy="student")
-	private Application application;
+	@OneToMany(mappedBy = "student")
+	private List<Application> applications;
 	@ManyToOne
-	@JoinColumn(name="cohort_id")
+	@JoinColumn(name = "cohort_id")
 	private Cohort cohort;
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<CompanyNote> companyNotes;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<StudentDesiredLocation> studentDesiredLocations;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<Event> events;
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy = "student")
 	private List<StudentAddress> address;
-	
-	
+
 	public Student() {
-		
+
 	}
+
 	
-	public Student(int id, int userId, String firstName, String lastName, String email, String githubUsername,
-			boolean isVettec, boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid,
-			boolean needsLoanerLaptop, String educationLevel, String openToRelocation, String clearance,
-			Application application, Cohort cohort, User user, List<CompanyNote> companyNotes) {
+
+	public Student(int id, String firstName, String lastName, String email, String githubUsername, boolean isVettec,
+			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid, boolean needsLoanerLaptop,
+			String educationLevel, String openToRelocation, String clearance, List<Application> applications,
+			Cohort cohort, User user, List<CompanyNote> companyNotes,
+			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
 		this.id = id;
-		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -85,10 +86,13 @@ public class Student {
 		this.educationLevel = educationLevel;
 		this.openToRelocation = openToRelocation;
 		this.clearance = clearance;
-		this.application = application;
+		this.applications = applications;
 		this.cohort = cohort;
 		this.user = user;
 		this.companyNotes = companyNotes;
+		this.studentDesiredLocations = studentDesiredLocations;
+		this.events = events;
+		this.address = address;
 	}
 
 	public Student(int id) {
@@ -104,13 +108,7 @@ public class Student {
 		this.id = id;
 	}
 
-	public int getUserId() {
-		return userId;
-	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -216,14 +214,38 @@ public class Student {
 		this.clearance = clearance;
 	}
 
-	public Application getApplication() {
-		return application;
+	public List<Application> getApplications() {
+		return applications;
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
 	}
-	
+
+	public List<StudentDesiredLocation> getStudentDesiredLocations() {
+		return studentDesiredLocations;
+	}
+
+	public void setStudentDesiredLocations(List<StudentDesiredLocation> studentDesiredLocations) {
+		this.studentDesiredLocations = studentDesiredLocations;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public List<StudentAddress> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<StudentAddress> address) {
+		this.address = address;
+	}
+
 	public Cohort getCohort() {
 		return cohort;
 	}
@@ -247,7 +269,7 @@ public class Student {
 		result = prime * result + id;
 		return result;
 	}
-	
+
 	public List<CompanyNote> getCompanyNotes() {
 		return companyNotes;
 	}
@@ -275,8 +297,8 @@ public class Student {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Student [id=");
 		builder.append(id);
-		builder.append(", userId=");
-		builder.append(userId);
+//		builder.append(", userId=");
+//		builder.append(userId);
 		builder.append(", firstName=");
 		builder.append(firstName);
 		builder.append(", lastName=");
@@ -303,6 +325,20 @@ public class Student {
 		builder.append(openToRelocation);
 		builder.append(", clearance=");
 		builder.append(clearance);
+		builder.append(", applications=");
+		builder.append(applications);
+		builder.append(", cohort=");
+		builder.append(cohort);
+		builder.append(", user=");
+		builder.append(user);
+		builder.append(", companyNotes=");
+		builder.append(companyNotes);
+		builder.append(", studentDesiredLocations=");
+		builder.append(studentDesiredLocations);
+		builder.append(", events=");
+		builder.append(events);
+		builder.append(", address=");
+		builder.append(address);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -18,28 +18,29 @@ public class Company {
 	private String name;
 	@Column(name = "site_url")
 	private String siteURL;
-	@OneToMany(mappedBy="company")
-	private Application application;
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy = "company")
+	private List<Application> applications;
+	@OneToMany(mappedBy = "company")
 	private List<CompanyNote> companyNote;
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy = "company")
 	private List<CompanyLocation> companyLocations;
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy = "company")
 	private List<JobPost> jopPosts;
-	
-	public Company() {
-		
-	}
 
-	public Company(int id, String name, String siteURL, Application application, List<CompanyNote> companyNote,
-			List<CompanyLocation> companyLocations) {
+	public Company(int id, String name, String siteURL, List<Application> applications, List<CompanyNote> companyNote,
+			List<CompanyLocation> companyLocations, List<JobPost> jopPosts) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.siteURL = siteURL;
-		this.application = application;
+		this.applications = applications;
 		this.companyNote = companyNote;
 		this.companyLocations = companyLocations;
+		this.jopPosts = jopPosts;
+	}
+
+	public Company() {
+		super();
 	}
 
 	public int getId() {
@@ -66,14 +67,21 @@ public class Company {
 		this.siteURL = siteURL;
 	}
 
-	public Application getApplication() {
-		return application;
+	public List<Application> getApplications() {
+		return applications;
 	}
 
-	public void setApplication(Application application) {
-		this.application = application;
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
 	}
-	
+
+	public List<JobPost> getJopPosts() {
+		return jopPosts;
+	}
+
+	public void setJopPosts(List<JobPost> jopPosts) {
+		this.jopPosts = jopPosts;
+	}
 
 	public List<CompanyNote> getCompanyNote() {
 		return companyNote;

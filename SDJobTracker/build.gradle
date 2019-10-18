@@ -20,5 +20,5 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.9'
 }

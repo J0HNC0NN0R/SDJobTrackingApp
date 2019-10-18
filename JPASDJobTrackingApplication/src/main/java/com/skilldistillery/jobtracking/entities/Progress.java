@@ -5,25 +5,27 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Progress {
 
 	@Id
 	private int id;
-
-	@Column(name = "application_id")
-	private int applicationId;
-
+//	@Column(name = "application_id")
+//	private int applicationId;
+	@ManyToOne
+	@JoinColumn(name = "application_id")
+	private Application application;
 	private String State;
-
 	@Column(name = "updated")
 	private Date updated;
 
-	public Progress(int id, int applicationId, String state, Date updated) {
+	public Progress(int id, Application applicationId, String state, Date updated) {
 		super();
 		this.id = id;
-		this.applicationId = applicationId;
+		this.application = applicationId;
 		State = state;
 		this.updated = updated;
 	}
@@ -40,12 +42,12 @@ public class Progress {
 		this.id = id;
 	}
 
-	public int getApplicationId() {
-		return applicationId;
+	public Application getApplication() {
+		return application;
 	}
 
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 
 	public String getState() {
@@ -91,8 +93,8 @@ public class Progress {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Progress [id=");
 		builder.append(id);
-		builder.append(", applicationId=");
-		builder.append(applicationId);
+//		builder.append(", application=");
+//		builder.append(application);
 		builder.append(", State=");
 		builder.append(State);
 		builder.append(", updated=");
@@ -100,5 +102,6 @@ public class Progress {
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 }

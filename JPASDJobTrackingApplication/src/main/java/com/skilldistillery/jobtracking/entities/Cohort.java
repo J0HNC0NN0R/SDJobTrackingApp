@@ -1,12 +1,14 @@
 package com.skilldistillery.jobtracking.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cohort {
@@ -19,6 +21,8 @@ public class Cohort {
 	private Date endDate;
 	private String name;
 	private String nickname;
+	@OneToMany(mappedBy="cohort")
+	private List<Student> students;
 
 	public Cohort(int id, Date startDate, Date endDate, String name, String nickname) {
 		super();

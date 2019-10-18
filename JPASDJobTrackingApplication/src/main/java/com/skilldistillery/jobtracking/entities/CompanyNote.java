@@ -1,10 +1,11 @@
 package com.skilldistillery.jobtracking.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,28 +15,30 @@ public class CompanyNote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	@Column(name = "student_id")
-	private int studentId;
-
-	@Column(name = "company_id")
-	private int companyId;
-
 	private String title;
-
 	private String body;
-
-	public CompanyNote(int id, int studentId, int companyId, String title, String body) {
-		super();
-		this.id = id;
-		this.studentId = studentId;
-		this.companyId = companyId;
-		this.title = title;
-		this.body = body;
+//	@Column(name = "company_id")
+//	private int companyId;
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
+//	@Column(name = "student_id")
+//	private int studentId;
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private Student student;
+	
+	public CompanyNote() {
+		
 	}
 
-	public CompanyNote() {
+	public CompanyNote(int id, String title, String body, Company company, Student student) {
 		super();
+		this.id = id;
+		this.title = title;
+		this.body = body;
+		this.company = company;
+		this.student = student;
 	}
 
 	public int getId() {
@@ -44,22 +47,6 @@ public class CompanyNote {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
-	}
-
-	public int getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
 	}
 
 	public String getTitle() {
@@ -76,6 +63,22 @@ public class CompanyNote {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	@Override
@@ -105,14 +108,14 @@ public class CompanyNote {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CompanyNote [id=");
 		builder.append(id);
-		builder.append(", studentId=");
-		builder.append(studentId);
-		builder.append(", companyId=");
-		builder.append(companyId);
 		builder.append(", title=");
 		builder.append(title);
 		builder.append(", body=");
 		builder.append(body);
+		builder.append(", company=");
+		builder.append(company);
+		builder.append(", student=");
+		builder.append(student);
 		builder.append("]");
 		return builder.toString();
 	}

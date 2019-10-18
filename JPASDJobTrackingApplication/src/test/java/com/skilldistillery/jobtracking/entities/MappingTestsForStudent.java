@@ -92,7 +92,7 @@ class MappingTestsForStudent {
 
 	@Test
 	void mapping_Student_Desired_Location_To_Student_Tests() {
-		assertEquals("gituser", studentDesiredLocation.getStudent().getGithubUsername());
+		assertEquals("gituser", studentDesiredLocation.getStudents().get(0).getGithubUsername());
 		assertEquals("CO", student.getStudentDesiredLocations().get(0).getState());
 	}
 

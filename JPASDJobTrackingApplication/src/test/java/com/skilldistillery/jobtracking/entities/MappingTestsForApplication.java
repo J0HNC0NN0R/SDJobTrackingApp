@@ -19,7 +19,7 @@ class MappingTestsForApplication {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	
+
 	private Contact contact;
 	private Application app;
 	private Progress progress;
@@ -100,15 +100,15 @@ class MappingTestsForApplication {
 	@Test
 	void mapping_Application_Note_To_Application_Tests() {
 		assertEquals(1, appNote.getApplication().getId());
-		assertEquals("" app.getNotes().getc
+		assertEquals("I need a job", app.getApplicatinNotes().get(1));
 
 	}
 
 	// COMPANY TO APPLICATION TESTS
 	@Test
 	void mapping_Company_To_Application_Tests() {
-		assertEquals(1, app.getCompanyId());
-		assertEquals("Fake Company", company.getName());
+		assertEquals(1, company.getApplications().get(0).getId());
+		assertEquals("Fake Company", app.getCompany().getName());
 
 	}
 

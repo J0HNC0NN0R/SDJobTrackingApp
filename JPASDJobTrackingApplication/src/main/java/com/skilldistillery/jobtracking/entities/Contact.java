@@ -112,8 +112,8 @@ public class Contact {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Contact [id=");
 		builder.append(id);
-		builder.append(", application=");
-		builder.append(application);
+//		builder.append(", application=");
+//		builder.append(application);
 		builder.append(", name=");
 		builder.append(name);
 		builder.append(", email=");

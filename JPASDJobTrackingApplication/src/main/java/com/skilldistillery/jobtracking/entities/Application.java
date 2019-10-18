@@ -164,12 +164,12 @@ public class Application {
 		builder.append(interestLevel);
 		builder.append(", progress=");
 		builder.append(progress);
-		builder.append(", contacts=");
-		builder.append(contacts);
+//		builder.append(", contacts=");
+//		builder.append(contacts);
 //		builder.append(", applicationNotes=");
 //		builder.append(applicationNotes);
-		builder.append(", student=");
-		builder.append(student);
+//		builder.append(", student=");
+//		builder.append(student);
 		builder.append(", company=");
 		builder.append(company);
 		builder.append("]");

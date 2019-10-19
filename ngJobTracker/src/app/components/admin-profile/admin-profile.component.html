@@ -1,13 +1,13 @@
 <div id="adminProfile">
-  <table>
-    <thead>
+  <table class="table table-striped table-bordered table-sm">
+    <thead class="thead-dark">
       <tr>
         <th>Username</th>
         <th>Role</th>
         <th>Enabled</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="table table-hover">
       <tr *ngFor="let user of users">
         <td>{{user.username}}</td>
         <td>{{user.role}}</td>

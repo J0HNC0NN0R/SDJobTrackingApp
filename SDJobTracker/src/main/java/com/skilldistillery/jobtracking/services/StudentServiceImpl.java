@@ -129,9 +129,20 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Event updateEvent(Integer eventId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Event updateEvent(Event event, Integer eventId) {
+		Event actualEvent = null;
+		Optional<Event> managedEvent = evenrepo.findById(eventId);
+		if(managedEvent.isPresent()) {
+			actualEvent = managedEvent.get();
+			actualEvent.setTitle(event.getTitle());
+			actualEvent.setDescription(event.getDescription());
+			actualEvent.setLocation(event.getLocation());
+			actualEvent.setDate(event.getDate());
+			
+			evenrepo.saveAndFlush(actualEvent);
+		}
+		
+		return actualEvent;
 	}
 
 	@Override
@@ -171,6 +182,15 @@ public class StudentServiceImpl implements StudentService {
 		return actualCNote;
 	}
 
+	@Override
+	public StudentAddress getAddressById(Integer stuAddId) {
+		return stuaddrepo.findById(stuAddId).get();
+	}
+		
+	@Override
+	public List<StudentAddress> getAddressesByStudentId(Integer studentId){
+		return stuaddrepo.findByStudentId(studentId);
+	}
 	@Override
 	public StudentAddress addStudentAddress(StudentAddress address, Integer studentId) {
 		StudentAddress newAddress = null;

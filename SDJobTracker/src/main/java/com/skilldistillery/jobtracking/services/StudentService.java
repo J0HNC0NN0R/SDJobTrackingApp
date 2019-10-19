@@ -23,7 +23,7 @@ public interface StudentService {
 
 	Event addEvent(Event event);
 
-	Event updateEvent(Integer eventId);
+	Event updateEvent(Event event, Integer eventId);
 
 	CompanyNote addCompanyNote(CompanyNote companynote, Integer companyId, Integer studentId);
 
@@ -35,6 +35,8 @@ public interface StudentService {
 
 	StudentAddress updateStudentAddress(StudentAddress address, Integer addressId);
 
+	
+	
 	Cohort findById(Integer cohortId);
 
 	List<Student> getStudentsByCohortId(Integer cohortId);
@@ -44,6 +46,10 @@ public interface StudentService {
 	List<Student> getStudentsByName(String name);
 
 	List<Event> getEventsByStudentId(Integer studentId);
+
+	List<StudentAddress> getAddressesByStudentId(Integer studentId);
+
+	StudentAddress getAddressById(Integer stuAddId);
 
 	
 	

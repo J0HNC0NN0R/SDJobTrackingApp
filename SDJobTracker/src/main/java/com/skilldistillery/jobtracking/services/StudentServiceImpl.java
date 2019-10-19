@@ -71,7 +71,30 @@ public class StudentServiceImpl implements StudentService {
 		return sturepo.findById(id).get();
 	}
 	
-
+	@Override 
+	public Cohort addCohort(Cohort cohort) {
+		Cohort newCohort = null;
+		if(cohort != null) {
+			newCohort = cohorepo.saveAndFlush(cohort);
+		}
+		return newCohort;
+	}
+	
+	@Override
+	public Cohort updateCohort(Cohort cohort, Integer cohortId) {
+		Cohort actualCohort = null;
+		
+		Optional<Cohort> managedCohort = cohorepo.findById(cohortId);
+		if(managedCohort.isPresent()) {
+			actualCohort = managedCohort.get();
+			actualCohort.setName(cohort.getName());
+			actualCohort.setNickname(cohort.getNickname());
+			actualCohort.setStartDate(cohort.getEndDate());
+			actualCohort.setEndDate(cohort.getEndDate());
+			cohorepo.saveAndFlush(actualCohort);
+		}
+		return actualCohort;
+	}
 
 	@Override
 	public Student create(Student student, User user, Integer cohortId) {

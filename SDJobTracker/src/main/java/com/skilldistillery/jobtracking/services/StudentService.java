@@ -51,6 +51,10 @@ public interface StudentService {
 
 	StudentAddress getAddressById(Integer stuAddId);
 
+	Cohort addCohort(Cohort cohort);
+
+	Cohort updateCohort(Cohort cohort, Integer cohortId);
+
 	
 	
 }

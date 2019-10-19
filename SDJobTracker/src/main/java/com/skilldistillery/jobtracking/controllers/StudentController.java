@@ -29,7 +29,7 @@ import com.skilldistillery.jobtracking.services.StudentService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http:localhost:4201" })
+@CrossOrigin({ "*", "http:localhost:6969" })
 public class StudentController {
 	@Autowired
 	private StudentService serv;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsService } from 'src/app/services/statistics.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-statistics',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stats: StatisticsService) { }
 
   ngOnInit() {
-  }
 
+
+    this.stats.showApps().subscribe(
+      // tslint:disable-next-line: no-unused-expression
+      lifeIsGood => { result => console.log('working?');
+    },
+      listIsBad => {
+        console.log('everything is on fire');
+      }
+      );
+  }
 }

@@ -20,7 +20,7 @@ import { CohortProfileComponent } from './components/cohort-profile/cohort-profi
 import { MessagingComponent } from './components/messaging/messaging.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
-
+import { StatisticsService } from './services/statistics.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { ApplicationStatusComponent } from './components/application-status/appl
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [StatisticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

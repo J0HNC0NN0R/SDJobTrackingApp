@@ -112,17 +112,21 @@ public class StudentController {
 		return serv.getStudentsByCohortId(cid);
 	}
 
-	@GetMapping("students/{id}")
-	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-		Student student = serv.findByStudentId(id);
-		if (student != null) {
-			resp.setStatus(200);
-		} else {
-			resp.setStatus(404);
-		}
-		return student;
-	}
+//	@GetMapping("students/{id}")
+//	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+//		Student student = serv.findByStudentId(id);
+//		if (student != null) {
+//			resp.setStatus(200);
+//		} else {
+//			resp.setStatus(404);
+//		}
+//		return student;
+//	}
 	
+	@GetMapping("students/{username}")
+	public Student findStudentsByUsername(@PathVariable("username") String username, Principal principal) {
+		return serv.findByUserName(username);
+	}
 	
 	@PostMapping("cohorts/{id}/students")
 	public Student create(@RequestBody Student su, @PathVariable("id") int id, HttpServletResponse resp,

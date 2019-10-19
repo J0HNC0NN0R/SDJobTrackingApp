@@ -164,7 +164,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	
 	@Override
 	public List<ApplicationNote> getAppNotesByAppId(Integer appId){
-		return appnoterepo.findByApplicationId(appId);
+		return appnoterepo.findByAppId(appId);
 	}
 
 	@Override

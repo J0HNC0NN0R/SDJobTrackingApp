@@ -38,10 +38,11 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company create(Company company) {
+		Company newCompany = null;
 		if (company != null) {
-			Company newCompany = comrepo.saveAndFlush(company);
+			 newCompany = comrepo.saveAndFlush(company);
 		}
-		return company;
+		return newCompany;
 	}
 
 	

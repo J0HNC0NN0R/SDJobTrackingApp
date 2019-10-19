@@ -24,6 +24,7 @@ public class Company {
 	@JsonIgnore
 	private List<Application> applications;
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<CompanyNote> companyNote;
 	@OneToMany(mappedBy = "company")
 	private List<CompanyLocation> companyLocations;

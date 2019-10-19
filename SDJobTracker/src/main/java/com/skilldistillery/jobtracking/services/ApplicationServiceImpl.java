@@ -12,9 +12,11 @@ import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
+import com.skilldistillery.jobtracking.repositories.ApplicationNoteRepository;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
 import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 import com.skilldistillery.jobtracking.repositories.ContactRepository;
+import com.skilldistillery.jobtracking.repositories.ProgressRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
@@ -31,6 +33,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 	
 	@Autowired
 	private ContactRepository contrepo;
+	
+	@Autowired
+	private ApplicationNoteRepository appnoterepo;
+	
+	@Autowired
+	private ProgressRepository progrepo;
 	
 	@Override
 	public Application findByApplicationId(Integer id) {
@@ -73,8 +81,14 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Override
 	public Progress addProgressOnApplication(Progress progress, Integer appId) {
-		
-		return null;
+		Progress newProgress = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(progress != null) {
+			
+			progress.setApplication(newApplication.get());
+			newProgress = progrepo.saveAndFlush(progress);
+		}
+		return newProgress;
 	}
 
 	@Override
@@ -92,9 +106,16 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	public ApplicationNote addAppNoteOnApplication(ApplicationNote applicationnote, Integer appId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ApplicationNote addAppNoteOnApplication(ApplicationNote applicationNote, Integer appId) {
+		ApplicationNote newAppNote = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(applicationNote != null){
+			
+			applicationNote.setApplicationId(newApplication.get());
+			newAppNote = appnoterepo.saveAndFlush(applicationNote);
+		}
+		
+		return newAppNote;
 	}
 
 	

@@ -28,6 +28,7 @@ public class Company {
 	@OneToMany(mappedBy = "company")
 	private List<CompanyLocation> companyLocations;
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<JobPost> jopPosts;
 
 	public Company(int id, String name, String siteURL, List<Application> applications, List<CompanyNote> companyNote,

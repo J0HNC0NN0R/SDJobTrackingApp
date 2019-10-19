@@ -71,7 +71,30 @@ public class StudentServiceImpl implements StudentService {
 		return sturepo.findById(id).get();
 	}
 	
-
+	@Override 
+	public Cohort addCohort(Cohort cohort) {
+		Cohort newCohort = null;
+		if(cohort != null) {
+			newCohort = cohorepo.saveAndFlush(cohort);
+		}
+		return newCohort;
+	}
+	
+	@Override
+	public Cohort updateCohort(Cohort cohort, Integer cohortId) {
+		Cohort actualCohort = null;
+		
+		Optional<Cohort> managedCohort = cohorepo.findById(cohortId);
+		if(managedCohort.isPresent()) {
+			actualCohort = managedCohort.get();
+			actualCohort.setName(cohort.getName());
+			actualCohort.setNickname(cohort.getNickname());
+			actualCohort.setStartDate(cohort.getEndDate());
+			actualCohort.setEndDate(cohort.getEndDate());
+			cohorepo.saveAndFlush(actualCohort);
+		}
+		return actualCohort;
+	}
 
 	@Override
 	public Student create(Student student, User user, Integer cohortId) {
@@ -81,7 +104,7 @@ public class StudentServiceImpl implements StudentService {
 		if (student != null && user != null) {
 			newCohort = cohorepo.findById(cohortId).get();
 			User newUser = userrepo.saveAndFlush(user);
-			student.setUser(user);
+			student.setUser(newUser);
 			student.setCohort(newCohort);
 			newStudent = sturepo.saveAndFlush(student);
 
@@ -129,9 +152,20 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Event updateEvent(Integer eventId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Event updateEvent(Event event, Integer eventId) {
+		Event actualEvent = null;
+		Optional<Event> managedEvent = evenrepo.findById(eventId);
+		if(managedEvent.isPresent()) {
+			actualEvent = managedEvent.get();
+			actualEvent.setTitle(event.getTitle());
+			actualEvent.setDescription(event.getDescription());
+			actualEvent.setLocation(event.getLocation());
+			actualEvent.setDate(event.getDate());
+			
+			evenrepo.saveAndFlush(actualEvent);
+		}
+		
+		return actualEvent;
 	}
 
 	@Override
@@ -172,6 +206,15 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
+	public StudentAddress getAddressById(Integer stuAddId) {
+		return stuaddrepo.findById(stuAddId).get();
+	}
+		
+	@Override
+	public List<StudentAddress> getAddressesByStudentId(Integer studentId){
+		return stuaddrepo.findByStudentId(studentId);
+	}
+	@Override
 	public StudentAddress addStudentAddress(StudentAddress address, Integer studentId) {
 		StudentAddress newAddress = null;
 		
@@ -180,8 +223,6 @@ public class StudentServiceImpl implements StudentService {
 			address.setStudent(newStudent);
 			newAddress = stuaddrepo.saveAndFlush(address);
 		}
-		
-		
 		return newAddress;
 	}
 
@@ -190,6 +231,7 @@ public class StudentServiceImpl implements StudentService {
 		StudentAddress actualAddress = null;
 		Optional<StudentAddress> managedAddress = stuaddrepo.findById(addressId);
 		if(managedAddress.isPresent()) {
+			actualAddress = managedAddress.get();
 			actualAddress.setStreet(address.getStreet());
 			actualAddress.setCity(address.getCity());
 			actualAddress.setState(address.getState());
@@ -197,8 +239,6 @@ public class StudentServiceImpl implements StudentService {
 			actualAddress.setPhone(address.getPhone());
 			stuaddrepo.saveAndFlush(actualAddress);
 		}
-		
-		
 		return actualAddress;
 	}
 

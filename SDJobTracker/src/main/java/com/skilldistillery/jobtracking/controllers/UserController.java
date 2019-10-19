@@ -22,7 +22,7 @@ import com.skilldistillery.jobtracking.services.UserService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http:localhost:4201" })
+@CrossOrigin({ "*", "http:localhost:6969" })
 public class UserController {
 	@Autowired
 	private UserService serv;
@@ -80,18 +80,18 @@ public class UserController {
 		return updated;
 	}
 
-//	@DeleteMapping("users/{id}")
-//	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-//		try {
-//			if (!serv.deleteUserById(id)) {
-//				resp.setStatus(204);
-//			} else {
-//				resp.setStatus(404);
-//			}
-//
-//		} catch (Exception e) {
-//			resp.setStatus(400);
-//		}
-//	}
+	@DeleteMapping("users/{id}")
+	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+		try {
+			if (!serv.deleteUserById(id)) {
+				resp.setStatus(204);
+			} else {
+				resp.setStatus(404);
+			}
+
+		} catch (Exception e) {
+			resp.setStatus(400);
+		}
+	}
 
 }

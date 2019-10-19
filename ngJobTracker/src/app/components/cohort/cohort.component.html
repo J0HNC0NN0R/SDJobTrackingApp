@@ -1,1 +1,25 @@
-<p>cohort works!</p>
+<div name='countdownDiv'>
+    <table class='table table-striped table-bordered table-sm'>
+      <thead class='thead-dark'>
+        <tr>
+          <th> ID </th>
+          <th> Start Date</th>
+          <th> End Date </th>
+          <th> Name </th>
+          <th> Deadline Date </th>
+          <th> Days Left </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor='let cohort of cohorts'>
+          <td> {{ cohort.id }} </td>
+          <td> {{ cohort.startDate | date }}</td>
+          <td> {{ cohort.endDate | date }}</td>
+          <td> {{ cohort.name }}</td>
+          <td> {{ deadline(cohort) | date }}</td>
+          <td> {{ daysLeft() | number: '1.0-0'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

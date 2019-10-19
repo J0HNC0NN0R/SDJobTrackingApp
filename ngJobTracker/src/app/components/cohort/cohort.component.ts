@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HardmodeCountdownComponent } from '../hardmode-countdown/hardmode-countdown.component';
 
 @Component({
   selector: 'app-cohort',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CohortComponent implements OnInit {
 
-  constructor() { }
+  constructor(private countdown: HardmodeCountdownComponent) { }
 
   ngOnInit() {
   }

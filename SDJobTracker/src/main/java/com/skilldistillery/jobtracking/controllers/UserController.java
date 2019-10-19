@@ -22,7 +22,7 @@ import com.skilldistillery.jobtracking.services.UserService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http:localhost:4201" })
+@CrossOrigin({ "*", "http:localhost:6969" })
 public class UserController {
 	@Autowired
 	private UserService serv;

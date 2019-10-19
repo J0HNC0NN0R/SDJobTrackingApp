@@ -1,1 +1,18 @@
-<p>application works!</p>
+<div>
+  <table class="table table-striped table-hover" >
+    <thead class="thead thead-dark">
+      <th>Application ID</th>
+      <th>Position</th>
+      <th>Job Description</th>
+      <th>Interest Level</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let app of apps">
+        <td>{{ app.id }}</td>
+        <td>{{ app.position}}</td>
+        <td>{{ app.descriptionURL}}</td>
+        <td>{{ app.interestLevel}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

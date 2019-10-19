@@ -30,6 +30,7 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          localStorage.setItem('username' , username);
           return res;
         }),
         catchError((err: any) => {
@@ -53,6 +54,7 @@ export class AuthService {
   logout() {
     try {
       localStorage.removeItem('credentials');
+      localStorage.removeItem('username');
       this.logoutSuccess = true;
     } catch (error) {
       console.error('logout failure');
@@ -73,4 +75,9 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+
+  getUsername() {
+    return localStorage.getItem('username');
+  }
+
 }

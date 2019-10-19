@@ -1,13 +1,14 @@
 package com.skilldistillery.jobtracking.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.CompanyLocation;
-import com.skilldistillery.jobtracking.entities.CompanyNote;
+import com.skilldistillery.jobtracking.repositories.CompanyLocationRepository;
 import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 
 @Service
@@ -15,6 +16,9 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
 	private CompanyRepository comrepo;
+	
+	@Autowired
+	private CompanyLocationRepository comlocrepo;
 	
 	@Override
 	public Company findByName(String name) {
@@ -44,14 +48,27 @@ public class CompanyServiceImpl implements CompanyService {
 	
 
 	@Override
-	public CompanyLocation addCompanyLocation(Integer companyId) {
-		// TODO Auto-generated method stub
-		return null;
+	public CompanyLocation addCompanyLocation(CompanyLocation companyLocation, Integer companyId) {
+		CompanyLocation newLocation = null;
+		Optional<Company> company = comrepo.findById(companyId);
+		if(companyLocation != null) {
+			companyLocation.setCompany(company.get());
+			newLocation = comlocrepo.saveAndFlush(companyLocation);
+		}
+			
+		
+		return newLocation;
 	}
 
 	@Override
 	public CompanyLocation updateCompanyLocation(Integer companyLocId) {
-		// TODO Auto-generated method stub
+
+		
 		return null;
+	}
+
+	@Override
+	public CompanyLocation findByCityAndState(String city, String state) {
+		return comlocrepo.findByLocation(city, state);
 	}
 }

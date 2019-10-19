@@ -14,12 +14,14 @@ public interface CompanyService {
 	Company create(Company company);
 	
 	
+	CompanyLocation addCompanyLocation(CompanyLocation companyLocation, Integer companyId);
 
-	CompanyLocation addCompanyLocation(Integer companyId);
 	
 	CompanyLocation updateCompanyLocation(Integer companyLocId);
 
 	Company findByName(String name);
+
+	CompanyLocation findByCityAndState(String city, String state);
 	
 	
 	

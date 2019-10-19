@@ -14,6 +14,7 @@ import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
 import com.skilldistillery.jobtracking.repositories.CompanyRepository;
+import com.skilldistillery.jobtracking.repositories.ContactRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
@@ -28,7 +29,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired 
 	private CompanyRepository comrepo;
 	
-	
+	@Autowired
+	private ContactRepository contrepo;
 	
 	@Override
 	public Application findByApplicationId(Integer id) {
@@ -42,7 +44,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application, Company compnay, Integer studentId) {
+	public Application create(Application application, Company company, Integer studentId) {
 		Application newApplication = null;
 		if(application != null) {
 			newApplication = apprepo.saveAndFlush(application);
@@ -75,7 +77,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Override
 	public Contact addContactOnApplication(Contact contact, Integer appId) {
-		// TODO Auto-generated method stub
+		
+		Contact newContact = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(contact !=null) {
+			
+			contact.setApplication(newApplication.get());
+			newContact = contrepo.saveAndFlush(contact);
+			
+		}
 		return null;
 	}
 

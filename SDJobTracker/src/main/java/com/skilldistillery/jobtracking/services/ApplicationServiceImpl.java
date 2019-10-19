@@ -44,9 +44,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application, Company company, Integer studentId) {
+	public Application create(Application application, Integer studentId) {
 		Application newApplication = null;
+		Optional<Student> foundStudent = sturepo.findById(studentId);
 		if(application != null) {
+			application.setStudent(foundStudent.get());
 			newApplication = apprepo.saveAndFlush(application);
 		}
 		return newApplication;

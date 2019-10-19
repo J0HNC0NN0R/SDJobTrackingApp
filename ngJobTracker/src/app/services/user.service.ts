@@ -9,16 +9,16 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  delete(user: any) {
-    throw new Error("Method not implemented.");
-  }
+
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   private url = 'http://localhost:8095/api/users/';
 
   // private url = environment.baseUrl + 'api/todos/';
   private credentials = this.auth.getCredentials();
-
-  constructor(private http: HttpClient, private auth: AuthService) { }
+  delete(user: any) {
+    throw new Error('Method not implemented.');
+  }
 
   index() {
     const httpOptions = {

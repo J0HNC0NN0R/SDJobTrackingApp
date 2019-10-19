@@ -180,8 +180,6 @@ public class StudentServiceImpl implements StudentService {
 			address.setStudent(newStudent);
 			newAddress = stuaddrepo.saveAndFlush(address);
 		}
-		
-		
 		return newAddress;
 	}
 
@@ -190,6 +188,7 @@ public class StudentServiceImpl implements StudentService {
 		StudentAddress actualAddress = null;
 		Optional<StudentAddress> managedAddress = stuaddrepo.findById(addressId);
 		if(managedAddress.isPresent()) {
+			actualAddress = managedAddress.get();
 			actualAddress.setStreet(address.getStreet());
 			actualAddress.setCity(address.getCity());
 			actualAddress.setState(address.getState());
@@ -197,8 +196,6 @@ public class StudentServiceImpl implements StudentService {
 			actualAddress.setPhone(address.getPhone());
 			stuaddrepo.saveAndFlush(actualAddress);
 		}
-		
-		
 		return actualAddress;
 	}
 

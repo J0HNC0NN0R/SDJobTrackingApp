@@ -72,11 +72,21 @@ public class ApplicationServiceImpl implements ApplicationService {
 			actualApplication.setPosition(application.getPosition());
 			actualApplication.setDescriptionURL(application.getDescriptionURL());
 			actualApplication.setInterestLevel(application.getInterestLevel());
-			
+			actualApplication.setCompany(application.getCompany());
 			apprepo.saveAndFlush(actualApplication);
 		
 	}
 		return actualApplication;
+	}
+	
+	@Override
+	public Progress getProgressById(Integer progressId) {
+		return progrepo.findById(progressId).get();
+	}
+	
+	@Override 
+	public List<Progress> getAllProgressByAppId(Integer appId){
+		return progrepo.findByApplicationId(appId);
 	}
 
 	@Override
@@ -90,7 +100,33 @@ public class ApplicationServiceImpl implements ApplicationService {
 		}
 		return newProgress;
 	}
+	
+	@Override
+	public Progress updateProgress(Progress progress, Integer progId) {
+		Progress actualProgress = null;
+		Optional<Progress> managedProgress = progrepo.findById(progId);
 
+		if(managedProgress.isPresent()) {
+			actualProgress = managedProgress.get();
+			actualProgress.setState(progress.getState());
+			actualProgress.setUpdated(progress.getUpdated());
+			
+			progrepo.saveAndFlush(actualProgress);
+		}
+		
+		return actualProgress;
+	}
+	
+	@Override
+	public Contact getContactById(Integer contactId) {
+		return contrepo.findById(contactId).get();
+	}
+
+	@Override
+	public List <Contact> getContactsByAppId(Integer appId) {
+		return contrepo.findByApplicationId(appId);
+	}
+	
 	@Override
 	public Contact addContactOnApplication(Contact contact, Integer appId) {
 		
@@ -103,6 +139,32 @@ public class ApplicationServiceImpl implements ApplicationService {
 			
 		}
 		return null;
+	}
+	
+	@Override
+	public Contact updateContact(Contact contact, Integer contactId) {
+		Contact actualContact = null;
+		Optional<Contact> managedContact = contrepo.findById(contactId);
+		if(managedContact.isPresent()) {
+			actualContact = managedContact.get();
+			actualContact.setName(contact.getName());
+			actualContact.setEmail(contact.getEmail());
+			actualContact.setPhone(contact.getPhone());
+			actualContact.setPosition(contact.getPosition());
+			
+			contrepo.saveAndFlush(actualContact);
+		}
+		return actualContact;
+	}
+	
+	@Override
+	public ApplicationNote getAppNoteById(Integer appNoteId) {
+		return appnoterepo.findById(appNoteId).get();
+	}
+	
+	@Override
+	public List<ApplicationNote> getAppNotesByAppId(Integer appId){
+		return appnoterepo.findByApplicationId(appId);
 	}
 
 	@Override
@@ -118,6 +180,19 @@ public class ApplicationServiceImpl implements ApplicationService {
 		return newAppNote;
 	}
 
-	
+	@Override
+	public ApplicationNote updateApplicationNote(ApplicationNote applicationNote, Integer appNoteId) {
+		ApplicationNote actualAppNote = null;
+		
+		Optional<ApplicationNote> managedAppNote = appnoterepo.findById(appNoteId);
+		if(managedAppNote.isPresent()) {
+			actualAppNote = managedAppNote.get();
+			actualAppNote.setBody(applicationNote.getBody());
+			actualAppNote.setTitle(applicationNote.getTitle());
+			
+			appnoterepo.saveAndFlush(actualAppNote);
+		}
+		return actualAppNote;
+	}
 	
 }

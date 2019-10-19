@@ -25,6 +25,24 @@ public interface ApplicationService {
 
 	Application create(Application application, Integer studentId);
 
+	Progress updateProgress(Progress progress, Integer progId);
+
+	Contact updateContact(Contact contact, Integer contactId);
+
+	ApplicationNote updateApplicationNote(ApplicationNote applicationNote, Integer appNoteId);
+
+	Progress getProgressById(Integer progressId);
+
+	List<Progress> getAllProgressByAppId(Integer appId);
+
+	List<Contact> getContactsByAppId(Integer appId);
+
+	Contact getContactById(Integer contactId);
+
+	List<ApplicationNote> getAppNotesByAppId(Integer appId);
+
+	ApplicationNote getAppNoteById(Integer appNoteId);
+
 
 	
 }

@@ -347,7 +347,7 @@ COMMIT;
 START TRANSACTION;
 USE `trackerdb`;
 INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (22, '2019-07-09', '2019-10-28', NULL, NULL);
-INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (23, '2019-09-22', '2019-01-10', NULL, NULL);
+INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (23, '2019-09-22', '2020-01-10', NULL, NULL);
 
 COMMIT;
 
@@ -469,7 +469,7 @@ COMMIT;
 START TRANSACTION;
 USE `trackerdb`;
 INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (1, 1, 'Denver', 'CO');
-INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (2, 2, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (2, 2, 'Austin', 'TX');
 
 COMMIT;
 

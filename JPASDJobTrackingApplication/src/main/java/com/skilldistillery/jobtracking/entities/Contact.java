@@ -23,14 +23,14 @@ public class Contact {
 	
 	private String name;
 	private String email;
-	private int phone;
+	private String phone;
 	private String position;
 	
 	public Contact() {
 		
 	}
 
-	public Contact(int id, Application application, String name, String email, int phone, String position) {
+	public Contact(int id, Application application, String name, String email, String phone, String position) {
 		super();
 		this.id = id;
 		this.application = application;
@@ -72,11 +72,11 @@ public class Contact {
 		this.email = email;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

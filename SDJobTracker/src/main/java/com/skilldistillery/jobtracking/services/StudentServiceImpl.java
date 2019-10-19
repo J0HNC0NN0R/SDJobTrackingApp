@@ -104,7 +104,7 @@ public class StudentServiceImpl implements StudentService {
 		if (student != null && user != null) {
 			newCohort = cohorepo.findById(cohortId).get();
 			User newUser = userrepo.saveAndFlush(user);
-			student.setUser(user);
+			student.setUser(newUser);
 			student.setCohort(newCohort);
 			newStudent = sturepo.saveAndFlush(student);
 

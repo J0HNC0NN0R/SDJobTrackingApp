@@ -15,7 +15,7 @@ import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.AuthService;
 
 @RestController
-@CrossOrigin({ "*", "http:localhost:4201" })
+@CrossOrigin({ "*", "http:localhost:6969" })
 public class AuthController {
 	@Autowired
 	private AuthService serv;

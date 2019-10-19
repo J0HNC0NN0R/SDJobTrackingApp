@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.ApplicationNote;
-import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 

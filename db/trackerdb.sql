@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `enabled` TINYINT NOT NULL DEFAULT 1,
   `password` VARCHAR(200) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NOT NULL DEFAULT 'User',
+  `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `application_id` INT NOT NULL,
   `name` VARCHAR(300) NOT NULL,
   `email` VARCHAR(300) NULL,
-  `phone` INT NULL,
+  `phone` VARCHAR(30) NULL,
   `position` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_contact_application1_idx` (`application_id` ASC),
@@ -408,8 +408,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (1, 1, 'contact name', 'contact@test.com', 888-888-8888, 'tech lead');
-INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (2, 3, 'other contact', 'othercon@test.com', 999-999-9999, 'hr');
+INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (1, 1, 'contact name', 'contact@test.com', '888-888-8888', 'tech lead');
+INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (2, 3, 'other contact', 'othercon@test.com', '999-999-9999', 'hr');
 
 COMMIT;
 

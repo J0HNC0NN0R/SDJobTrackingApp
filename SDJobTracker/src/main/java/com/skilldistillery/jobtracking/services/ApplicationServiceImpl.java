@@ -8,13 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.ApplicationNote;
-import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.repositories.ApplicationNoteRepository;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
-import com.skilldistillery.jobtracking.repositories.CompanyRepository;
 import com.skilldistillery.jobtracking.repositories.ContactRepository;
 import com.skilldistillery.jobtracking.repositories.ProgressRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
@@ -27,9 +25,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 	
 	@Autowired
 	private StudentRepository sturepo;
-	
-	@Autowired 
-	private CompanyRepository comrepo;
 	
 	@Autowired
 	private ContactRepository contrepo;
@@ -94,7 +89,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 		Progress newProgress = null;
 		Optional<Application> newApplication = apprepo.findById(appId);
 		if(progress != null) {
-			
 			progress.setApplication(newApplication.get());
 			newProgress = progrepo.saveAndFlush(progress);
 		}
@@ -138,7 +132,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 			newContact = contrepo.saveAndFlush(contact);
 			
 		}
-		return null;
+		return newContact;
 	}
 	
 	@Override

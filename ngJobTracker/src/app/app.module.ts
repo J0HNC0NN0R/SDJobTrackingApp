@@ -20,6 +20,7 @@ import { CohortProfileComponent } from './components/cohort-profile/cohort-profi
 import { MessagingComponent } from './components/messaging/messaging.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ApplicationStatusComponent } from './components/application-status/appl
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

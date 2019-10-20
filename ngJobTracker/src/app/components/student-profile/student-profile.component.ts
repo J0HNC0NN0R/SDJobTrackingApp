@@ -18,10 +18,12 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
     this.showProfile();
 
+
+
   }
 
   showProfile(){
-  this.studentService.getStudent().subscribe(
+  this.studentService.getStudentByUsername().subscribe(
     data => {
       this.studentProfile = data;
 

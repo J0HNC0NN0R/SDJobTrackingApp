@@ -1,8 +1,17 @@
 <p>student-profile works!</p>
 <div>
   <ul>
-    <li>
-{{studentProfile.firstName}}
-    </li>
+
+      <li>Id : {{studentProfile.id}} </li>
+    <li>Name : {{studentProfile.firstName}} {{studentProfile.lastName}}</li>
+    <li>Github : {{studentProfile.githubUsername}} </li>
+    <li>Cohort : {{studentProfile.cohortId}} </li>
+    <li>Email : {{studentProfile.email}} </li>
+    <li>Accepted : {{studentProfile.isAccepted}} </li>
+    <li>Employed : {{studentProfile.isEmployed}} </li>
+    <li>GI Bill : {{studentProfile.isGIBill}} </li>
+    <li>VETTEC : {{studentProfile.isVettec}} </li>
+    <li>Needs Loaner : {{studentProfile.needsLoanerLaptop}} </li>
+    <li>Open to Relocation : {{studentProfile.openToRelocation}} </li>
   </ul>
 </div>

@@ -1,4 +1,5 @@
 <div>
+  <button type="button" class="btn btn-success btn-lg btn-block" (click)="openModalForm()">Add Application</button>
   <table class="table table-striped table-hover" >
     <thead class="thead thead-dark">
       <th>Application ID</th>
@@ -19,7 +20,7 @@
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>
         <td>{{ app.progress | json }}</td>
-        <td><button class='btn btn-secondary' (click)='openModalForm(app)'>Update</button></td>
+        <td><button class="btn btn-primary" (click)="openModalForm(app)">Update</button></td>
       </tr>
     </tbody>
   </table>

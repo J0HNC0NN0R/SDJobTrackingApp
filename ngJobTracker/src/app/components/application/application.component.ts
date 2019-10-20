@@ -44,16 +44,21 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
       );
   }
 
-  openModalForm(app: Application) {
-    const formData = new ApplicationForm();
-    formData.city = app.company.companyLocations[0].city;
-    formData.state = app.company.companyLocations[0].state;
-    formData.companyName = app.company.name;
-    formData.descriptionURL = app.descriptionURL;
-    formData.interestLevel = app.interestLevel;
-    formData.position = app.position;
-    formData.siteUrl = app.company.siteURL;
+  openModalForm(app?: Application) {
+    if (app) {
+      const formData = new ApplicationForm();
+      formData.city = app.company.companyLocations[0].city;
+      formData.state = app.company.companyLocations[0].state;
+      formData.companyName = app.company.name;
+      formData.descriptionURL = app.descriptionURL;
+      formData.interestLevel = app.interestLevel;
+      formData.position = app.position;
+      formData.siteUrl = app.company.siteURL;
 
-    this.formComp.open(app.id, formData);
+      this.formComp.open(app.id, formData);
+    } else {
+      this.formComp.open();
+    }
+
   }
 }

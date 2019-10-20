@@ -16,7 +16,8 @@ export class FormModalComponent implements OnInit, AfterViewInit {
   @Output() childEvent = new EventEmitter();
   @ViewChild('content', {static: false}) form;
   private content;
-  update: ApplicationForm = new ApplicationForm();
+  isUpdate = false;
+  update: ApplicationForm = null;
   @Input() private student: Student;
   private appId: number;
 
@@ -38,17 +39,28 @@ export class FormModalComponent implements OnInit, AfterViewInit {
     this.appService.updateApp(this.student.id, this.update, this.appId).subscribe(
       data => {
         this.refresh();
-        this.update = new ApplicationForm();
+        this.update = null;
       },
 
       err => console.error('Fetch application err: ' + err)
     );
   }
 
-  open(appId: number, formData: ApplicationForm) {
-    this.update = formData;
-    this.appId = appId;
-    this.modalService.open(this.content);
+  createApp(form: NgForm) {
+
+  }
+
+  open(appId?: number, formData?: ApplicationForm) {
+    if (appId) {
+      this.isUpdate = true;
+      this.update = formData;
+      this.appId = appId;
+      this.modalService.open(this.content);
+    } else {
+      this.update = new ApplicationForm();
+      this.isUpdate = false;
+      this.modalService.open(this.content);
+    }
   }
 
 }

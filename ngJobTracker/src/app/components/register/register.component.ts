@@ -17,18 +17,13 @@ export class RegisterComponent implements OnInit {
 
   register(form: NgForm) {
     console.log(form);
+    console.log(form.value.role);
+
     const newUser: User = form.value;
     this.auth.register(newUser).subscribe(
         data => {
           console.log('RegisterComponent.register(): user registered.');
-          this.auth.login(newUser.username, newUser.password).subscribe(
-            next => {
-              console.log('RegisterComponent.register()');
-            },
-            error => {
-              console.error('RegisterComponent.register(): error logging in.');
-            }
-          );
+
         },
         err => {
           console.error('RegisterComponent.register(): error registering.');
@@ -36,4 +31,12 @@ export class RegisterComponent implements OnInit {
         }
       );
 }
+// this.auth.login(newUser.username, newUser.password).subscribe(
+//   next => {
+//     console.log('RegisterComponent.register()');
+//   },
+//   error => {
+//     console.error('RegisterComponent.register(): error logging in.');
+//   }
+// );
 }

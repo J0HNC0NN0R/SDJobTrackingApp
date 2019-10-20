@@ -36,6 +36,7 @@ export class UserService {
       })
     );
   }
+
   update(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({

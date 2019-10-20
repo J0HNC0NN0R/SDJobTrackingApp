@@ -1,3 +1,5 @@
+import { Progress } from './progress';
+import { Company } from './company';
 export class Application {
   id: number;
   userId: number;
@@ -5,6 +7,8 @@ export class Application {
   position: string;
   descriptionURL: string;
   interestLevel: number;
+  progress: Progress;
+  company: Company;
 
   constructor(
     id?: number,
@@ -12,7 +16,9 @@ export class Application {
     companyId?: number,
     position?: string,
     descriptionURL?: string,
-    interestLevel?: number
+    interestLevel?: number,
+    progress?: Progress,
+    company?: Company
   ) {
     this.id = id;
     this.userId = userId;
@@ -20,5 +26,7 @@ export class Application {
     this.position = position;
     this.descriptionURL = descriptionURL;
     this.interestLevel = interestLevel;
+    this.progress = progress;
+    this.company = company;
   }
 }

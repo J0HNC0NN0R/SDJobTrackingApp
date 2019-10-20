@@ -1,10 +1,10 @@
+import { ApplicationForm } from './../../models/application-form';
 import { NgForm } from '@angular/forms';
 import { ApplicationService } from './../../services/application.service';
 import { Component, OnInit, AfterViewInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Student } from 'src/app/models/student';
 import { Application } from 'src/app/models/application';
-import { ApplicationForm } from 'src/app/models/application-form';
 
 
 @Component({
@@ -45,7 +45,8 @@ export class FormModalComponent implements OnInit, AfterViewInit {
     );
   }
 
-  open(appId) {
+  open(appId: number, formData: ApplicationForm) {
+    this.update = formData;
     this.appId = appId;
     this.modalService.open(this.content);
   }

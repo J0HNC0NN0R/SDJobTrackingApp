@@ -1,3 +1,4 @@
+import { ApplicationForm } from 'src/app/models/application-form';
 import { FormModalComponent } from './../form-modal/form-modal.component';
 import { StudentService } from './../../services/student.service';
 import { ApplicationService } from './../../services/application.service';
@@ -43,7 +44,16 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
       );
   }
 
-  openModalForm(id: number) {
-    this.formComp.open(id);
+  openModalForm(app: Application) {
+    const formData = new ApplicationForm();
+    formData.city = app.company.companyLocations[0].city;
+    formData.state = app.company.companyLocations[0].state;
+    formData.companyName = app.company.name;
+    formData.descriptionURL = app.descriptionURL;
+    formData.interestLevel = app.interestLevel;
+    formData.position = app.position;
+    formData.siteUrl = app.company.siteURL;
+
+    this.formComp.open(app.id, formData);
   }
 }

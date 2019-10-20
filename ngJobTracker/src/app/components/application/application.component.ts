@@ -47,8 +47,8 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   openModalForm(app?: Application) {
     if (app) {
       const formData = new ApplicationForm();
-      formData.city = app.company.companyLocations[0].city;
-      formData.state = app.company.companyLocations[0].state;
+      formData.city = app.company.companyLocations[app.company.companyLocations.length - 1].city;
+      formData.state = app.company.companyLocations[app.company.companyLocations.length - 1].state;
       formData.companyName = app.company.name;
       formData.descriptionURL = app.descriptionURL;
       formData.interestLevel = app.interestLevel;

@@ -37,7 +37,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click'); updateApp(editForm)" *ngIf="isUpdate">Save</button>
-      <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click'); createApp(editForm)" *ngIf="!isUpdate">Add</button>
+      <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click'); createApp()" *ngIf="!isUpdate">Add</button>
     </div>
 
 </ng-template>

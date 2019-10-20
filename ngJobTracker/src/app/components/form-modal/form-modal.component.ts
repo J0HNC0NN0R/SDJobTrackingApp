@@ -35,7 +35,6 @@ export class FormModalComponent implements OnInit, AfterViewInit {
   }
 
   updateApp(form: NgForm) {
-    console.log(this.update);
     this.appService.updateApp(this.student.id, this.update, this.appId).subscribe(
       data => {
         this.refresh();
@@ -46,8 +45,14 @@ export class FormModalComponent implements OnInit, AfterViewInit {
     );
   }
 
-  createApp(form: NgForm) {
+  createApp() {
+    this.appService.createApp(this.student.id, this.update).subscribe(
+      data => {
+        this.refresh();
+      },
 
+      err => console.error('Create application err: ' + err)
+    );
   }
 
   open(appId?: number, formData?: ApplicationForm) {

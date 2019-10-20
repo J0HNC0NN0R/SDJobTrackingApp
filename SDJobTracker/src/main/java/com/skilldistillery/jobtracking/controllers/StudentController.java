@@ -18,9 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.jobtracking.entities.Application;
+import com.skilldistillery.jobtracking.entities.ApplicationForm;
 import com.skilldistillery.jobtracking.entities.Cohort;
+import com.skilldistillery.jobtracking.entities.Company;
+import com.skilldistillery.jobtracking.entities.CompanyLocation;
 import com.skilldistillery.jobtracking.entities.CompanyNote;
+import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Event;
+import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.ApplicationService;
@@ -43,43 +49,85 @@ public class StudentController {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-
-	@GetMapping("students")
-	public List<Student> searchStudentsByName(@RequestParam(value="name") String name, Principal principal){
-		return serv.getStudentsByName("%" + name + "%");
-	}
+	// C O H O R T S
 	
 	@GetMapping("cohorts")
 	public List<Cohort> findCohortsById(Principal principal) {
 		return serv.getCohorts();
 	}
+
+	@PostMapping("cohorts")
+	public Cohort addCohort(@RequestBody Cohort cohort, HttpServletResponse resp, 
+			HttpServletRequest req, Principal principal) {
+		Cohort created = null;
+		
+		try {
+			created = serv.addCohort(cohort);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return created;
+	}
+	
+	@PutMapping("cohorts/{cid}")
+	public Cohort updateCohort(@RequestBody Cohort cohort, @PathVariable("cid") int cid,
+			HttpServletResponse resp, HttpServletRequest req, Principal principal) {
+		
+		Cohort updated = null;
+		try {
+			updated = serv.updateCohort(cohort, cid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+			
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		
+		return updated; 
+	}
+
+
+	
+	
+	// S T U D E N T S
+	
+	@GetMapping("students")
+	public List<Student> searchStudentsByName(@RequestParam(value="name") String name, Principal principal){
+		return serv.getStudentsByName("%" + name + "%");
+	}
+	
 	
 	@GetMapping("cohorts/{cid}/students")
 	public List<Student> findStudentsByCohort(@PathVariable("cid") int cid, Principal principal) {
 		return serv.getStudentsByCohortId(cid);
 	}
-	
-	@GetMapping("students/{id}/events")
-	public List<Event> getAllEvents(@PathVariable("id") int id, Principal principal){
-		return serv.getEventsByStudentId(id);
-	}
-	
-	@GetMapping("students/{id}/notes/companies/{cid}")
-	public CompanyNote getNoteByCaompanyName(@PathVariable("sid") int sid, @PathVariable("cid") int cid) {
-		return serv.getCompanyNote(cid, sid);
-	}
 
-	@GetMapping("students/{id}")
-	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-		Student student = serv.findByStudentId(id);
-		if (student != null) {
-			resp.setStatus(200);
-		} else {
-			resp.setStatus(404);
-		}
-		return student;
+//	@GetMapping("students/{id}")
+//	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+//		Student student = serv.findByStudentId(id);
+//		if (student != null) {
+//			resp.setStatus(200);
+//		} else {
+//			resp.setStatus(404);
+//		}
+//		return student;
+//	}
+	
+	@GetMapping("students/{username}")
+	public Student findStudentsByUsername(@PathVariable("username") String username, Principal principal) {
+		return serv.findByUserName(username);
 	}
-
+	
 	@PostMapping("cohorts/{id}/students")
 	public Student create(@RequestBody Student su, @PathVariable("id") int id, HttpServletResponse resp,
 			HttpServletRequest req, Principal principal) {
@@ -121,9 +169,38 @@ public class StudentController {
 		return created;
 	}
 	
+	@PutMapping("cohorts/{cid}/students/{sid}")
+	public Student updateStudent(@PathVariable("sid") int sid, @PathVariable("cid") int cid, 
+			@RequestBody Student student, HttpServletResponse resp, Principal principal) {
+		Student updated = null;
+		try {
+			updated = serv.update(student, sid, cid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return updated;
+	}
+	
+	
+	// C O M P A N Y  N O T E S
+	
+	@GetMapping("students/{id}/notes/companies/{cid}")
+	public CompanyNote getNoteByCaompanyName(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
+			Principal principal) {
+		return serv.getCompanyNote(cid, sid);
+	}
+	
 	@PostMapping("students/{sid}/notes/companies/{cid}")
 	public CompanyNote createCompanyNote(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
-			@RequestBody CompanyNote note, HttpServletResponse resp, HttpServletRequest req) {
+			@RequestBody CompanyNote note, HttpServletResponse resp, HttpServletRequest req,
+			Principal principal) {
 		CompanyNote created = null;
 		
 		try {
@@ -141,10 +218,35 @@ public class StudentController {
 		return created;
 	}
 
+	@PutMapping("students/{sid}/notes/companies/{cid}")
+	public CompanyNote updateCompanyNote(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
+			@RequestBody CompanyNote note, HttpServletResponse resp, Principal principal) {
+		CompanyNote updated = null;
+		try {
+			updated = serv.updateCompanyNote(note, cid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return updated;
+	}
+	
+	
+	// E V E N T S
+	
+	@GetMapping("students/{id}/events")
+	public List<Event> getAllEvents(@PathVariable("id") int id, Principal principal){
+		return serv.getEventsByStudentId(id);
+	}
 	
 	@PostMapping("students/{id}/events")
-	public Event createEvent(@PathVariable("id") int id, @RequestBody Event event, HttpServletResponse resp, HttpServletRequest req,
-			Principal principal) {
+	public Event createEvent(@PathVariable("id") int id, @RequestBody Event event, HttpServletResponse resp, 
+			HttpServletRequest req, Principal principal) {
 		Event created = null;
 		try {
 			Student student = serv.findByStudentId(id);
@@ -161,114 +263,190 @@ public class StudentController {
 		}
 		return created;
 	}
-	
-		
-	@PutMapping("students/{sid}/notes/companies/{cid}")
-	public CompanyNote updateCompanyNote(@PathVariable("sid") int sid, @PathVariable("cid") int cid,
-			@RequestBody CompanyNote note, HttpServletResponse resp) {
-		CompanyNote updated = null;
-		try {
-			updated = serv.updateCompanyNote(note, cid);
-			if (updated != null) {
-				resp.setStatus(200);
-			} else {
-				resp.setStatus(404);
-			}
-		} catch (Exception e) {
-			System.err.println(e);
-			resp.setStatus(400);
-		}
-		return updated;
-	}
 
 
-	@PutMapping("cohorts/{cid}/students/{sid}")
-	public Student update(@PathVariable("sid") int sid, @PathVariable("cid") int cid, @RequestBody Student student, HttpServletResponse resp,
-			Principal principal) {
-		Student updated = null;
-		try {
-			updated = serv.update(student, sid, cid);
-			if (updated != null) {
-				resp.setStatus(200);
-			} else {
-				resp.setStatus(404);
-			}
-
-		} catch (Exception e) {
-			System.err.println(e);
-			resp.setStatus(400);
-		}
-		return updated;
-	}
-
-//	@DeleteMapping("students/{id}")
-//	public void delete(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-//		try {
-//			if (!serv.destroy(id)) {
-//				resp.setStatus(204);
-//			} else {
-//				resp.setStatus(404);
-//			}
-//
-//		} catch (Exception e) {
-//			resp.setStatus(400);
-//		}
-//	}
-
-//	@GetMapping("students/notes/{company}")
-//	public Student getCompanyNote(@PathVariable("company") String companyName, HttpServletResponse resp, Principal principal,
-//			Student student) {
-//		CompanyNote note = serv.getCompanyNote(companyName, student.getId());
-//		if (note != null) {
-//			resp.setStatus(200);
-//		} else {
-//			resp.setStatus(404);
-//		}
-//		return note;
-//	}
-	
-	
-	
 	////////////////////////////////////////////////////////////////////////////////
 	//							APPLICATION										  //	
 	////////////////////////////////////////////////////////////////////////////////
 	
 	
-//	@GetMapping("students/{id}/applications")
-//	public List<Event> getApplications(@PathVariable("id") int id){
-//		return serv.getApplicationsByStudentId(id);
-//	}
-//		
-//	@GetMapping("students/{sid}/applications/{aid}")
-//	public List<Event> getApplications(@PathVariable("sid") int sid, @PathVariable("aid") int aid){
-//		return serv.getApplicationById(sid, aid);
-//	}
-//	
+	@GetMapping("students/{id}/applications")
+	public List<Application> getApplications(@PathVariable("id") int id, Principal principal){
+		return appServ.getStudentApplications(id);
+	}
+		
+	@GetMapping("students/{sid}/applications/{aid}")
+	public Application getApplications(@PathVariable("sid") int sid, @PathVariable("aid") int aid,
+			Principal principal){
+		return appServ.findByApplicationId(aid);
+	}
+	
 
-//	@PostMapping("students/{id}/applications")
-//	public Application createApplication(@PathVariable("id") int id, @RequestBody Application application,
-//			@RequestBody Company company, HttpServletResponse resp, HttpServletRequest req, 
-//			Principal principal) {
-//		Application created = null;
-//		
-//		Company managedCompany = compServ.findByName(company.getName());
-//		if (managedCompany == null) {
-//			managedCompany = compServ.create(company);
-//		}
-//		
-//		try {
-//			application.setCompany(managedCompany);
-//			created = appServ.create(application);
-//			StringBuffer url = req.getRequestURL();
-//			url.append("/" + created.getId());
-//			resp.setStatus(201);
-//			resp.setHeader("Location", url.toString());
-//
-//		} catch (Exception e) {
-//			System.err.println(e);
-//			resp.setStatus(400);
-//		}
-//		return created;
-//	}
-//	
+	@PostMapping("students/{id}/applications")
+	public Application createApplication(@PathVariable("id") int id, @RequestBody ApplicationForm form, 
+			HttpServletResponse resp, HttpServletRequest req, Principal principal) {
+		Application application = new Application();
+		Application created = null;
+		
+		Company company = new Company();
+		company.setName(form.getCompanyName());
+		company.setSiteURL(form.getSiteUrl());
+		
+		Company managedCompany = compServ.findByName(form.getCompanyName());
+		if (managedCompany == null) {
+			managedCompany = compServ.create(company);
+		}
+		
+		CompanyLocation location = new CompanyLocation();
+		location.setCity(form.getCity());
+		location.setState(form.getState());
+		
+		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+		if (managedLoc == null) {
+			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+		}
+
+		application.setCompany(managedCompany);
+		application.setDescriptionURL(form.getDescriptionURL());
+		application.setInterestLevel(form.getInterestLevel());
+		application.setPosition(form.getPosition());
+		
+		
+		try {
+			created = appServ.create(application, id);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return created;
+	}
+	
+	@PutMapping("students/{sid}/applications/{aid}")
+	public Application updateApplication(@PathVariable("sid") int sid, @PathVariable("aid") int aid,
+			@RequestBody ApplicationForm form, HttpServletResponse resp, HttpServletRequest req, 
+			Principal principal) {
+
+		Application application = new Application();
+		Application updated = null;
+		
+		Company company = new Company();
+		company.setName(form.getCompanyName());
+		company.setSiteURL(form.getSiteUrl());
+		
+		Company managedCompany = compServ.findByName(form.getCompanyName());
+		if (managedCompany == null) {
+			managedCompany = compServ.create(company);
+		}
+		
+		CompanyLocation location = new CompanyLocation();
+		location.setCity(form.getCity());
+		location.setState(form.getState());
+		
+		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+		if (managedLoc == null) {
+			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+		}
+		
+		application.setCompany(managedCompany);
+		application.setDescriptionURL(form.getDescriptionURL());
+		application.setInterestLevel(form.getInterestLevel());
+		application.setPosition(form.getPosition());
+		
+		try {
+			updated = appServ.update(application, aid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return updated;
+	}
+	
+	// P R O G R E S S
+
+	@GetMapping("students/{sid}/applications/{aid}/progress")
+	public List<Progress> getApplicationProgresses(@PathVariable("sid") int sid, @PathVariable("aid") int aid){
+		return appServ.getAllProgressByAppId(aid);
+	}
+	
+	@PostMapping("students/{sid}/applications/{aid}/progress")
+	public Progress createProgress(@RequestBody Progress progress, @PathVariable("aid") int aid,
+			HttpServletResponse resp, HttpServletRequest req) {
+		
+		Progress created = null;
+		try {
+			created = appServ.addProgressOnApplication(progress, aid);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		
+		return created;
+	}
+	
+	//	C O N T A C T S
+	
+	@GetMapping("students/{sid}/applications/{aid}/contacts")
+	public List<Contact> getApplicationContacts(@PathVariable("sid") int sid, @PathVariable("aid") int aid){
+		return appServ.getContactsByAppId(aid);
+	}
+	
+	@PostMapping("students/{sid}/applications/{aid}/contacts")
+	public Contact createApplicationContact(@RequestBody Contact contact, @PathVariable("aid") int aid,
+			HttpServletResponse resp, HttpServletRequest req) {
+		
+		Contact created = null;
+
+		try {
+			created = appServ.addContactOnApplication(contact, aid);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		
+		return created;
+	}
+	
+	@PutMapping("students/{sid}/applications/{aid}/contacts/{cid}")
+	public Contact updateApplicationContact(@RequestBody Contact contact, @PathVariable("cid") int aid,
+			HttpServletResponse resp) {
+		
+		Contact updated = null;
+
+		try {
+			updated = appServ.addContactOnApplication(contact, aid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		
+		return updated;
+	}
+	
 }

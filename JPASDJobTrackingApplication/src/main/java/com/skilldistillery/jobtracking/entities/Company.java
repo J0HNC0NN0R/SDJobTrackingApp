@@ -24,10 +24,12 @@ public class Company {
 	@JsonIgnore
 	private List<Application> applications;
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<CompanyNote> companyNote;
 	@OneToMany(mappedBy = "company")
 	private List<CompanyLocation> companyLocations;
 	@OneToMany(mappedBy = "company")
+	@JsonIgnore
 	private List<JobPost> jopPosts;
 
 	public Company(int id, String name, String siteURL, List<Application> applications, List<CompanyNote> companyNote,

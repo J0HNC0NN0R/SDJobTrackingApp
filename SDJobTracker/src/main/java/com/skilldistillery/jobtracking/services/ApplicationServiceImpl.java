@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.Application;
 import com.skilldistillery.jobtracking.entities.ApplicationNote;
-import com.skilldistillery.jobtracking.entities.Company;
 import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
+import com.skilldistillery.jobtracking.repositories.ApplicationNoteRepository;
 import com.skilldistillery.jobtracking.repositories.ApplicationRepository;
-import com.skilldistillery.jobtracking.repositories.CompanyRepository;
+import com.skilldistillery.jobtracking.repositories.ContactRepository;
+import com.skilldistillery.jobtracking.repositories.ProgressRepository;
 import com.skilldistillery.jobtracking.repositories.StudentRepository;
 
 @Service
@@ -25,10 +26,14 @@ public class ApplicationServiceImpl implements ApplicationService {
 	@Autowired
 	private StudentRepository sturepo;
 	
-	@Autowired 
-	private CompanyRepository comrepo;
+	@Autowired
+	private ContactRepository contrepo;
 	
+	@Autowired
+	private ApplicationNoteRepository appnoterepo;
 	
+	@Autowired
+	private ProgressRepository progrepo;
 	
 	@Override
 	public Application findByApplicationId(Integer id) {
@@ -42,9 +47,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 	
 	@Override
-	public Application create(Application application) {
+	public Application create(Application application, Integer studentId) {
 		Application newApplication = null;
+		Optional<Student> foundStudent = sturepo.findById(studentId);
 		if(application != null) {
+			application.setStudent(foundStudent.get());
 			newApplication = apprepo.saveAndFlush(application);
 		}
 		return newApplication;
@@ -60,31 +67,126 @@ public class ApplicationServiceImpl implements ApplicationService {
 			actualApplication.setPosition(application.getPosition());
 			actualApplication.setDescriptionURL(application.getDescriptionURL());
 			actualApplication.setInterestLevel(application.getInterestLevel());
-			
+			actualApplication.setCompany(application.getCompany());
 			apprepo.saveAndFlush(actualApplication);
 		
 	}
 		return actualApplication;
 	}
+	
+	@Override
+	public Progress getProgressById(Integer progressId) {
+		return progrepo.findById(progressId).get();
+	}
+	
+	@Override 
+	public List<Progress> getAllProgressByAppId(Integer appId){
+		return progrepo.findByApplicationId(appId);
+	}
 
 	@Override
 	public Progress addProgressOnApplication(Progress progress, Integer appId) {
+		Progress newProgress = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(progress != null) {
+			progress.setApplication(newApplication.get());
+			newProgress = progrepo.saveAndFlush(progress);
+		}
+		return newProgress;
+	}
+	
+	@Override
+	public Progress updateProgress(Progress progress, Integer progId) {
+		Progress actualProgress = null;
+		Optional<Progress> managedProgress = progrepo.findById(progId);
+
+		if(managedProgress.isPresent()) {
+			actualProgress = managedProgress.get();
+			actualProgress.setState(progress.getState());
+			actualProgress.setUpdated(progress.getUpdated());
+			
+			progrepo.saveAndFlush(actualProgress);
+		}
 		
-		return null;
+		return actualProgress;
+	}
+	
+	@Override
+	public Contact getContactById(Integer contactId) {
+		return contrepo.findById(contactId).get();
 	}
 
+	@Override
+	public List <Contact> getContactsByAppId(Integer appId) {
+		return contrepo.findByApplicationId(appId);
+	}
+	
 	@Override
 	public Contact addContactOnApplication(Contact contact, Integer appId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Contact newContact = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(contact !=null) {
+			
+			contact.setApplication(newApplication.get());
+			newContact = contrepo.saveAndFlush(contact);
+			
+		}
+		return newContact;
+	}
+	
+	@Override
+	public Contact updateContact(Contact contact, Integer contactId) {
+		Contact actualContact = null;
+		Optional<Contact> managedContact = contrepo.findById(contactId);
+		if(managedContact.isPresent()) {
+			actualContact = managedContact.get();
+			actualContact.setName(contact.getName());
+			actualContact.setEmail(contact.getEmail());
+			actualContact.setPhone(contact.getPhone());
+			actualContact.setPosition(contact.getPosition());
+			
+			contrepo.saveAndFlush(actualContact);
+		}
+		return actualContact;
+	}
+	
+	@Override
+	public ApplicationNote getAppNoteById(Integer appNoteId) {
+		return appnoterepo.findById(appNoteId).get();
+	}
+	
+	@Override
+	public List<ApplicationNote> getAppNotesByAppId(Integer appId){
+		return appnoterepo.findByAppId(appId);
 	}
 
 	@Override
-	public ApplicationNote addAppNoteOnApplication(ApplicationNote applicationnote, Integer appId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ApplicationNote addAppNoteOnApplication(ApplicationNote applicationNote, Integer appId) {
+		ApplicationNote newAppNote = null;
+		Optional<Application> newApplication = apprepo.findById(appId);
+		if(applicationNote != null){
+			
+			applicationNote.setApplicationId(newApplication.get());
+			newAppNote = appnoterepo.saveAndFlush(applicationNote);
+		}
+		
+		return newAppNote;
 	}
 
-	
+	@Override
+	public ApplicationNote updateApplicationNote(ApplicationNote applicationNote, Integer appNoteId) {
+		ApplicationNote actualAppNote = null;
+		
+		Optional<ApplicationNote> managedAppNote = appnoterepo.findById(appNoteId);
+		if(managedAppNote.isPresent()) {
+			actualAppNote = managedAppNote.get();
+			actualAppNote.setBody(applicationNote.getBody());
+			actualAppNote.setTitle(applicationNote.getTitle());
+			
+			appnoterepo.saveAndFlush(actualAppNote);
+		}
+		return actualAppNote;
+	}
 	
 }

@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `enabled` TINYINT NOT NULL DEFAULT 1,
   `password` VARCHAR(200) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NOT NULL DEFAULT 'User',
+  `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `application_id` INT NOT NULL,
   `name` VARCHAR(300) NOT NULL,
   `email` VARCHAR(300) NULL,
-  `phone` INT NULL,
+  `phone` VARCHAR(30) NULL,
   `position` VARCHAR(150) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_contact_application1_idx` (`application_id` ASC),
@@ -347,7 +347,7 @@ COMMIT;
 START TRANSACTION;
 USE `trackerdb`;
 INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (22, '2019-07-09', '2019-10-28', NULL, NULL);
-INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (23, '2019-09-22', '2019-01-10', NULL, NULL);
+INSERT INTO `cohort` (`id`, `start_date`, `end_date`, `name`, `nickname`) VALUES (23, '2019-09-22', '2020-01-10', NULL, NULL);
 
 COMMIT;
 
@@ -408,8 +408,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `trackerdb`;
-INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (1, 1, 'contact name', 'contact@test.com', 888-888-8888, 'tech lead');
-INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (2, 3, 'other contact', 'othercon@test.com', 999-999-9999, 'hr');
+INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (1, 1, 'contact name', 'contact@test.com', '888-888-8888', 'tech lead');
+INSERT INTO `contact` (`id`, `application_id`, `name`, `email`, `phone`, `position`) VALUES (2, 3, 'other contact', 'othercon@test.com', '999-999-9999', 'hr');
 
 COMMIT;
 
@@ -469,7 +469,7 @@ COMMIT;
 START TRANSACTION;
 USE `trackerdb`;
 INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (1, 1, 'Denver', 'CO');
-INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (2, 2, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (2, 2, 'Austin', 'TX');
 
 COMMIT;
 

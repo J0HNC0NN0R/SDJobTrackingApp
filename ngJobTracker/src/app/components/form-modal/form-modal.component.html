@@ -5,19 +5,22 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+
     <div class="modal-body">
-      <form>
-        <input type="text" name="position" placeholder="Position"><br>
-        <input type="text" name="descriptionURL" placeholder="Job Description URL"><br>
-        <input type="text" name="interestLevel" placeholder="Interest Level"><br>
-        <input type="text" name="companyName" placeholder="Company Name"><br>
-        <input type="text" name="siteUrl" placeholder="Company Website"><br>
-        <input type="text" name="city" placeholder="City"><br>
-        <input type="text" name="state" placeholder="State"><br>
+      <form #editForm = "ngForm">
+        <input type="text" name="position" placeholder="Position" [(ngModel)]="update.position"><br>
+        <input type="text" name="descriptionURL" placeholder="Job Description URL" [(ngModel)]="update.descriptionURL"><br>
+        <input type="text" name="interestLevel" placeholder="Interest Level" [(ngModel)]="update.interestLevel"><br>
+        <input type="text" name="companyName" placeholder="Company Name" [(ngModel)]="update.companyName"><br>
+        <input type="text" name="siteUrl" placeholder="Company Website" [(ngModel)]="update.siteUrl"><br>
+        <input type="text" name="city" placeholder="City" [(ngModel)]="update.city"><br>
+        <input type="text" name="state" placeholder="State" [(ngModel)]="update.state"><br>
       </form>
     </div>
+
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); updateApp(editForm)">Save</button>
     </div>
-  </ng-template>
+
+</ng-template>
 

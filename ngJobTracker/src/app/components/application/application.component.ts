@@ -14,6 +14,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   apps: Application[] = [];
   url: string;
   student: Student;
+  appId: number;
 
   constructor(private appService: ApplicationService, private stuService: StudentService) { }
     @ViewChild(FormModalComponent, {static: false}) formComp;
@@ -42,18 +43,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
       );
   }
 
-  updateApp(app: Application) {
-    this.appService.updateApp(this.student.id, app).subscribe(
-      data => {
-        this.refreshApps();
-      },
-
-      err => console.error('Fetch application err: ' + err)
-    );
-  }
-
-  openModalForm() {
-    this.formComp.open();
-
+  openModalForm(id: number) {
+    this.formComp.open(id);
   }
 }

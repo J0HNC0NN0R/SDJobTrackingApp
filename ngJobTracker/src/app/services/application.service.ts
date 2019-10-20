@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ApplicationForm } from '../models/application-form';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class ApplicationService {
       );
   }
 
-  updateApp(id: number, app: Application) {
+  updateApp(id: number, app: ApplicationForm, appId: number) {
     this.credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -41,10 +42,13 @@ export class ApplicationService {
       })
     };
 
-    return this.http.post<Application[]>(this.url + id + '/applications/' + app.id, app, httpOptions)
+    console.error(app);
+
+    return this.http.put<Application[]>(this.url + id + '/applications/' + appId, app, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
+          console.log(app);
           return throwError('Failed update application');
         })
       );

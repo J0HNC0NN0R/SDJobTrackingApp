@@ -301,10 +301,11 @@ public class StudentController {
 		location.setCity(form.getCity());
 		location.setState(form.getState());
 		
-		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
-		if (managedLoc == null) {
-			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
-		}
+//		*** Company needs Many to Many relationship for this to work ***
+//		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+//		if (managedLoc == null) {
+			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//		}}
 
 		application.setCompany(managedCompany);
 		application.setDescriptionURL(form.getDescriptionURL());
@@ -346,11 +347,13 @@ public class StudentController {
 		CompanyLocation location = new CompanyLocation();
 		location.setCity(form.getCity());
 		location.setState(form.getState());
+
+//		*** Company needs Many to Many relationship for this to work ***
+//		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+//		if (managedLoc == null) {
+			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//		}
 		
-		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
-		if (managedLoc == null) {
-			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
-		}
 		
 		application.setCompany(managedCompany);
 		application.setDescriptionURL(form.getDescriptionURL());

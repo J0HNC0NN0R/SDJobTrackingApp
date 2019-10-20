@@ -37,7 +37,7 @@ public class Student {
 	@Column(name = "is_accepted")
 	private boolean isAccepted;
 	@Column(name = "deposit_paid")
-	private boolean deposit_paid;
+	private boolean depositPaid;
 	@Column(name = "needs_loaner_laptop")
 	private boolean needsLoanerLaptop;
 	@Column(name = "education_level")
@@ -70,7 +70,7 @@ public class Student {
 	
 
 	public Student(int id, String firstName, String lastName, String email, String githubUsername, boolean isVettec,
-			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid, boolean needsLoanerLaptop,
+			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean depositPaid, boolean needsLoanerLaptop,
 			String educationLevel, String openToRelocation, String clearance, List<Application> applications,
 			Cohort cohort, User user, List<CompanyNote> companyNotes,
 			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
@@ -84,7 +84,7 @@ public class Student {
 		this.isGIBill = isGIBill;
 		this.isEmployed = isEmployed;
 		this.isAccepted = isAccepted;
-		this.deposit_paid = deposit_paid;
+		this.depositPaid = depositPaid;
 		this.needsLoanerLaptop = needsLoanerLaptop;
 		this.educationLevel = educationLevel;
 		this.openToRelocation = openToRelocation;
@@ -177,12 +177,12 @@ public class Student {
 		this.isAccepted = isAccepted;
 	}
 
-	public boolean isDeposit_paid() {
-		return deposit_paid;
+	public boolean isDepositPaid() {
+		return depositPaid;
 	}
 
-	public void setDeposit_paid(boolean deposit_paid) {
-		this.deposit_paid = deposit_paid;
+	public void setDeposit_paid(boolean depositPaid) {
+		this.depositPaid = depositPaid;
 	}
 
 	public boolean isNeedsLoanerLaptop() {
@@ -318,8 +318,8 @@ public class Student {
 		builder.append(isEmployed);
 		builder.append(", isAccepted=");
 		builder.append(isAccepted);
-		builder.append(", deposit_paid=");
-		builder.append(deposit_paid);
+		builder.append(", depositPaid=");
+		builder.append(depositPaid);
 		builder.append(", needsLoanerLaptop=");
 		builder.append(needsLoanerLaptop);
 		builder.append(", educationLevel=");

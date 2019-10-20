@@ -1,3 +1,7 @@
+import { AuthService } from 'src/app/services/auth.service';
+import { Student } from './../../models/student';
+
+import { StudentService } from './../../services/student.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentProfileComponent implements OnInit {
 
-  constructor() { }
+  studentProfile: Student = null;
+
+  constructor(private studentService: StudentService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.showProfile();
+
+  }
+
+  showProfile(){
+  this.studentService.getStudent().subscribe(
+    data => {
+      this.studentProfile = data;
+
+    },
+    err => {
+      console.error('Error in getStudent ' + err);
+    }
+
+  );
+
   }
 
 }

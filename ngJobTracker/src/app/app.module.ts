@@ -20,6 +20,8 @@ import { CohortProfileComponent } from './components/cohort-profile/cohort-profi
 import { MessagingComponent } from './components/messaging/messaging.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
+import { FormModalComponent } from './components/form-modal/form-modal.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -39,16 +41,24 @@ import { ApplicationStatusComponent } from './components/application-status/appl
     CohortProfileComponent,
     MessagingComponent,
     StatisticsComponent,
-    ApplicationStatusComponent
+    ApplicationStatusComponent,
+    FormModalComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModalModule,
     HttpClientModule
   ],
+  exports: [
+    FormModalComponent
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FormModalComponent
+  ]
 })
 export class AppModule { }

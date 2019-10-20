@@ -19,8 +19,10 @@
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>
         <td>{{ app.progress | json }}</td>
-        <td><button class='btn btn-secondary' (click)='setUpdate(app)'>Update</button></td>
+        <td><button class='btn btn-secondary' (click)='openModalForm()'>Update</button></td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<app-form-modal #modal></app-form-modal>

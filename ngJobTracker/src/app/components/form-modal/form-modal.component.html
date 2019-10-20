@@ -1,0 +1,23 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Application Update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <input type="text" name="position" placeholder="Position"><br>
+        <input type="text" name="descriptionURL" placeholder="Job Description URL"><br>
+        <input type="text" name="interestLevel" placeholder="Interest Level"><br>
+        <input type="text" name="companyName" placeholder="Company Name"><br>
+        <input type="text" name="siteUrl" placeholder="Company Website"><br>
+        <input type="text" name="city" placeholder="City"><br>
+        <input type="text" name="state" placeholder="State"><br>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+

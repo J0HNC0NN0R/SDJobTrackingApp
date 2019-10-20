@@ -1,3 +1,4 @@
+import { Cohort } from './models/cohort';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +15,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { ApplicationComponent } from './components/application/application.component';
-import { HardmodeCountdownComponent } from './components/hardmode-countdown/hardmode-countdown.component';
 import { CohortCreateComponent } from './components/cohort-create/cohort-create.component';
 import { CohortProfileComponent } from './components/cohort-profile/cohort-profile.component';
 import { MessagingComponent } from './components/messaging/messaging.component';
@@ -22,6 +22,10 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
 import { ChartsModule } from 'ng2-charts';
 
+import { FormModalComponent } from './components/form-modal/form-modal.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { CohortComponent } from './components/cohort/cohort.component';
 
 @NgModule({
   declarations: [
@@ -35,22 +39,31 @@ import { ChartsModule } from 'ng2-charts';
     StudentProfileComponent,
     AdminProfileComponent,
     ApplicationComponent,
-    HardmodeCountdownComponent,
     CohortCreateComponent,
     CohortProfileComponent,
     MessagingComponent,
     StatisticsComponent,
-    ApplicationStatusComponent
+    ApplicationStatusComponent,
+    FormModalComponent,
+    CohortComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgbModalModule,
     HttpClientModule,
     ChartsModule
+
+  ],
+  exports: [
+    FormModalComponent
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    FormModalComponent
+  ]
 })
 export class AppModule { }

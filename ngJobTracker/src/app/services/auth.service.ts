@@ -2,6 +2,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { Student } from '../models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,11 @@ export class AuthService {
   private baseUrl = 'http://localhost:8095/';
   logoutSuccess: boolean;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient /*, private todoService: TodoService*/) { }
 
   login(username, password) {
     // Make credentials
+
     const credentials = this.generateBasicAuthCredentials(username, password);
     // Send credentials as Authorization header (this is spring security convention for basic auth)
     const httpOptions = {
@@ -30,6 +32,7 @@ export class AuthService {
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
+          localStorage.setItem('username' , username);
           return res;
         }),
         catchError((err: any) => {
@@ -53,7 +56,9 @@ export class AuthService {
   logout() {
     try {
       localStorage.removeItem('credentials');
+      localStorage.removeItem('username');
       this.logoutSuccess = true;
+
     } catch (error) {
       console.error('logout failure');
     }
@@ -73,4 +78,9 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+
+  getUsername() {
+    return localStorage.getItem('username');
+  }
+
 }

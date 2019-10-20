@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HardmodeCountdownComponent } from './hardmode-countdown.component';
+import { FormModalComponent } from './form-modal.component';
 
-describe('HardmodeCountdownComponent', () => {
-  let component: HardmodeCountdownComponent;
-  let fixture: ComponentFixture<HardmodeCountdownComponent>;
+describe('FormModalComponent', () => {
+  let component: FormModalComponent;
+  let fixture: ComponentFixture<FormModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HardmodeCountdownComponent ]
+      declarations: [ FormModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HardmodeCountdownComponent);
+    fixture = TestBed.createComponent(FormModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -96,8 +96,6 @@ public class StudentController {
 		return updated; 
 	}
 
-
-	
 	
 	// S T U D E N T S
 	
@@ -112,17 +110,21 @@ public class StudentController {
 		return serv.getStudentsByCohortId(cid);
 	}
 
-	@GetMapping("students/{id}")
-	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
-		Student student = serv.findByStudentId(id);
-		if (student != null) {
-			resp.setStatus(200);
-		} else {
-			resp.setStatus(404);
-		}
-		return student;
-	}
+//	@GetMapping("students/{id}")
+//	public Student getStudentById(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {
+//		Student student = serv.findByStudentId(id);
+//		if (student != null) {
+//			resp.setStatus(200);
+//		} else {
+//			resp.setStatus(404);
+//		}
+//		return student;
+//	}
 	
+	@GetMapping("students/{username}")
+	public Student findStudentsByUsername(@PathVariable("username") String username, Principal principal) {
+		return serv.findByUserName(username);
+	}
 	
 	@PostMapping("cohorts/{id}/students")
 	public Student create(@RequestBody Student su, @PathVariable("id") int id, HttpServletResponse resp,
@@ -297,10 +299,11 @@ public class StudentController {
 		location.setCity(form.getCity());
 		location.setState(form.getState());
 		
-		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
-		if (managedLoc == null) {
-			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
-		}
+//		*** Company needs Many to Many relationship for this to work ***
+//		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+//		if (managedLoc == null) {
+			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//		}}
 
 		application.setCompany(managedCompany);
 		application.setDescriptionURL(form.getDescriptionURL());
@@ -342,11 +345,13 @@ public class StudentController {
 		CompanyLocation location = new CompanyLocation();
 		location.setCity(form.getCity());
 		location.setState(form.getState());
+
+//		*** Company needs Many to Many relationship for this to work ***
+//		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
+//		if (managedLoc == null) {
+			CompanyLocation managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
+//		}
 		
-		CompanyLocation managedLoc = compServ.findByCityAndState(form.getCity(), form.getState());
-		if (managedLoc == null) {
-			managedLoc = compServ.addCompanyLocation(location, managedCompany.getId());
-		}
 		
 		application.setCompany(managedCompany);
 		application.setDescriptionURL(form.getDescriptionURL());

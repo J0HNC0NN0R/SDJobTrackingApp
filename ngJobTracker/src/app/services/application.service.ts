@@ -31,4 +31,22 @@ export class ApplicationService {
         })
       );
   }
+
+  updateApp(id: number, app: Application) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post<Application[]>(this.url + id + '/applications/' + app.id, app, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed update application');
+        })
+      );
+  }
 }

@@ -8,6 +8,7 @@
       <th>Job Description</th>
       <th>Interest Level</th>
       <th>Progress</th>
+      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let app of apps">
@@ -18,6 +19,7 @@
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>
         <td>{{ app.progress | json }}</td>
+        <td><button class='btn btn-secondary' (click)='setUpdate(app)'>Update</button></td>
       </tr>
     </tbody>
   </table>

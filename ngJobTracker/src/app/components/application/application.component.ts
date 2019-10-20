@@ -37,4 +37,15 @@ export class ApplicationComponent implements OnInit {
       err => console.error('Fetch application err: ' + err)
     );
   }
+
+  updateApp(app: Application) {
+    this.appService.updateApp(this.student.id, app).subscribe(
+      data => {
+        this.refreshApps();
+      },
+
+      err => console.error('Fetch application err: ' + err)
+    );
+  }
+
 }

@@ -3,6 +3,7 @@
     <thead class="thead thead-dark">
       <th>Application ID</th>
       <th>Company</th>
+      <th>Location</th>
       <th>Position</th>
       <th>Job Description</th>
       <th>Interest Level</th>
@@ -11,7 +12,8 @@
     <tbody>
       <tr *ngFor="let app of apps">
         <td>{{ app.id }}</td>
-        <td>{{ app.company | json }}</td>
+        <td>{{ app.company.name }}</td>
+        <td>{{ app.company.companyLocations[0].city}}, {{ app.company.companyLocations[0].state}}</td>
         <td>{{ app.position}}</td>
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>

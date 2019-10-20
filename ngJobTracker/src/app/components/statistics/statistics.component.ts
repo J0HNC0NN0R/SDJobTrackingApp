@@ -20,19 +20,21 @@ export class StatisticsComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  // tslint:disable-next-line: max-line-length
+  public barChartLabels: Label[] = ['Not Applied', 'Applied', 'Recieved Response', 'Phone Interview', 'In-Person Interview', 'Recived Offer', 'Hired'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [5, 1, 1, 1, 1, 1, 0, 0], label: 'Applications' },
+    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   constructor() { }
 
   ngOnInit() {
+    this.fillGraph();
   }
 
   // events
@@ -42,6 +44,16 @@ export class StatisticsComponent implements OnInit {
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
+  }
+
+  public seedGraph() {
+    const data = [15];
+  }
+
+  public fillGraph() {
+    const data = [10, 10, 10, 10, 1];
+
+    this.barChartData[0].data = data;
   }
 
   public randomize(): void {

@@ -70,7 +70,10 @@ public class Student {
 	public Student(String firstName, String lastName, String email, String githubUsername, boolean isVettec,
 			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean depositPaid, boolean needsLoanerLaptop,
 			String educationLevel, boolean openToRelocation, String clearance, List<Application> applications,
+<<<<<<< HEAD
+=======
 
+>>>>>>> 2602adeab57f7113d58d79dcb75bb669b5ddb309
 			Cohort cohort, User user, List<CompanyNote> companyNotes,
 			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
@@ -168,9 +171,14 @@ public class Student {
 		this.isAccepted = isAccepted;
 	}
 
+<<<<<<< HEAD
+	public boolean isDepositPaid() {
+	
+=======
 
 	public boolean isDepositPaid() {
 
+>>>>>>> 2602adeab57f7113d58d79dcb75bb669b5ddb309
 		return depositPaid;
 	}
 

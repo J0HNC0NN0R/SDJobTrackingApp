@@ -35,20 +35,23 @@ export class RegisterComponent implements OnInit {
       if (!form.value.depositPaid) {
           form.value.depositPaid = false;
       }
-      if (!form.value.isAccepted) {
-        form.value.isAccepted = false;
+      if (!form.value.accepted) {
+        form.value.accepted = false;
       }
-      if (!form.value.isGIBill) {
-        form.value.isGIBill = false;
+      if (!form.value.gibill) {
+        form.value.gibill = false;
       }
-      if (!form.value.isVettec) {
-        form.value.isVettec = false;
+      if (!form.value.vettec) {
+        form.value.vettec = false;
       }
       if (!form.value.needsLoanerLaptop)  {
         form.value.needsLoanerLaptop = false;
       }
       if (!form.value.openToRelocation) {
         form.value.openToRelocation = false;
+      }
+      if (!form.value.employed) {
+        form.value.employed = false;
       }
     }
 

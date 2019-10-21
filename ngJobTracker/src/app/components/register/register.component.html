@@ -16,23 +16,25 @@
           ngModel
           placeholder="Last Name"
         /><br />
-        <input type="text" name="email" ngModel placeholder="Email Address" /><br>
+        <input
+          type="text"
+          name="email"
+          ngModel
+          placeholder="Email Address"
+        /><br />
         <input
           type="text"
           name="educationLevel"
           ngModel
           placeholder="Highest Education Lvl"
         /><br />
-        <label
-          >GI Bill:
-          <input type="checkbox" name="isGIBill" ngModel /> </label><br />
-        <label
-          >VETTEC:
-          <input type="checkbox" name="isVettec"  ngModel /> </label
+        <label>GI Bill: <input type="checkbox" name="gibill" ngModel /> </label
+        ><br />
+        <label>VETTEC: <input type="checkbox" name="vettec" ngModel /> </label
         ><br />
         <label
           >Accepted into Skill Distillery:
-          <input type="checkbox" name="isAccepted" ngModel /> </label
+          <input type="checkbox" name="accepted" ngModel /> </label
         ><br />
         <label
           >Deposit Paid:
@@ -60,7 +62,7 @@
         /><br />
         <label
           >Attained Employment after completing course:
-          <input type="checkbox" name="openToRelocation" ngModel /> </label
+          <input type="checkbox" name="employed" ngModel /> </label
         ><br />
         <button (click)="registerStudent(studentRegister)">
           Register Student

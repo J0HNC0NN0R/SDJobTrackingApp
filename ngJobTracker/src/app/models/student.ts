@@ -5,6 +5,7 @@ import { Application } from './application';
 export class Student {
   id: number;
   cohort: Cohort;
+  cohortId: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -24,6 +25,7 @@ export class Student {
   constructor(
     id?: number,
     cohort?: Cohort,
+    cohortId?: number,
     firstName?: string,
     lastName?: string,
     email?: string,
@@ -42,6 +44,7 @@ export class Student {
   ) {
     this.id = id;
     this.cohort = cohort;
+    this.cohortId = cohortId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

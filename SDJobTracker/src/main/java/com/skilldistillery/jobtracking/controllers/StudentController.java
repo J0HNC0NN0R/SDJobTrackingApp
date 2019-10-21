@@ -142,7 +142,7 @@ public class StudentController {
 		student.setGIBill(su.isGIBill());
 		student.setVettec(su.isVettec());
 		student.setEmployed(su.isEmployed());
-		student.setDeposit_paid(su.isDeposit_paid());
+		student.setDeposit_paid(su.isDepositPaid());
 		student.setNeedsLoanerLaptop(su.isNeedsLoanerLaptop());
 		student.setEducationLevel(su.getEducationLevel());
 		student.setOpenToRelocation(su.getOpenToRelocation());

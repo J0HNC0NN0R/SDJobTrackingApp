@@ -1,6 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,9 +23,9 @@ public class Progress {
 	private Application application;
 	private String State;
 	@Column(name = "updated")
-	private Date updated;
+	private LocalDateTime updated;
 
-	public Progress(int id, Application applicationId, String state, Date updated) {
+	public Progress(int id, Application applicationId, String state, LocalDateTime updated) {
 		super();
 		this.id = id;
 		this.application = applicationId;
@@ -61,11 +61,11 @@ public class Progress {
 		State = state;
 	}
 
-	public Date getUpdated() {
+	public LocalDateTime getUpdated() {
 		return updated;
 	}
 
-	public void setUpdated(Date updated) {
+	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
 	}
 

@@ -397,8 +397,6 @@ USE `trackerdb`;
 INSERT INTO `progress` (`id`, `application_id`, `state`, `updated`) VALUES (1, 1, 'Applied', '2019-10-24');
 INSERT INTO `progress` (`id`, `application_id`, `state`, `updated`) VALUES (2, 2, 'Applied', '2019-10-28');
 INSERT INTO `progress` (`id`, `application_id`, `state`, `updated`) VALUES (3, 3, 'Not Applied', '2019-10-22');
-INSERT INTO `progress` (`id`, `application_id`, `state`, `updated`) VALUES (4, 1, 'Phone Interview', '2019-10-26');
-INSERT INTO `progress` (`id`, `application_id`, `state`, `updated`) VALUES (5, 3, 'Applied', '2019-10-23');
 
 COMMIT;
 

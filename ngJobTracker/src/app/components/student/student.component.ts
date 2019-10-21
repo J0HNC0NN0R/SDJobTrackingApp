@@ -17,8 +17,9 @@ export class StudentComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.auth.getRole();
-    console.log(this.role);
+    if (this.role) {
     this.refreshApps();
+    }
   }
 
   refreshApps() {

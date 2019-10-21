@@ -12,7 +12,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit() {
     this.role = this.auth.getRole();
-    console.log(this.role);
   }
 
 

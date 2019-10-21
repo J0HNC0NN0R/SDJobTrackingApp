@@ -90,7 +90,9 @@ export class StudentService {
 
   }
 
-  update(editStudent) {
+  update(upStudent) {
+    console.log(upStudent.id);
+    console.log(upStudent.id);
     this.credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -99,8 +101,8 @@ export class StudentService {
       })
     };
 
-    return this.http.put<Student>(this.url + 'cohorts/' + this.student.cohort.id
-      + '/students/' + this.student.id, editStudent, httpOptions)
+    return this.http.put<Student>(this.url + 'cohorts/' + upStudent.cohort.id
+      + '/students/' + upStudent.id, upStudent, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

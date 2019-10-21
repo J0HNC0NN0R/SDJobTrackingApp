@@ -1,4 +1,4 @@
-<div class="border border-primary" *ngIf="role == 'ADMIN'">
+<div class="border border-primary" *ngIf="checkRole() == 'ADMIN'">
   <p>Admin Component</p>
   <!-- All Admin centric components below -->
   <app-register></app-register>
@@ -12,4 +12,5 @@
   <app-statistics></app-statistics>
   <!-- All Admin centric components above -->
 </div>
+
 

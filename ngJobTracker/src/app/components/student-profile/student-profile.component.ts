@@ -4,7 +4,6 @@ import { Student } from './../../models/student';
 import { StudentService } from './../../services/student.service';
 import { Component, OnInit } from '@angular/core';
 
-
 @Component({
   selector: 'app-student-profile',
   templateUrl: './student-profile.component.html',

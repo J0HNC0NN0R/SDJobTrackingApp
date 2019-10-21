@@ -53,7 +53,6 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 
 				jobs.add(listing);
 			}
-			System.err.println(jobs);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

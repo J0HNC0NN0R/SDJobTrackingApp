@@ -129,6 +129,7 @@ public class StudentController {
 	@PostMapping("cohorts/{id}/students")
 	public Student create(@RequestBody Student su, @PathVariable("id") int id, HttpServletResponse resp,
 			HttpServletRequest req, Principal principal) {
+		System.err.println("Controller: " + su);
 		Student created = null;
 		
 		Student student = new Student();
@@ -142,10 +143,10 @@ public class StudentController {
 		student.setGIBill(su.isGIBill());
 		student.setVettec(su.isVettec());
 		student.setEmployed(su.isEmployed());
-		student.setDeposit_paid(su.isDeposit_paid());
+		student.setDeposit_paid(su.isDepositPaid());
 		student.setNeedsLoanerLaptop(su.isNeedsLoanerLaptop());
 		student.setEducationLevel(su.getEducationLevel());
-		student.setOpenToRelocation(su.getOpenToRelocation());
+		student.setOpenToRelocation(su.isOpenToRelocation());
 		student.setClearance(su.getClearance());
 		
 		user.setEnabled(true);

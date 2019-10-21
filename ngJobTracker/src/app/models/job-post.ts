@@ -1,21 +1,21 @@
 export class JobPost {
-  id: number;
-  companyId: number;
-  position: string;
+  title: number;
+  company: string;
+  location: string;
   description: string;
-  postURL: string;
+  url: string;
 
   constructor(
-    id?: number,
-    companyId?: number,
-    position?: string,
+    title?: number,
+    company?: string,
+    location?: string,
     description?: string,
-    postURL?: string
+    url?: string
   ) {
-    this.id = id;
-    this.companyId = companyId;
-    this.position = position;
+    this.title = title;
+    this.company = company;
+    this.location = location;
     this.description = description;
-    this.postURL = postURL;
+    this.url = url;
   }
 }

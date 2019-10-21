@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from 'selenium-webdriver/http';
+import { AuthService } from 'src/app/services/auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-application-status',
@@ -6,10 +9,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./application-status.component.css']
 })
 export class ApplicationStatusComponent implements OnInit {
+  // private credentials: string;
+  // private url = 'http://localhost:8095/api/students/';
 
-  constructor() { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
   ngOnInit() {
   }
+
+  // index(id: number) {
+  //   this.credentials = this.auth.getCredentials();
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       Authorization: `Basic ${this.credentials}`,
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     })
+  //   };
+
+  //   return this.http.get<Application[]>(this.url + id + '/applications', httpOptions)
+  //     .pipe(
+  //       catchError((err: any) => {
+  //         console.log(err);
+  //         return throwError('Failed to get list of applications');
+  //       })
+  //     );
+  // }
 
 }

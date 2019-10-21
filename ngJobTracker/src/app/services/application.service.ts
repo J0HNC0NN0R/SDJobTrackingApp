@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ApplicationForm } from '../models/application-form';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -76,10 +77,8 @@ export class ApplicationService {
   }
 
   getJobs() {
-    this.credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: `Basic ${this.credentials}`,
         'X-Requested-With': 'XMLHttpRequest'
       })
     };

@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 // import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { StudentService } from 'src/app/services/student.service';
+import { Student } from 'src/app/models/student';
+import { ApplicationService } from 'src/app/services/application.service';
+import { Application } from 'src/app/models/application';
+import { Observable } from 'rxjs';
+import { Progress } from 'src/app/models/progress';
+
 
 @Component({
   selector: 'app-statistics',
@@ -33,13 +40,20 @@ export class StatisticsComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data: [5, 1, 1, 1, 1, 1, 0, 0], label: 'Applications' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [10, 2, 3, 9, 4, 6, 0, 6], label: 'Series B' }
   ];
+  student: Student = null;
+  studentStats: Application[] = [];
+  progressArray: Progress[] = null;
+  progress: Progress = null;
 
-  constructor() { }
+  constructor(private studentService: StudentService, private applicationService: ApplicationService) { }
 
   ngOnInit() {
-    this.testFillGraph();
+    this.getStudent();
+    this.getApplications();
+    console.log(this.studentStats);
+
   }
 
   // events
@@ -51,28 +65,45 @@ export class StatisticsComponent implements OnInit {
     console.log(event, active);
   }
 
-  public seedGraph() {
-    const data = [15];
+  // loadPokemon() {
+  //   this.pokeService.index().subscribe(
+  //     data => {this.pokemons = data; },
+  //     err => {console.log('Error in loadPokemon'); }
+  //   );
+  // }
+
+  public getStudent() {
+    this.studentService.getStudentByUsername().subscribe(
+      data => {
+        this.student = data;
+      },
+      err => {
+        console.log('Error seeding Graph Data');
+      }
+      );
+    }
+
+    public getApplications() {
+      this.applicationService.index(this.student.id).subscribe (
+        data => {
+          this.studentStats = data;
+        },
+        err => { console.log('Error in getApplications');
+        }
+       );
+      }
+    // public setArray() {
+    //   this.studentStats = this.applicationService.index(this.student.id);
+    // }
+
+    public testFillGraph() {
+      const data = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+      //  const data = [];
+
+      this.barChartData[0].data = data;
+    }
+
+    public getProgress(studentStats: Application[]) {
+
+    }
   }
-
-
-  public testFillGraph() {
-    // const data = [1, 1, 1, 1, 1, 1, 1, 1, 1];
-       const data = [];
-
-       this.barChartData[0].data = data;
-  }
-
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    this.barChartData[0].data = data;
-  }
-}

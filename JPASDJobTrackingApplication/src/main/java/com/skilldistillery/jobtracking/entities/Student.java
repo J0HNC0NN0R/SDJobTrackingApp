@@ -168,6 +168,7 @@ public class Student {
 	}
 
 	public boolean isDepositPaid() {
+
 		return depositPaid;
 	}
 

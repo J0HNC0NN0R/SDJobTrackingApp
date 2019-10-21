@@ -18,19 +18,16 @@ export class StudentProfileComponent implements OnInit {
   constructor(private studentService: StudentService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.showProfile();
-    // this.student = this.studentProfile;
-
-
-
+    this.reload();
+    this.editStudent = this.studentProfile;
   }
 
   updateStudent(editStudent) {
+    console.log('edit student' + editStudent);
+
     this.studentService.update(editStudent).subscribe(
       data => {
         this.showProfile();
-        console.log('TeST LOG in update Student');
-
       },
       err => {
         console.error('Error updating student' + err);
@@ -39,10 +36,14 @@ export class StudentProfileComponent implements OnInit {
     );
   }
 
+  reload() {
+    this.showProfile();
+  }
+
   showProfile() {
     this.studentService.getStudentByUsername().subscribe(
       data => {
-        this.studentProfile = data;
+        this.editStudent = data;
 
       },
       err => {

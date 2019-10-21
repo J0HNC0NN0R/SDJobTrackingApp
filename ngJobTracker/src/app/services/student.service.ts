@@ -18,7 +18,6 @@ export class StudentService {
   constructor(private auth: AuthService, private http: HttpClient) { }
 
   registerStudent(student, cid) {
-    console.log(student);
 
     const httpOptions = {
       headers: new HttpHeaders({

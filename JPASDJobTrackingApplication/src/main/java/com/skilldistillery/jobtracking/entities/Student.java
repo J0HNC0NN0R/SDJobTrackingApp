@@ -66,18 +66,10 @@ public class Student {
 	public Student() {
 
 	}
-<<<<<<< HEAD
 
-	
-
-	public Student(int id, String firstName, String lastName, String email, String githubUsername, boolean isVettec,
-			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean depositPaid, boolean needsLoanerLaptop,
-			String educationLevel, String openToRelocation, String clearance, List<Application> applications,
-=======
 	public Student(String firstName, String lastName, String email, String githubUsername, boolean isVettec,
 			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean depositPaid, boolean needsLoanerLaptop,
 			String educationLevel, boolean openToRelocation, String clearance, List<Application> applications,
->>>>>>> c41aa90420f3c3a394312aceab51bc19d7a4b3e8
 			Cohort cohort, User user, List<CompanyNote> companyNotes,
 			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
@@ -175,11 +167,8 @@ public class Student {
 		this.isAccepted = isAccepted;
 	}
 
-<<<<<<< HEAD
 	public boolean isDepositPaid() {
-=======
-	public boolean isDeposit_paid() {
->>>>>>> c41aa90420f3c3a394312aceab51bc19d7a4b3e8
+	
 		return depositPaid;
 	}
 

@@ -1,3 +1,4 @@
+import { Progress } from './../../models/progress';
 import { ApplicationForm } from 'src/app/models/application-form';
 import { FormModalComponent } from './../form-modal/form-modal.component';
 import { StudentService } from './../../services/student.service';
@@ -16,6 +17,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   url: string;
   student: Student;
   appId: number;
+  // progress: ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
 
   constructor(private appService: ApplicationService, private stuService: StudentService) { }
     @ViewChild(FormModalComponent, {static: false}) formComp;
@@ -37,7 +39,11 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     refreshApps() {
       this.appService.index(this.student.id).subscribe(
       data => {
-        this.apps = data;
+        data.forEach(app => {
+          const newApp: Application = new Application(app.id, app.userId, app.companyId, app.position,
+            app.descriptionURL, app.interestLevel, app.progress, app.company);
+          this.apps.push(newApp);
+        });
       },
 
       err => console.error('Fetch application err: ' + err)
@@ -59,6 +65,12 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     } else {
       this.formComp.open();
     }
+  }
 
+
+  setProgress(app: Application) {
+    app.progress.forEach(prog => {
+
+    });
   }
 }

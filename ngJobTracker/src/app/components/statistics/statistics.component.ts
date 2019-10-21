@@ -12,7 +12,12 @@ export class StatisticsComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { xAxes: [{}], yAxes: [{
+      display: true,
+      ticks: {
+          beginAtZero: true   // minimum value will be 0.
+      }
+    }] },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -28,13 +33,13 @@ export class StatisticsComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     { data: [5, 1, 1, 1, 1, 1, 0, 0], label: 'Applications' },
-    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   constructor() { }
 
   ngOnInit() {
-    this.fillGraph();
+    this.testFillGraph();
   }
 
   // events
@@ -50,10 +55,12 @@ export class StatisticsComponent implements OnInit {
     const data = [15];
   }
 
-  public fillGraph() {
-    const data = [10, 10, 10, 10, 1];
 
-    this.barChartData[0].data = data;
+  public testFillGraph() {
+    // const data = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+       const data = [];
+
+       this.barChartData[0].data = data;
   }
 
   public randomize(): void {

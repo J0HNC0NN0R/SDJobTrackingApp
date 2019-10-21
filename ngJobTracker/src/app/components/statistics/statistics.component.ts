@@ -8,6 +8,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 import { Application } from 'src/app/models/application';
 import { Observable } from 'rxjs';
 import { Progress } from 'src/app/models/progress';
+import { ProgressService } from 'src/app/services/progress.service';
 
 
 @Component({
@@ -43,16 +44,17 @@ export class StatisticsComponent implements OnInit {
     { data: [10, 2, 3, 9, 4, 6, 0, 6], label: 'Series B' }
   ];
   student: Student = null;
-  studentStats: Application[] = [];
+  appArray: Application[] = [];
   progressArray: Progress[] = null;
   progress: Progress = null;
 
-  constructor(private studentService: StudentService, private applicationService: ApplicationService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(private studentService: StudentService, private applicationService: ApplicationService, private progressService: ProgressService) { }
 
   ngOnInit() {
     this.getStudent();
     this.getApplications();
-    console.log(this.studentStats);
+    console.log(this.appArray);
 
   }
 
@@ -86,16 +88,16 @@ export class StatisticsComponent implements OnInit {
     public getApplications() {
       this.applicationService.index(this.student.id).subscribe (
         data => {
-          this.studentStats = data;
+          this.appArray = data;
         },
         err => { console.log('Error in getApplications');
         }
        );
       }
-    // public setArray() {
-    //   this.studentStats = this.applicationService.index(this.student.id);
-    // }
 
+    public getProgressArray(studentId: number, appId: number){
+      return this.progressService.getApplicationProgresses(studentId, appId);
+    }
     public testFillGraph() {
       const data = [1, 1, 1, 1, 1, 1, 1, 1, 1];
       //  const data = [];
@@ -103,7 +105,4 @@ export class StatisticsComponent implements OnInit {
       this.barChartData[0].data = data;
     }
 
-    public getProgress(studentStats: Application[]) {
-
-    }
   }

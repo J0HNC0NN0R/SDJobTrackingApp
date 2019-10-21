@@ -90,4 +90,26 @@ export class StudentService {
     );
 
   }
+
+  update(editStudent) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.put<Student>(this.url + 'cohorts/' + this.student.cohort.id
+      + '/students/' + this.student.id, editStudent, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed update student');
+        })
+      );
+
+
+  }
+
 }

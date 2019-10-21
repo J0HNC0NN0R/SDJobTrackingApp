@@ -1,17 +1,40 @@
-<p>student-profile works!</p>
 <div>
   <ul>
+    <li> Id : {{student.id}} </li>
+    <li> Name : {{student.firstName}} {{student.lastName}}</li>
+    <li> Github : {{student.githubUsername}} </li>
+    <li> Cohort : {{student.cohort.id}} </li>
+    <li> Email : {{student.email}} </li>
+    <li> Accepted : {{student.accepted}} </li>
+    <li> Employed : {{student.employed}} </li>
 
-      <li>Id : {{studentProfile.id}} </li>
-    <li>Name : {{studentProfile.firstName}} {{studentProfile.lastName}}</li>
-    <li>Github : {{studentProfile.githubUsername}} </li>
-    <li>Cohort : {{studentProfile.cohortId}} </li>
-    <li>Email : {{studentProfile.email}} </li>
-    <li>Accepted : {{studentProfile.isAccepted}} </li>
-    <li>Employed : {{studentProfile.isEmployed}} </li>
-    <li>GI Bill : {{studentProfile.isGIBill}} </li>
-    <li>VETTEC : {{studentProfile.isVettec}} </li>
-    <li>Needs Loaner : {{studentProfile.needsLoanerLaptop}} </li>
-    <li>Open to Relocation : {{studentProfile.openToRelocation}} </li>
+    <li> Deposit Paid : {{student.depositPaid}} </li>
+
+    <li> GI Bill : {{student.gibill}} </li>
+    <li> VETTEC : {{student.vettec}} </li>
+    <li> Needs Loaner : {{student.needsLoanerLaptop}} </li>
+    <li> Open to Relocation : {{student.openToRelocation}} </li>
+
+    <!-- <li>Student Address : {{studentProfile.studentAddresses}} </li> -->
+    <!-- <li>Number of Applications : {{studentProfile.applications}} </li> -->
   </ul>
+
 </div>
+<br>
+<!-- <div>
+  <form>
+    <ul>
+      <br>
+      <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="editStudent.firstName"></li>
+      <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="editStudent.lastName"></li>
+      <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="editStudent.email"></li>
+      <li> <input type="text" name="githubUsername" placeholder="GitHub" [(ngModel)]="editStudent.githubUsername"></li>
+      <li> Employed: <input type="checkbox" name="Employed" [(ngModel)]="editStudent.employed"></li>
+      <li> Needs Loaner Laptop: <input type="checkbox" name="Needs Loaner Laptop"
+          [(ngModel)]="editStudent.needsLoanerLaptop"></li>
+      <li> Open to Relocation: <input type="checkbox" name="Open to Relocation"
+          [(ngModel)]="editStudent.openToRelocation"></li>
+      <button (click)="updateStudent()"> Update Student </button>
+    </ul>
+  </form>
+</div> -->

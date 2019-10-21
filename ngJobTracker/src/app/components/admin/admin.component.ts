@@ -11,8 +11,10 @@ export class AdminComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.role = this.auth.getRole();
+    this.checkRole();
   }
 
-
+  checkRole() {
+    return this.role = this.auth.getRole();
+  }
 }

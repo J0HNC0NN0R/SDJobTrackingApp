@@ -4,3 +4,8 @@ div {
   border-style: solid;
   border-width: 1px;
 }
+.row {
+margin-left: 0px;
+margin-right: 0px;
+
+}

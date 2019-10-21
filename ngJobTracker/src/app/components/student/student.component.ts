@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   constructor(private studentService: StudentService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.role = this.auth.getRole();
+    this.checkRole();
     if (this.role) {
     this.refreshApps();
     }
@@ -30,5 +30,8 @@ export class StudentComponent implements OnInit {
 
       err => console.error('Fetch student err: ' + err)
     );
+  }
+  checkRole() {
+    return this.role = this.auth.getRole();
   }
 }

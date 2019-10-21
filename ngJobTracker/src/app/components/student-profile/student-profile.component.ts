@@ -39,10 +39,10 @@ export class StudentProfileComponent implements OnInit {
   reload() {
     this.showProfile();
   }
-setEditStudent(){
+setEditStudent() {
 this.upStudent = Object.assign({}, this .editStudent);
 }
-cancelEditStudent(){
+cancelEditStudent() {
   this.upStudent = null;
 }
   showProfile() {

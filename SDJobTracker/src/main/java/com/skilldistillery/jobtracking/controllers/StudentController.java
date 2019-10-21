@@ -450,6 +450,30 @@ public class StudentController {
 		return created;
 	}
 	
+	@PutMapping("students/{sid}/applications/{aid}/progress/{pid}")
+	public Progress updateProgress(@RequestBody Progress progress, @PathVariable("sid") int sid,
+			@PathVariable("aid") int aid, @PathVariable("pid") int pid, HttpServletResponse resp) {
+		
+		Progress updated = null;
+
+		try {
+			updated = appServ.updateProgress(progress, pid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		
+		return updated;
+	}
+	
+	
+	
 	//	C O N T A C T S
 	
 	@GetMapping("students/{sid}/applications/{aid}/contacts")

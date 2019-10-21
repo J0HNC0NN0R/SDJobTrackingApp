@@ -1,5 +1,6 @@
 package com.skilldistillery.jobtracking.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,12 +87,22 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Override
 	public Progress addProgressOnApplication(Progress progress, Integer appId) {
-		Progress newProgress = null;
-		Optional<Application> newApplication = apprepo.findById(appId);
-		if(progress != null) {
-			progress.setApplication(newApplication.get());
-			newProgress = progrepo.saveAndFlush(progress);
+		Progress newProgress = new Progress();
+		
+		
+		try {
+			Progress managed = progrepo.findByApplicationId(appId).get(0);
+			newProgress = updateProgress(progress, managed.getId());
+			
+		} catch (Exception e) {
+		
+			Optional<Application> newApplication = apprepo.findById(appId);
+			if(progress != null) {
+				progress.setApplication(newApplication.get());
+				newProgress = progrepo.saveAndFlush(progress);
+			}
 		}
+
 		return newProgress;
 	}
 	

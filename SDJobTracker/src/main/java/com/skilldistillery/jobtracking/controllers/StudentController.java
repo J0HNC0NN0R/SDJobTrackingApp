@@ -28,6 +28,7 @@ import com.skilldistillery.jobtracking.entities.Contact;
 import com.skilldistillery.jobtracking.entities.Event;
 import com.skilldistillery.jobtracking.entities.Progress;
 import com.skilldistillery.jobtracking.entities.Student;
+import com.skilldistillery.jobtracking.entities.StudentAddress;
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.ApplicationService;
 import com.skilldistillery.jobtracking.services.CompanyService;
@@ -187,6 +188,54 @@ public class StudentController {
 		return updated;
 	}
 	
+	
+	// A D D R E S S
+	
+	@PostMapping("students/{id}/addresses")
+	public StudentAddress createAddress(@PathVariable("id") int id, 
+			@RequestBody StudentAddress address, HttpServletResponse resp, HttpServletRequest req,
+			Principal principal) {
+
+		StudentAddress created = null;
+		
+		System.err.println(address);
+		System.err.println("***************");
+		
+		try {
+			created = serv.addStudentAddress(address, id);
+			StringBuffer url = req.getRequestURL();
+			url.append("/" + created.getId());
+			resp.setStatus(201);
+			resp.setHeader("Location", url.toString());
+
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+
+		return created;
+	}
+	
+	@PutMapping("students/{sid}/addresses/{aid}")
+	public StudentAddress updateCompanyNote(@PathVariable("sid") int sid, @PathVariable("aid") int aid,
+			@RequestBody StudentAddress address, HttpServletResponse resp, Principal principal) {
+
+		StudentAddress updated = null;
+		try {
+			updated = serv.updateStudentAddress(address, aid);
+			if (updated != null) {
+				resp.setStatus(200);
+			} else {
+				resp.setStatus(404);
+			}
+		} catch (Exception e) {
+			System.err.println(e);
+			resp.setStatus(400);
+		}
+		return updated;
+	}
+	
+
 	
 	// C O M P A N Y  N O T E S
 	

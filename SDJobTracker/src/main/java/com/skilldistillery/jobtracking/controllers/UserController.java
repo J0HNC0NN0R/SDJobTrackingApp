@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.skilldistillery.jobtracking.entities.User;
 import com.skilldistillery.jobtracking.services.UserService;
 
@@ -31,6 +30,7 @@ public class UserController {
 	public List<User> index(Principal principal) {
 		return serv.index();
 	}
+	
 
 	@GetMapping("users/{id}")
 	public User show(@PathVariable("id") int id, HttpServletResponse resp, Principal principal) {

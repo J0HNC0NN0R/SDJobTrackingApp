@@ -14,7 +14,7 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    console.log('logout');
+    // console.log('logout');
     this.auth.logout();
     if (this.auth.logoutSuccess) {
     }

@@ -1,3 +1,4 @@
+import { JobPost } from './../models/job-post';
 import { Application } from './../models/application';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -74,4 +75,21 @@ export class ApplicationService {
       );
   }
 
+  getJobs() {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.get<JobPost[]>('http://localhost:8095/jobs', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed to get list of jobs');
+        })
+      );
+  }
 }

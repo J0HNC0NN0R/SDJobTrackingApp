@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Address } from 'cluster';
+import { StudentAddress } from '../models/student-address';
 
 @Injectable({
   providedIn: 'root'
@@ -122,7 +122,7 @@ export class StudentService {
       })
     };
 
-    return this.http.put<Address>(this.url + 'students/' + student.id
+    return this.http.put<StudentAddress>(this.url + 'students/' + student.id
       + '/addresses/' + upAddress.id, upAddress, httpOptions)
       .pipe(
         catchError((err: any) => {
@@ -141,7 +141,7 @@ export class StudentService {
       })
     };
 
-    return this.http.post<Address>(this.url + 'students/' + student.id
+    return this.http.post<StudentAddress>(this.url + 'students/' + student.id
       + '/addresses', newAddress, httpOptions)
       .pipe(
         catchError((err: any) => {

@@ -1,9 +1,11 @@
+import { FormsModule, NgForm } from '@angular/forms';
 import { StudentAddress } from './../../models/student-address';
 import { AuthService } from 'src/app/services/auth.service';
 import { Student } from './../../models/student';
 
 import { StudentService } from './../../services/student.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-student-profile',
@@ -18,6 +20,7 @@ export class StudentProfileComponent implements OnInit {
   upAddress: StudentAddress = null;
   newAddress: StudentAddress = null;
   showAddressForm = false;
+
 
 
   constructor(private studentService: StudentService, private authService: AuthService) { }
@@ -76,6 +79,7 @@ updateAddress(){
   this.studentService.updateAddress(this.upAddress, this.editStudent).subscribe(
     data => {
       this.showProfile();
+      this.cancelEditAddress();
     },
     err => {
       console.error('Error updating address' + err);
@@ -89,8 +93,10 @@ this.showAddressForm = true;
 cancelAddressForm(){
   this.showAddressForm = false;
 }
-addAddress(){
-  this.studentService.addAddress(this.newAddress, this.editStudent).subscribe(
+addAddress(form: NgForm ) {
+  console.log(form.value);
+
+  this.studentService.addAddress(form.value, this.editStudent).subscribe(
     data => {
       this.showProfile();
     },

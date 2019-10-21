@@ -26,11 +26,9 @@
     </li>
 
     <br>
-      <button (click)='setEditStudent()'>  Edit Student</button>
+      <button (click)='setEditStudent()'>  Update Personal Information</button>
       <br>
 
-      <!-- <li>Student Address : {{studentProfile.studentAddresses}} </li> -->
-      <!-- <li>Number of Applications : {{studentProfile.applications}} </li> -->
     </ul>
   </div>
 
@@ -57,7 +55,7 @@
           <li> Open to Relocation: <input type="checkbox" name="Open to Relocation"
             [(ngModel)]="upStudent.openToRelocation"></li>
 
-            <button (click)="updateStudent()"> Update Student </button>
+            <button (click)="updateStudent()"> Confirm Update</button>
             <button (click)='cancelEditStudent()'>  Cancel</button>
     </ul>
   </form>
@@ -75,24 +73,24 @@
             <li> <input type="text" name="zipcode" placeholder="Zip Code" [(ngModel)]="upAddress.zipcode"></li>
             <li> <input type="text" name="phone" placeholder="Street" [(ngModel)]="upAddress.phone"></li>
 
-                <button (click)="updateAddress()"> Update Student </button>
+                <button (click)="updateAddress()"> Update Address </button>
                 <button (click)='cancelEditAddress()'>  Cancel</button>
         </ul>
       </form>
     </div>
     <div *ngIf='showAddressForm'>
-        <form>
+        <form #aAddress ="ngForm" id="addAddress">
           <ul>
             <br>
-      new
-            <li> <input type="text" name="addressType" placeholder="Address Type" [(ngModel)]="newAddress.addressType"></li>
-            <li> <input type="text" name="street" placeholder="Street" [(ngModel)]="newAddress.street"></li>
-            <li> <input type="text" name="city" placeholder="City" [(ngModel)]="newAddress.city"></li>
-            <li> <input type="text" name="state" placeholder="State" [(ngModel)]="newAddress.state"></li>
-            <li> <input type="text" name="zipcode" placeholder="Zip Code" [(ngModel)]="newAddress.zipcode"></li>
-            <li> <input type="text" name="phone" placeholder="Street" [(ngModel)]="newAddress.phone"></li>
 
-                <button (click)="addAddress()"> Update Student </button>
+            <li> <input type="text" name="addressType" placeholder="Address Type" ngModel></li>
+            <li> <input type="text" name="street" placeholder="Street" ngModel></li>
+            <li> <input type="text" name="city" placeholder="City" ngModel></li>
+            <li> <input type="text" name="state" placeholder="State" ngModel></li>
+            <li> <input type="text" name="zipcode" placeholder="Zip Code" ngModel></li>
+            <li> <input type="text" name="phone" placeholder="Street" ngModel></li>
+
+                <button (click)="addAddress(aAddress)"> Add Address </button>
                 <button (click)='cancelAddressForm()'>  Cancel</button>
         </ul>
       </form>

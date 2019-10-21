@@ -1,3 +1,4 @@
+import { JobPost } from './../models/job-post';
 import { Application } from './../models/application';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -44,12 +45,50 @@ export class ApplicationService {
 
     console.error(app);
 
-    return this.http.put<Application[]>(this.url + id + '/applications/' + appId, app, httpOptions)
+    return this.http.put<Application>(this.url + id + '/applications/' + appId, app, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
           console.log(app);
           return throwError('Failed update application');
+        })
+      );
+  }
+
+
+  createApp(id: number, app: ApplicationForm) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post<Application>(this.url + id + '/applications', app, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          console.log(app);
+          return throwError('Failed update application');
+        })
+      );
+  }
+
+  getJobs() {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.get<JobPost[]>('http://localhost:8095/jobs', httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed to get list of jobs');
         })
       );
   }

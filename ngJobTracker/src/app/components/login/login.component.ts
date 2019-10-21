@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm) {
-    console.log(loginForm.value);
+    // console.log(loginForm.value);
     this.auth
       .login(loginForm.value.username, loginForm.value.password)
       .subscribe(
         data => {
-          console.log('loginComponenent.login(): user logged in.');
+          // console.log('loginComponenent.login(): user logged in.');
         },
         error => {
           console.error('loginComponent.login(): error logging in.');

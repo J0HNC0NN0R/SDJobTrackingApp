@@ -16,7 +16,7 @@ export class AdminProfileComponent implements OnInit {
     this.reload();
   }
   reload() {
-    console.log(this.users);
+    // console.log(this.users);
     this.user.index().subscribe(
       lifeIsGood => {
         // console.log(this.users);

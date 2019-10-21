@@ -24,7 +24,7 @@ export class CohortComponent implements OnInit {
   reload() {
     this.studentService.cohortsIndex().subscribe(
       lifeIsGood => {
-        console.log('Cohorts Loaded');
+        // console.log('Cohorts Loaded');
         this.cohorts = lifeIsGood;
 
       },
@@ -39,7 +39,7 @@ export class CohortComponent implements OnInit {
   deadline(cohort: Cohort) {
     this.date = new Date(cohort.endDate);
     this.date.setDate(this.date.getDate() + 180);
-    console.log(cohort.id + ' : ' + this.date);
+    // console.log(cohort.id + ' : ' + this.date);
     this.daysLeft();
     return this.date;
   }

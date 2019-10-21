@@ -44,7 +44,7 @@ export class ApplicationService {
 
     console.error(app);
 
-    return this.http.put<Application[]>(this.url + id + '/applications/' + appId, app, httpOptions)
+    return this.http.put<Application>(this.url + id + '/applications/' + appId, app, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
@@ -53,4 +53,25 @@ export class ApplicationService {
         })
       );
   }
+
+
+  createApp(id: number, app: ApplicationForm) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post<Application>(this.url + id + '/applications', app, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          console.log(app);
+          return throwError('Failed update application');
+        })
+      );
+  }
+
 }

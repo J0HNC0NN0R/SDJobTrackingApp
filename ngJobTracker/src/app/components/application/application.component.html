@@ -1,4 +1,5 @@
 <div>
+  <button type="button" class="btn btn-success btn-lg btn-block" (click)="openModalForm()">Add Application</button>
   <table class="table table-striped table-hover" >
     <thead class="thead thead-dark">
       <th>Application ID</th>
@@ -7,19 +8,20 @@
       <th>Position</th>
       <th>Job Description</th>
       <th>Interest Level</th>
-      <th>Progress</th>
+      <!-- <th>Progress</th> -->
       <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let app of apps">
         <td>{{ app.id }}</td>
         <td>{{ app.company.name }}</td>
-        <td>{{ app.company.companyLocations[0].city}}, {{ app.company.companyLocations[0].state}}</td>
+        <td>{{ app.company.companyLocations[app.company.companyLocations.length -1].city}},
+           {{ app.company.companyLocations[app.company.companyLocations.length -1].state}}</td>
         <td>{{ app.position}}</td>
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>
-        <td>{{ app.progress | json }}</td>
-        <td><button class='btn btn-secondary' (click)='openModalForm(app)'>Update</button></td>
+        <!-- <td>{{ app.progress | json }}</td> -->
+        <td><button class="btn btn-primary" (click)="openModalForm(app)">Update</button></td>
       </tr>
     </tbody>
   </table>

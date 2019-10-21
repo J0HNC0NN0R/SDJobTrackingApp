@@ -76,10 +76,8 @@ export class ApplicationService {
   }
 
   getJobs() {
-    this.credentials = this.auth.getCredentials();
     const httpOptions = {
       headers: new HttpHeaders({
-        Authorization: `Basic ${this.credentials}`,
         'X-Requested-With': 'XMLHttpRequest'
       })
     };

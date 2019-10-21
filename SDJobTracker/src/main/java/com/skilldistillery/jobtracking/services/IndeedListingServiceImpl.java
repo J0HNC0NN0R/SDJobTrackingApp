@@ -43,7 +43,11 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 				listing.setUrl("https://www.indeed.com" + matcher.group(1));
 				listing.setTitle(matcher.group(2));
 				listing.setLocation(matcher.group(7));
-				listing.setDescription(matcher.group(9));
+				if (matcher.group(8).trim().length() > 10) {
+					listing.setDescription(matcher.group(8));
+				} else {
+					listing.setDescription(matcher.group(9));
+				}
 				
 				if (matcher.group(3).length() <= 1) {
 					listing.setCompany(matcher.group(6));

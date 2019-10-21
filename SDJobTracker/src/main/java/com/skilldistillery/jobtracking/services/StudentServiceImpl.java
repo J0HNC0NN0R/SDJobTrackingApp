@@ -98,6 +98,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student create(Student student, User user, Integer cohortId) {
+		System.err.println("impl: " + student);
 		Student newStudent = null;
 		Cohort newCohort = null;
 		
@@ -127,10 +128,10 @@ public class StudentServiceImpl implements StudentService {
 			actualStudent.setGIBill(student.isGIBill());
 			actualStudent.setVettec(student.isVettec());
 			actualStudent.setEmployed(student.isEmployed());
-			actualStudent.setDeposit_paid(student.isDeposit_paid());
+			actualStudent.setDeposit_paid(student.isDepositPaid());
 			actualStudent.setNeedsLoanerLaptop(student.isNeedsLoanerLaptop());
 			actualStudent.setEducationLevel(student.getEducationLevel());
-			actualStudent.setOpenToRelocation(student.getOpenToRelocation());
+			actualStudent.setOpenToRelocation(student.isOpenToRelocation());
 			actualStudent.setClearance(student.getClearance());
 			actualStudent.setCohort(cohorepo.findById(cohortId).get());
 			

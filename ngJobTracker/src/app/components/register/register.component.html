@@ -1,12 +1,93 @@
-<div>
-<form #registerForm = 'ngForm'>
-  <input type="text" name="email" ngModel placeholder="Email"><br>
-  <input type="text" name="username" ngModel placeholder="Username"><br>
-  <input type="password" name="password" ngModel placeholder="Password"><br>
-  <input type="radio" name="role" value= "USER" ngModel> User <br>
-  <input type="radio" name="role" value= "ADMIN" ngModel> Admin <br>
-  <button (click)="register(registerForm)">Register Account</button>
-  <!-- <option value="volvo">Volvo</option> -->
-
-</form>
+<div class="row">
+  <div class="col-sm-5">
+    <span id="studentRegisterForm">
+      <label>Register New Student</label>
+      <form #studentRegister="ngForm" id="studentRegister">
+        <input
+          type="text"
+          name="cohortId"
+          ngModel
+          placeholder="Cohort Number"
+        /><br />
+        <input type="text" name="firstName" ngModel placeholder="First Name" />
+        <input
+          type="text"
+          name="lastName"
+          ngModel
+          placeholder="Last Name"
+        /><br />
+        <input type="text" name="email" ngModel placeholder="Email Address" /><br>
+        <input
+          type="text"
+          name="educationLevel"
+          ngModel
+          placeholder="Highest Education Lvl"
+        /><br />
+        <label
+          >GI Bill:
+          <input type="checkbox" name="isGIBill" ngModel /> </label><br />
+        <label
+          >VETTEC:
+          <input type="checkbox" name="isVettec"  ngModel /> </label
+        ><br />
+        <label
+          >Accepted into Skill Distillery:
+          <input type="checkbox" name="isAccepted" ngModel /> </label
+        ><br />
+        <label
+          >Deposit Paid:
+          <input type="checkbox" name="depositPaid" ngModel /> </label
+        ><br />
+        <label
+          >Needs Loaner Laptop:
+          <input type="checkbox" name="needsLoanerLaptop" ngModel /> </label
+        ><br />
+        <input
+          type="text"
+          name="githubUsername"
+          ngModel
+          placeholder="Github Username"
+        /><br />
+        <label
+          >Open to Relocation:
+          <input type="checkbox" name="openToRelocation" ngModel /> </label
+        ><br />
+        <input
+          type="text"
+          name="clearance"
+          ngModel
+          placeholder="Clearance Level"
+        /><br />
+        <label
+          >Attained Employment after completing course:
+          <input type="checkbox" name="openToRelocation" ngModel /> </label
+        ><br />
+        <button (click)="registerStudent(studentRegister)">
+          Register Student
+        </button>
+      </form>
+    </span>
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-5">
+    <span id="adminRegisterForm">
+      <label>Register New Admin User</label>
+      <form #adminRegister="ngForm">
+        <input type="text" name="email" ngModel placeholder="Email" /><br />
+        <input
+          type="text"
+          name="username"
+          ngModel
+          placeholder="Username"
+        /><br />
+        <input
+          type="password"
+          name="password"
+          ngModel
+          placeholder="Password"
+        /><br />
+        <button (click)="registerAdmin(adminRegister)">Register Admin</button>
+      </form>
+    </span>
+  </div>
 </div>

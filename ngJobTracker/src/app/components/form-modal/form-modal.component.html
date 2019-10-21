@@ -1,6 +1,7 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Application Update</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="isUpdate">Updte Application</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="!isUpdate">Create Application</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -8,18 +9,35 @@
 
     <div class="modal-body">
       <form #editForm = "ngForm">
-        <input type="text" name="position" placeholder="Position" [(ngModel)]="update.position"><br>
-        <input type="text" name="descriptionURL" placeholder="Job Description URL" [(ngModel)]="update.descriptionURL"><br>
-        <input type="text" name="interestLevel" placeholder="Interest Level" [(ngModel)]="update.interestLevel"><br>
-        <input type="text" name="companyName" placeholder="Company Name" [(ngModel)]="update.companyName"><br>
-        <input type="text" name="siteUrl" placeholder="Company Website" [(ngModel)]="update.siteUrl"><br>
-        <input type="text" name="city" placeholder="City" [(ngModel)]="update.city"><br>
-        <input type="text" name="state" placeholder="State" [(ngModel)]="update.state"><br>
-      </form>
-    </div>
+        <table>
+          <tr>
+            <td>Position:</td><td><input type="text" name="position" [(ngModel)]="update.position"></td>
+          </tr>
+          <tr>
+            <td>Company:</td><td><input type="text" name="companyName" [(ngModel)]="update.companyName"></td>
+          </tr>
+          <tr>
+            <td>Job Description URL:</td><td><input type="text" name="descriptionURL" [(ngModel)]="update.descriptionURL"></td>
+          </tr>
+          <tr>
+           <td>Interest Level:</td><td><input type="number" name="interestLevel" [(ngModel)]="update.interestLevel"></td>
+          </tr>
+          <tr>
+            <td>Company Website:</td><td><input type="text" name="siteUrl" [(ngModel)]="update.siteUrl"></td>
+          </tr>
+          <tr>
+            <td>City:</td><td><input type="text" name="city" [(ngModel)]="update.city"></td>
+          </tr>
+          <tr>
+            <td>State:</td><td><input type="text" name="state" [(ngModel)]="update.state"></td>
+          </tr>
+        </table>
+    </form>
+  </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); updateApp(editForm)">Save</button>
+      <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click'); updateApp(editForm)" *ngIf="isUpdate">Save</button>
+      <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click'); createApp()" *ngIf="!isUpdate">Add</button>
     </div>
 
 </ng-template>

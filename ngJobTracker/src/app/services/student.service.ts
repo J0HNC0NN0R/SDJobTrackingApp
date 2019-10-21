@@ -1,12 +1,10 @@
 import { Student } from 'src/app/models/student';
 import { Cohort } from './../models/cohort';
 import { AuthService } from 'src/app/services/auth.service';
-import { environment } from './../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Application } from '../models/application';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +16,25 @@ export class StudentService {
   private student: Student = null;
 
   constructor(private auth: AuthService, private http: HttpClient) { }
+
+  registerStudent(student, cid) {
+    console.log(student);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post(this.url + 'cohorts/' + cid + '/students', student, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Student service.registerStudent(); error registering student ');
+      })
+    );
+  }
 
   cohortsIndex() {
     // console.log('its Reaching cohortsIndex()!');

@@ -23,8 +23,8 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 	public List<IndeedListing> getJobs(String keyword, String city, String state) {
 		List<IndeedListing> jobs = new ArrayList<>();
 		HttpClient client = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet("https://www.indeed.com/jobs?q=" + keyword + "&l=" + city + ",+" + state + "&start=20");
-		String regex = "<div class=\"title\">.+?href=\"([^\"]+).+?title=\"([^\"]+).+?<span class=\"company\">\\s+([^<]+).+?((href=\\\"\\\\/cmp\\\\/)?cmp\\/([^\"]+)|data-rc).+?loc=\"([^\"]+).+?<div class=\"summary\">\\s+([^<]+)";
+		HttpGet request = new HttpGet("https://www.indeed.com/jobs?q=" + keyword + "&l=" + city + "%2C+" + state + "&start=20");
+		String regex = "<div class=\"title\">.+?href=\"([^\"]+).+?title=\"([^\"]+).+?<span class=\"company\">\\s+([^<]+).+?((href=\\\"\\\\/cmp\\\\/)?cmp\\/([^\"]+)|data-rc).+?loc=\"([^\"]+).+?<div class=\"summary\">\\s+([^<]+).+?>.+?>([^<]+)";
 		try {
 			HttpResponse response = client.execute(request);
 			HttpEntity entity = response.getEntity();
@@ -40,10 +40,10 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 			    for (int i = 1; i <= matcher.groupCount(); i++) {
 			        System.out.println("Group " + i + ": " + matcher.group(i));
 			    }
-				listing.setUrl(matcher.group(1));
+				listing.setUrl("https://www.indeed.com" + matcher.group(1));
 				listing.setTitle(matcher.group(2));
 				listing.setLocation(matcher.group(7));
-				listing.setDescription(matcher.group(8));
+				listing.setDescription(matcher.group(9));
 				
 				if (matcher.group(3).length() <= 1) {
 					listing.setCompany(matcher.group(6));
@@ -53,6 +53,7 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 
 				jobs.add(listing);
 			}
+			System.err.println(jobs);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

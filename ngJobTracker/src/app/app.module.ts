@@ -25,6 +25,7 @@ import { FormModalComponent } from './components/form-modal/form-modal.component
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CohortComponent } from './components/cohort/cohort.component';
+import { JobListingComponent } from './components/job-listing/job-listing.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CohortComponent } from './components/cohort/cohort.component';
     StatisticsComponent,
     ApplicationStatusComponent,
     FormModalComponent,
-    CohortComponent
+    CohortComponent,
+    JobListingComponent
 
   ],
   imports: [

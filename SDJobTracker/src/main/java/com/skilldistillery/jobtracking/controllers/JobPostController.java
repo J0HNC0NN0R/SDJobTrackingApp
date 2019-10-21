@@ -13,7 +13,7 @@ import com.skilldistillery.jobtracking.services.IndeedListingService;
 
 
 @RestController
-@CrossOrigin({ "*", "http:localhost:4201" })
+@CrossOrigin({ "*", "http:localhost:6969" })
 public class JobPostController {
 	@Autowired
 	private IndeedListingService serv;

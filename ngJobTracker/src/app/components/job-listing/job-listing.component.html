@@ -9,6 +9,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let job of jobList" id="{{ job.url }}" onclick="window.open(this.id)">
+
           <td>{{ job.title }}</td>
           <td>{{ job.company }}</td>
           <td>{{ job.location }}</td>

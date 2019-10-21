@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Address } from 'cluster';
 
 @Injectable({
   providedIn: 'root'
@@ -111,6 +112,43 @@ export class StudentService {
       );
 
 
+  }
+  updateAddress(upAddress, student){
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.put<Address>(this.url + 'students/' + student.id
+      + '/addresses/' + upAddress.id, upAddress, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed update student');
+        })
+      );
+  }
+
+  addAddress(newAddress, student){
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post<Address>(this.url + 'students/' + student.id
+      + '/addresses', newAddress, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed update student');
+        })
+      );
   }
 
 }

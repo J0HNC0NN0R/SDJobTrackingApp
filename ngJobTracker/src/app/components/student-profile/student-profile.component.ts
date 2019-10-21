@@ -1,3 +1,4 @@
+import { StudentAddress } from './../../models/student-address';
 import { AuthService } from 'src/app/services/auth.service';
 import { Student } from './../../models/student';
 
@@ -14,6 +15,10 @@ export class StudentProfileComponent implements OnInit {
   studentProfile: Student = null;
   editStudent: Student = null;
   upStudent: Student = null;
+  upAddress: StudentAddress = null;
+  newAddress: StudentAddress = null;
+  showAddressForm = false;
+
 
   constructor(private studentService: StudentService, private authService: AuthService) { }
 
@@ -21,6 +26,8 @@ export class StudentProfileComponent implements OnInit {
     this.reload();
     this.editStudent = this.studentProfile;
   }
+
+
 
   updateStudent() {
     console.log('edit student' + this.upStudent);
@@ -49,14 +56,49 @@ cancelEditStudent(){
     this.studentService.getStudentByUsername().subscribe(
       data => {
         this.editStudent = data;
-
       },
       err => {
         console.error('Error in getStudent ' + err);
       }
-
     );
-
   }
+  cancelEditAddress(){
+    this.upAddress = null;
+  }
+  setAddress(id){
+    for (let i = 0; i < this.editStudent.address.length; i++) {
+      if (this.editStudent.address[i].id = id) {
+      this.upAddress = this.editStudent.address[i];
+      }
+    }
+  }
+updateAddress(){
+  this.studentService.updateAddress(this.upAddress, this.editStudent).subscribe(
+    data => {
+      this.showProfile();
+    },
+    err => {
+      console.error('Error updating address' + err);
+
+    }
+  );
+}
+addressForm(){
+this.showAddressForm = true;
+}
+cancelAddressForm(){
+  this.showAddressForm = false;
+}
+addAddress(){
+  this.studentService.addAddress(this.newAddress, this.editStudent).subscribe(
+    data => {
+      this.showProfile();
+    },
+    err => {
+      console.error('Error adding address' + err);
+
+    }
+  );
+}
 
 }

@@ -13,7 +13,7 @@ export class StudentProfileComponent implements OnInit {
 
   studentProfile: Student = null;
   editStudent: Student = null;
-  student: Student = null;
+  upStudent: Student = null;
 
   constructor(private studentService: StudentService, private authService: AuthService) { }
 
@@ -22,10 +22,10 @@ export class StudentProfileComponent implements OnInit {
     this.editStudent = this.studentProfile;
   }
 
-  updateStudent(editStudent) {
-    console.log('edit student' + editStudent);
+  updateStudent() {
+    console.log('edit student' + this.upStudent);
 
-    this.studentService.update(editStudent).subscribe(
+    this.studentService.update(this.upStudent).subscribe(
       data => {
         this.showProfile();
       },
@@ -39,7 +39,12 @@ export class StudentProfileComponent implements OnInit {
   reload() {
     this.showProfile();
   }
-
+setEditStudent(){
+this.upStudent = Object.assign({}, this .editStudent);
+}
+cancelEditStudent(){
+  this.upStudent = null;
+}
   showProfile() {
     this.studentService.getStudentByUsername().subscribe(
       data => {

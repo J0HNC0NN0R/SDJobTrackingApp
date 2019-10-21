@@ -37,13 +37,13 @@ public class Student {
 	@Column(name = "is_accepted")
 	private boolean isAccepted;
 	@Column(name = "deposit_paid")
-	private boolean deposit_paid;
+	private boolean depositPaid;
 	@Column(name = "needs_loaner_laptop")
 	private boolean needsLoanerLaptop;
 	@Column(name = "education_level")
 	private String educationLevel;
 	@Column(name = "open_to_relocation")
-	private String openToRelocation;
+	private boolean openToRelocation;
 	private String clearance;
 	@OneToMany(mappedBy = "student")
 	@JsonIgnore
@@ -66,16 +66,12 @@ public class Student {
 	public Student() {
 
 	}
-
-	
-
-	public Student(int id, String firstName, String lastName, String email, String githubUsername, boolean isVettec,
-			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean deposit_paid, boolean needsLoanerLaptop,
-			String educationLevel, String openToRelocation, String clearance, List<Application> applications,
+	public Student(String firstName, String lastName, String email, String githubUsername, boolean isVettec,
+			boolean isGIBill, boolean isEmployed, boolean isAccepted, boolean depositPaid, boolean needsLoanerLaptop,
+			String educationLevel, boolean openToRelocation, String clearance, List<Application> applications,
 			Cohort cohort, User user, List<CompanyNote> companyNotes,
 			List<StudentDesiredLocation> studentDesiredLocations, List<Event> events, List<StudentAddress> address) {
 		super();
-		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -84,7 +80,7 @@ public class Student {
 		this.isGIBill = isGIBill;
 		this.isEmployed = isEmployed;
 		this.isAccepted = isAccepted;
-		this.deposit_paid = deposit_paid;
+		this.depositPaid = depositPaid;
 		this.needsLoanerLaptop = needsLoanerLaptop;
 		this.educationLevel = educationLevel;
 		this.openToRelocation = openToRelocation;
@@ -98,11 +94,6 @@ public class Student {
 		this.address = address;
 	}
 
-	public Student(int id) {
-		super();
-		this.id = id;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -110,8 +101,6 @@ public class Student {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -178,11 +167,11 @@ public class Student {
 	}
 
 	public boolean isDeposit_paid() {
-		return deposit_paid;
+		return depositPaid;
 	}
 
-	public void setDeposit_paid(boolean deposit_paid) {
-		this.deposit_paid = deposit_paid;
+	public void setDeposit_paid(boolean depositPaid) {
+		this.depositPaid = depositPaid;
 	}
 
 	public boolean isNeedsLoanerLaptop() {
@@ -201,11 +190,11 @@ public class Student {
 		this.educationLevel = educationLevel;
 	}
 
-	public String getOpenToRelocation() {
+	public boolean isOpenToRelocation() {
 		return openToRelocation;
 	}
 
-	public void setOpenToRelocation(String openToRelocation) {
+	public void setOpenToRelocation(boolean openToRelocation) {
 		this.openToRelocation = openToRelocation;
 	}
 
@@ -223,6 +212,30 @@ public class Student {
 
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
+	}
+
+	public Cohort getCohort() {
+		return cohort;
+	}
+
+	public void setCohort(Cohort cohort) {
+		this.cohort = cohort;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<CompanyNote> getCompanyNotes() {
+		return companyNotes;
+	}
+
+	public void setCompanyNotes(List<CompanyNote> companyNotes) {
+		this.companyNotes = companyNotes;
 	}
 
 	public List<StudentDesiredLocation> getStudentDesiredLocations() {
@@ -247,38 +260,6 @@ public class Student {
 
 	public void setAddress(List<StudentAddress> address) {
 		this.address = address;
-	}
-
-	public Cohort getCohort() {
-		return cohort;
-	}
-
-	public void setCohort(Cohort cohort) {
-		this.cohort = cohort;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	public List<CompanyNote> getCompanyNotes() {
-		return companyNotes;
-	}
-
-	public void setCompanyNotes(List<CompanyNote> companyNotes) {
-		this.companyNotes = companyNotes;
 	}
 
 	@Override
@@ -318,8 +299,8 @@ public class Student {
 		builder.append(isEmployed);
 		builder.append(", isAccepted=");
 		builder.append(isAccepted);
-		builder.append(", deposit_paid=");
-		builder.append(deposit_paid);
+		builder.append(", depositPaid=");
+		builder.append(depositPaid);
 		builder.append(", needsLoanerLaptop=");
 		builder.append(needsLoanerLaptop);
 		builder.append(", educationLevel=");
@@ -345,5 +326,7 @@ public class Student {
 		builder.append("]");
 		return builder.toString();
 	}
+
+	
 
 }

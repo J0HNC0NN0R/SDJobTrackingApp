@@ -1,0 +1,11 @@
+.current {
+  background-color: green;
+}
+
+.todo {
+  background-color: darkgray;
+}
+
+.lowCount {
+  background-color: lightcoral;
+}

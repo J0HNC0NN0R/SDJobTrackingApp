@@ -72,6 +72,22 @@ export class StudentService {
       );
   }
 
+  addCohort(cohort: Cohort) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.post(this.url + 'cohorts/', cohort, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Student Service addCohort(); error adding cohort ');
+      })
+    );
+  }
+
   getStudentsByCohort(cohort: Cohort) {
 
     const httpOptions = {

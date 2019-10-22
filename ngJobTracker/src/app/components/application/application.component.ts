@@ -75,7 +75,8 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     const state: string = app.progress[0].state;
 
 
-    for(var k = 0; k < this.progress.length; k++) {
+    // tslint:disable-next-line: no-var-keyword
+    for (var k = 0; k < this.progress.length; k++) {
       if (this.progress[k] === state) {
         break;
       }

@@ -17,12 +17,13 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   url: string;
   student: Student;
   appId: number;
-  // progress: ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
+  progress: string[];
 
   constructor(private appService: ApplicationService, private stuService: StudentService) { }
     @ViewChild(FormModalComponent, {static: false}) formComp;
 
     ngOnInit() {
+      this.progress = ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
       this.stuService.getStudentByUsername().subscribe(
         data => {
         this.student = data;
@@ -39,6 +40,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
     refreshApps() {
       this.appService.index(this.student.id).subscribe(
       data => {
+        this.apps = [];
         data.forEach(app => {
           const newApp: Application = new Application(app.id, app.userId, app.companyId, app.position,
             app.descriptionURL, app.interestLevel, app.progress, app.company);
@@ -68,9 +70,34 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
   }
 
 
-  setProgress(app: Application) {
-    app.progress.forEach(prog => {
+  setProgress(prog: string, app: Application) {
+    console.log(prog);
+    const newProg: Progress = new Progress();
+    newProg.updated = new Date();
+    const state: string = app.progress[0].state;
 
-    });
+
+    for(var k = 0; k < this.progress.length; k++) {
+      if (this.progress[k] === state) {
+        break;
+      }
+    }
+    console.log(this.progress[k]);
+    if (prog !== 'x' && prog !== this.progress[k]) {
+      newProg.state = this.progress[k - 1];
+    } else if (prog === 'x') {
+      newProg.state = this.progress[k + 1];
+    } else {
+      newProg.state = this.progress[k];
+    }
+
+    console.log(newProg);
+    this.appService.createProgress(this.student.id, app.id, newProg).subscribe(
+      data => {
+        this.refreshApps();
+      },
+
+      err => console.error('Fetch application err: ' + err)
+      );
   }
 }

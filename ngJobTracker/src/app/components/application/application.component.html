@@ -22,7 +22,7 @@
         <td>{{ app.position}}</td>
         <td>{{ app.descriptionURL}}</td>
         <td>{{ app.interestLevel}}</td>
-        <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" (click)=setProgress(app)> {{ prog.updated }} </td>
+        <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" (click)="setProgress(prog, app)"> </td>
         <td><button class="btn btn-primary" (click)="openModalForm(app)">Update</button></td>
       </tr>
     </tbody>

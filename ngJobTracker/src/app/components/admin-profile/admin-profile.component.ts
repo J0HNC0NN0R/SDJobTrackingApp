@@ -39,9 +39,18 @@ export class AdminProfileComponent implements OnInit {
 
   toggleEnable(user) {
     // console.log(user.enabled);
-    // user.enabled = !user.enabled;
+    user.enabled = !user.enabled;
     // console.log(user.enabled);
-    this.user.delete(user.id);
+
+
+    this.user.update(user).subscribe(
+      data => {
+        this.reload();
+      },
+      err => {
+        console.error('Error updating username and password' + err);
+      }
+    );
     // console.log(blah);
     // this.reload();
   }

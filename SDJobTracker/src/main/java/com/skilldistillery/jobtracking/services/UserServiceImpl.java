@@ -60,6 +60,7 @@ Optional<User> use = userrepo.findById(id);
 			 updateUser = use.get();
 			updateUser.setPassword(encoder.encode(user.getPassword()));
 			updateUser.setUsername(user.getUsername());
+			updateUser.setEnabled(user.isEnabled());
 			userrepo.saveAndFlush(updateUser);
 		}
 		

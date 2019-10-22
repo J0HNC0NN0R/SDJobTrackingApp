@@ -25,7 +25,7 @@ export class StudentProfileComponent implements OnInit {
   showAddressForm = false;
   setUser: User = null;
   updateUser: User = null;
-
+  mainAddress: StudentAddress = null;
 
 
   constructor(private studentService: StudentService, private authService: AuthService, private userService: UserService) { }
@@ -33,6 +33,9 @@ export class StudentProfileComponent implements OnInit {
   ngOnInit() {
     this.reload();
     this.editStudent = this.studentProfile;
+
+    console.log(this.editStudent);
+
   }
 
   updateStudent() {
@@ -64,7 +67,7 @@ cancelEditStudent() {
     this.studentService.getStudentByUsername().subscribe(
       data => {
         this.editStudent = data;
-
+        this.mainAddress = this.editStudent.address[0];
       },
       err => {
         console.error('Error in getStudent ' + err);
@@ -115,6 +118,9 @@ addAddress(form: NgForm ) {
 }
 setEditUserName() {
 this.setUser = this.editStudent.user;
+}
+cancelPassForm(){
+  this.setUser = null;
 }
 
 updateUserPass(form: NgForm) {

@@ -5,6 +5,8 @@ import { Student } from './../../models/student';
 
 import { StudentService } from './../../services/student.service';
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -20,10 +22,12 @@ export class StudentProfileComponent implements OnInit {
   upAddress: StudentAddress = null;
   newAddress: StudentAddress = null;
   showAddressForm = false;
+  setUser: User = null;
+  updateUser: User = null;
 
 
 
-  constructor(private studentService: StudentService, private authService: AuthService) { }
+  constructor(private studentService: StudentService, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit() {
     this.reload();
@@ -68,14 +72,14 @@ cancelEditStudent(){
   cancelEditAddress(){
     this.upAddress = null;
   }
-  setAddress(id){
+  setAddress(id) {
     for (let i = 0; i < this.editStudent.address.length; i++) {
       if (this.editStudent.address[i].id === id) {
       this.upAddress = this.editStudent.address[i];
       }
     }
   }
-updateAddress(){
+updateAddress() {
   this.studentService.updateAddress(this.upAddress, this.editStudent).subscribe(
     data => {
       this.showProfile();
@@ -105,6 +109,30 @@ addAddress(form: NgForm ) {
 
     }
   );
+}
+setEditUserName() {
+this.setUser = this.editStudent.user;
+}
+
+updateUserPass(form: NgForm) {
+  console.log(form.value);
+
+  this.updateUser = form.value;
+
+  this.setUser.username = this.updateUser.username;
+  this.setUser.password = this.updateUser.password;
+  console.log(this.setUser.username);
+  console.log(this.setUser.id);
+
+  this.userService.update(this.setUser).subscribe(
+  data => {
+    this.showProfile();
+  },
+  err => {
+    console.error('Error updating username and password' + err);
+  }
+);
+
 }
 
 }

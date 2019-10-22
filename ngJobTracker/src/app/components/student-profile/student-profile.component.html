@@ -23,16 +23,26 @@
     <br>
       <button (click)='setEditStudent()'>  Update Personal Information</button>
       <br>
+      <button (click)='setEditUserName()'>  Update Password/Username</button>
+      <br>
     </ul>
   </div>
 
   <br>
+<div *ngIf='setUser'>
+  <form #addPass ="ngForm" id="userPass">
 
+      <li> <input type="text" name="username" placeholder="UserName" ngModel></li>
+      <li> <input type="text" name="password" placeholder="Password" ngModel></li>
+    <button (click)="updateUserPass(addPass)"> Update Password and Username </button>
+    <button (click)='cancelAddressForm()'>  Cancel</button>
+  </form>
+</div>
   <div *ngIf='upStudent'>
     <form>
       <ul>
         <br>
-        <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li>
+        <!-- <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li> -->
         <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
         <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="upStudent.lastName"></li>
         <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="upStudent.email"></li>

@@ -25,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
 			//business decision to set enabled
 			user.setEnabled(true);
 		// set role field to standard
-			user.setRole(user.getRole());
+			user.setRole("ADMIN");
 			
 			userrepo.saveAndFlush(user);
 			

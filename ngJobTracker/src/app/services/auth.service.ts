@@ -52,7 +52,7 @@ export class AuthService {
     .pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Student service.register(): error registering admin.');
+        return throwError('Auth service.register(): error registering admin.');
       })
     );
   }

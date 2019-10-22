@@ -1,31 +1,28 @@
+
 <div *ngIf="editStudent">
-  <ul>
-    <!-- <li> Id : {{editStudent.id}} </li> -->
-    <li> Name : {{editStudent.firstName}} {{editStudent.lastName}}</li>
-    <li> Github : {{editStudent.githubUsername}} </li>
-    <li> Cohort : {{editStudent.cohort.id}} </li>
-    <li> Email : {{editStudent.email}} </li>
-    <li> Accepted : {{editStudent.accepted}} </li>
-    <li> Employed : {{editStudent.employed}} </li>
-    <li> Deposit Paid : {{editStudent.depositPaid}} </li>
-    <li> GI Bill : {{editStudent.gibill}} </li>
-    <li> VETTEC : {{editStudent.vettec}} </li>
-    <li> Needs Loaner : {{editStudent.needsLoanerLaptop}} </li>
-    <li> Open to Relocation : {{editStudent.openToRelocation}} </li>
-    <li>
-      Address   <button (click)='addressForm()'>  Add New Address</button>
-    </li>
-    <li *ngFor='let address of editStudent.address'>
-       {{address.addressType}} :
-       {{address.street}} ,
-       {{address.city}} , {{address.state}} {{address.zipcode}}   <button (click)='setAddress(address.id)'>  Update </button>
-    </li>
-    <br>
-      <button (click)='setEditStudent()'>  Update Personal Information</button>
-      <br>
-      <button (click)='setEditUserName()'>  Update Password/Username</button>
-      <br>
-    </ul>
+<!-- test -->
+<div class="container">
+    <div class="row">
+      <div class="col-4">
+        <table>
+          <tr>
+            <td><h4>{{editStudent.firstName}} {{editStudent.lastName}}</h4></td>
+
+          </tr>
+          <tr><td> {{mainAddress.city}}, {{mainAddress.state}} </td></tr>
+          <tr><td> <button (click)='addressForm()'>  Add New Address</button></td></tr>
+<tr><td> Github : {{editStudent.githubUsername}}</td></tr>
+<tr><td> Email : {{editStudent.email}}</td></tr>
+<tr><td><button (click)='setEditStudent()'>  Update Personal Information</button></td></tr>
+<tr><td> <button (click)='setEditUserName()'>  Update Password/Username</button></td></tr>
+        </table>
+
+      </div>
+      <div class="col-8">
+        Column 2
+      </div>
+    </div>
+  </div>
   </div>
 
   <br>
@@ -35,7 +32,7 @@
       <li> <input type="text" name="username" placeholder="UserName" ngModel></li>
       <li> <input type="text" name="password" placeholder="Password" ngModel></li>
     <button (click)="updateUserPass(addPass)"> Update Password and Username </button>
-    <button (click)='cancelAddressForm()'>  Cancel</button>
+    <button (click)='cancelPassForm()'>  Cancel</button>
   </form>
 </div>
   <div *ngIf='upStudent'>
@@ -75,7 +72,7 @@
             <li> <input type="text" name="city" placeholder="City" [(ngModel)]="upAddress.city"></li>
             <li> <input type="text" name="state" placeholder="State" [(ngModel)]="upAddress.state"></li>
             <li> <input type="text" name="zipcode" placeholder="Zip Code" [(ngModel)]="upAddress.zipcode"></li>
-            <li> <input type="text" name="phone" placeholder="Street" [(ngModel)]="upAddress.phone"></li>
+            <li> <input type="text" name="phone" placeholder="Phone" [(ngModel)]="upAddress.phone"></li>
 
                 <button (click)="updateAddress()"> Update Address </button>
                 <button (click)='cancelEditAddress()'>  Cancel</button>

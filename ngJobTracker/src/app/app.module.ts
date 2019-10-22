@@ -15,11 +15,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { AdminProfileComponent } from './components/admin-profile/admin-profile.component';
 import { ApplicationComponent } from './components/application/application.component';
-import { CohortCreateComponent } from './components/cohort-create/cohort-create.component';
 import { CohortProfileComponent } from './components/cohort-profile/cohort-profile.component';
 import { MessagingComponent } from './components/messaging/messaging.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
+import { ChartsModule } from 'ng2-charts';
 
 import { FormModalComponent } from './components/form-modal/form-modal.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -39,7 +39,6 @@ import { JobListingComponent } from './components/job-listing/job-listing.compon
     StudentProfileComponent,
     AdminProfileComponent,
     ApplicationComponent,
-    CohortCreateComponent,
     CohortProfileComponent,
     MessagingComponent,
     StatisticsComponent,
@@ -54,7 +53,9 @@ import { JobListingComponent } from './components/job-listing/job-listing.compon
     AppRoutingModule,
     FormsModule,
     NgbModalModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
+
   ],
   exports: [
     FormModalComponent

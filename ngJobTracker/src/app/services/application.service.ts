@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ApplicationForm } from '../models/application-form';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

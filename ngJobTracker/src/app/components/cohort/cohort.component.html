@@ -1,4 +1,26 @@
 <div name='cohortsDiv'>
+    <span>
+        <button (click)="showAddForm = !showAddForm">Add New Cohort</button>
+      </span>
+      <span *ngIf="showAddForm">
+        <label>Create New Cohort</label>
+        <form #cohort="ngForm" id="cohortCreate">
+          <input type="number" name="id" ngModel placeholder="Cohort Number" /><br />
+          <input type="text" name="name" ngModel placeholder="Cohort Name" /><br />
+
+          <input
+            type="date"
+            name="startDate"
+            ngModel
+            placeholder="Start Date"
+          /><label>Begin</label><br />
+          <input type="date" name="endDate" ngModel placeholder="End Date" /><label
+            >End</label
+          ><br />
+
+          <button (click)="createCohort(cohort)">Create Cohort</button>
+        </form></span
+      >
   <table class='table table-striped table-bordered table-sm'>
     <thead class='thead-dark'>
       <tr>
@@ -12,7 +34,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor='let cohort of cohorts' (click)='listStudents(cohort)'>
+      <tr *ngFor='let cohort of cohorts' (click)='listStudents(cohort)' class="table table-hover">
         <td> {{ cohort.id }} </td>
         <td> {{ cohort.startDate | date }}</td>
         <td> {{ cohort.endDate | date }}</td>
@@ -29,13 +51,15 @@
         <th> First Name </th>
         <th> Last Name </th>
         <th> Email </th>
+        <th> 7 Day App Count</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let student of students' >
-        <td (click)='showProfile(student.id)'> {{ student.firstName }}</td>
+      <tr *ngFor='let student of students' (click)='showProfile(student.id)' >
+        <td> {{ student.firstName }}</td>
         <td> {{ student.lastName }}</td>
         <td> {{ student.email }}</td>
+        <td [ngClass]="student.progCheck < 50 ? 'lowCount' : 'meetsStandards'">{{ student.progCheck }}</td>
       </tr>
     </tbody>
 

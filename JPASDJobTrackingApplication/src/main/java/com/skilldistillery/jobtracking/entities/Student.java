@@ -46,7 +46,7 @@ public class Student {
 	private boolean openToRelocation;
 	private String clearance;
 	@OneToMany(mappedBy = "student")
-	@JsonIgnore
+//	@JsonIgnore
 	private List<Application> applications;
 	@ManyToOne
 	@JoinColumn(name = "cohort_id")

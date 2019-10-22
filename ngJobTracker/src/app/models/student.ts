@@ -23,6 +23,8 @@ export class Student {
   clearance: string;
   events: Event[];
   address: StudentAddress[];
+  applications: Application[];
+  progCheck;
 
   constructor(
     id?: number,
@@ -43,7 +45,8 @@ export class Student {
     openToRelocation?: boolean,
     clearance?: string,
     events?: Event[],
-    address?: StudentAddress[]
+    address?: StudentAddress[],
+    applications?: Application[]
   ) {
     this.id = id;
     this.cohort = cohort;
@@ -64,5 +67,25 @@ export class Student {
     this.clearance = clearance;
     this.events = events;
     this.address = address;
+    this.applications = applications;
+    this.progCheck = this.setAppProgress();
   }
+
+  setAppProgress() {
+    const today = new Date();
+    // @ts-ignore
+    const todayM = Date.parse(today);
+    const weekM = todayM - 604800000;
+    let appCount = 0;
+
+    this.applications.forEach(app => {
+    // @ts-ignore
+      const appDate = Date.parse(app.progress[0].updated);
+      if (appDate >= weekM) {
+       appCount++;
+      }
+    });
+    return appCount;
+  }
+
 }

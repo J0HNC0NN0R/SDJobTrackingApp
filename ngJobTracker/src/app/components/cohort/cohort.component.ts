@@ -89,11 +89,19 @@ export class CohortComponent implements OnInit {
   listStudents(cohort) {
     // var listOfStudents[] = [];
     this.studentService.getStudentsByCohort(cohort).subscribe(
-      lifeIsGood => {
+      data => {
         console.log('Cohorts Loaded');
 
-        this.students = lifeIsGood;
+        // this.students = lifeIsGood;
         this.setCohort = cohort;
+        this.students = [];
+        data.forEach(app => {
+          const stu = new Student(app.id, app.cohort, app.cohortId, app.user, app.firstName, app.lastName,
+            app.email, app.githubUsername, app.vettec, app.gibill, app.employed, app.accepted,
+            app.depositPaid, app.needsLoanerLaptop, app.educationLevel, app.openToRelocation, app.clearance,
+            app.events, app.address, app.applications);
+          this.students.push(stu);
+        });
         this.clearProfile();
 
       },

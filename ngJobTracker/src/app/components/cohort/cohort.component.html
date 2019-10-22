@@ -51,6 +51,7 @@
         <th> First Name </th>
         <th> Last Name </th>
         <th> Email </th>
+        <th> 7 Day App Count</th>
       </tr>
     </thead>
     <tbody>
@@ -58,6 +59,7 @@
         <td> {{ student.firstName }}</td>
         <td> {{ student.lastName }}</td>
         <td> {{ student.email }}</td>
+        <td [ngClass]="student.progCheck < 50 ? 'lowCount' : 'meetsStandards'">{{ student.progCheck }}</td>
       </tr>
     </tbody>
 

@@ -21,10 +21,12 @@ export class CohortComponent implements OnInit {
   upStudent: Student = null;
   apps: Application[] = [];
   setCohort: Cohort = null;
+  progress: string[];
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }
 
   ngOnInit() {
+    this.progress = ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
     this.reload();
   }
 
@@ -74,6 +76,7 @@ export class CohortComponent implements OnInit {
 
         this.students = lifeIsGood;
         this.setCohort = cohort;
+        this.clearProfile();
 
       },
       whenThingsGoBad => {
@@ -107,7 +110,12 @@ this.showStudent = null;
   refreshApps(student) {
     this.appService.index(student.id).subscribe(
     data => {
-      this.apps = data;
+      this.apps = [];
+      data.forEach(app => {
+        const newApp: Application = new Application(app.id, app.userId, app.companyId, app.position,
+          app.descriptionURL, app.interestLevel, app.progress, app.company);
+        this.apps.push(newApp);
+      });
     },
 
     err => console.error('Fetch application err: ' + err)

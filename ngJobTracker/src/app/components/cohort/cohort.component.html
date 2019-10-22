@@ -79,7 +79,7 @@
     <form>
       <ul>
         <br>
-        <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li>
+        <!-- <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li> -->
         <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
         <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="upStudent.lastName"></li>
         <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="upStudent.email"></li>
@@ -116,6 +116,11 @@
         <th>Position</th>
         <th>Job Description</th>
         <th>Interest Level</th>
+            <th>Applied</th>
+        <th>Phone/Video</th>
+        <th>In-Person</th>
+        <th>Offer</th>
+        <th>Accepted</th>
         <!-- <th>Progress</th> -->
         <th></th>
       </thead>
@@ -128,6 +133,7 @@
           <td>{{ app.position}}</td>
           <td>{{ app.descriptionURL}}</td>
           <td>{{ app.interestLevel}}</td>
+          <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" > </td>
           <!-- <td>{{ app.progress | json }}</td> -->
         </tr>
       </tbody>

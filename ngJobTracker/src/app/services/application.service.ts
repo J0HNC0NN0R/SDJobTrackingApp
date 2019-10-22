@@ -1,3 +1,4 @@
+import { Progress } from './../models/progress';
 import { JobPost } from './../models/job-post';
 import { Application } from './../models/application';
 import { AuthService } from 'src/app/services/auth.service';
@@ -43,14 +44,11 @@ export class ApplicationService {
       })
     };
 
-    console.error(app);
-
     return this.http.put<Application>(this.url + id + '/applications/' + appId, app, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          console.log(app);
-          return throwError('Failed update application');
+          return throwError('Failed to update application');
         })
       );
   }
@@ -69,8 +67,7 @@ export class ApplicationService {
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          console.log(app);
-          return throwError('Failed update application');
+          return throwError('Failed to update application');
         })
       );
   }
@@ -89,5 +86,24 @@ export class ApplicationService {
           return throwError('Failed to get list of jobs');
         })
       );
+  }
+
+  createProgress(sid: number, aid: number, progress: Progress) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+
+    return this.http.post<Application>(this.url + sid + '/applications/' + aid + '/progress', progress, httpOptions)
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError('Failed to create progress');
+        })
+      );
+
   }
 }

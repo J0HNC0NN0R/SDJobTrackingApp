@@ -25,6 +25,14 @@ public class Progress {
 	@Column(name = "updated")
 	private LocalDateTime updated;
 
+
+	public Progress(Application application, String state, LocalDateTime updated) {
+		super();
+		this.application = application;
+		State = state;
+		this.updated = updated;
+	}
+
 	public Progress(int id, Application applicationId, String state, LocalDateTime updated) {
 		super();
 		this.id = id;

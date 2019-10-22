@@ -1,1 +1,36 @@
-<p>cohort-create works!</p>
+<div>
+  <button (click)="showAddForm = !showAddForm">Add New Cohort</button>
+  <button (click)="showEditForm = !showEditForm">Edit Cohort</button>
+</div>
+<span *ngIf="showAddForm">
+  <label>Create New Cohort</label>
+  <form #cohort="ngForm" id="cohortCreate">
+    <input type="number" name="id" ngModel placeholder="Cohort Number" /><br />
+    <input type="text" name="name" ngModel placeholder="Cohort Name" /><br />
+
+    <input
+      type="date"
+      name="startDate"
+      ngModel
+      placeholder="Start Date"
+    /><label>Begin</label><br />
+    <input type="date" name="endDate" ngModel placeholder="End Date" /><label
+      >End</label
+    ><br />
+
+    <button (click)="createCohort(cohort)">Create Cohort</button>
+  </form>
+</span>
+<span *ngIf="showEditForm" class="dropdown">
+    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Cohorts
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" *ngFor="let cohort of cohorts">
+      <li>dumb</li>
+    </ul>
+
+  <form #cohort="ngForm" id="cohortCreate">
+
+
+    <button (click)="createCohort(cohort)">Edit Cohort</button>
+  </form>
+</span>

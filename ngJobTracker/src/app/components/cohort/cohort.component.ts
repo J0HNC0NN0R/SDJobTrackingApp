@@ -5,6 +5,7 @@ import { Cohort } from './../../models/cohort';
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Application } from 'src/app/models/application';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cohort',
@@ -22,6 +23,8 @@ export class CohortComponent implements OnInit {
   apps: Application[] = [];
   setCohort: Cohort = null;
   progress: string[];
+  showAddForm: boolean;
+  cohort: Cohort;
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }
 
@@ -30,6 +33,21 @@ export class CohortComponent implements OnInit {
     this.reload();
   }
 
+  createCohort(form: NgForm) {
+    console.log(form.value);
+    this.studentService.addCohort(form.value).subscribe(
+      data => {
+        this.reload();
+        console.log('Cohort Create Component createCohort() cohort created ');
+      },
+      err => {
+        console.error(
+          'Cohort Create Component createCohort() cohort create failed'
+        );
+        console.error(err);
+      }
+    );
+  }
 
   reload() {
     this.studentService.cohortsIndex().subscribe(

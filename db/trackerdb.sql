@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(200) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `role` VARCHAR(45) NOT NULL DEFAULT 'USER',
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
 ENGINE = InnoDB;
 
 
@@ -658,6 +659,40 @@ INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (19,
 INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (20, 20, 'Denver', 'CO');
 INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (21, 21, 'Denver', 'CO');
 INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (22, 22, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (23, 23, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (24, 24, 'Lakewood', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (25, 25, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (26, 26, 'Lakewood', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (27, 27, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (28, 28, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (29, 29, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (30, 30, 'Aurora', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (31, 31, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (32, 32, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (33, 33, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (34, 34, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (35, 35, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (36, 36, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (37, 37, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (38, 38, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (39, 39, 'Boulder', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (40, 40, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (41, 41, 'Greenwood Village', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (42, 42, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (43, 43, 'Greenwood Village', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (44, 44, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (45, 45, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (46, 46, 'Greenwood Village', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (47, 47, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (48, 48, 'Aurora', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (49, 49, 'Denver', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (50, 50, 'Aurora', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (51, 51, 'Aurora', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (52, 52, 'Lakewood', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (53, 53, 'Aurora', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (54, 54, 'Greenwood Village', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (55, 55, 'Lakewood', 'CO');
+INSERT INTO `company_location` (`id`, `company_id`, `city`, `state`) VALUES (56, 56, 'Greenwood Village', 'CO');
 
 COMMIT;
 

@@ -25,7 +25,10 @@ export class StudentComponent implements OnInit {
   refreshApps() {
     this.studentService.getStudentByUsername().subscribe(
       data => {
-        this.student = data;
+        this.student = new Student(data.id, data.cohort, data.cohortId, data.user, data.firstName, data.lastName,
+          data.email, data.githubUsername, data.vettec, data.gibill, data.employed, data.accepted,
+          data.depositPaid, data.needsLoanerLaptop, data.educationLevel, data.openToRelocation, data.clearance,
+          data.events, data.address, data.applications);
       },
 
       err => console.error('Fetch student err: ' + err)

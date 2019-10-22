@@ -1,3 +1,4 @@
+import { User } from './user';
 import { Cohort } from './cohort';
 import { StudentAddress } from './student-address';
 import { Application } from './application';
@@ -6,6 +7,7 @@ export class Student {
   id: number;
   cohort: Cohort;
   cohortId: number;
+  user: User;
   firstName: string;
   lastName: string;
   email: string;
@@ -26,6 +28,7 @@ export class Student {
     id?: number,
     cohort?: Cohort,
     cohortId?: number,
+    user?: User,
     firstName?: string,
     lastName?: string,
     email?: string,
@@ -45,6 +48,7 @@ export class Student {
     this.id = id;
     this.cohort = cohort;
     this.cohortId = cohortId;
+    this.user = user;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.jobtracking.entities.User;
@@ -14,6 +15,10 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserRepository userrepo;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
 	
 	@Override
 	public User findByUserName(String username) {
@@ -50,14 +55,15 @@ public class UserServiceImpl implements UserService{
 	@Override 
 	public User updateUserById(Integer id,User user ) {
 Optional<User> use = userrepo.findById(id);
-		
+		User updateUser = null;
 		if(use.isPresent()) {
-			User updateUser = use.get();
-			
+			 updateUser = use.get();
+			updateUser.setPassword(encoder.encode(user.getPassword()));
+			updateUser.setUsername(user.getUsername());
 			userrepo.saveAndFlush(updateUser);
 		}
 		
-		return user;
+		return updateUser;
 	}
 	
 	@Override

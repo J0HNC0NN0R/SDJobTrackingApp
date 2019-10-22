@@ -94,6 +94,7 @@ export class CohortComponent implements OnInit {
 
         // this.students = lifeIsGood;
         this.setCohort = cohort;
+        this.students = [];
         data.forEach(app => {
           const stu = new Student(app.id, app.cohort, app.cohortId, app.user, app.firstName, app.lastName,
             app.email, app.githubUsername, app.vettec, app.gibill, app.employed, app.accepted,

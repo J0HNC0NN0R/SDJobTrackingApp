@@ -50,7 +50,7 @@ export class StudentProfileComponent implements OnInit {
     this.showProfile();
   }
 setEditStudent(){
-this.upStudent = Object.assign({}, this .editStudent);
+this.upStudent = Object.assign({}, this.editStudent);
 }
 cancelEditStudent(){
   this.upStudent = null;
@@ -70,7 +70,7 @@ cancelEditStudent(){
   }
   setAddress(id){
     for (let i = 0; i < this.editStudent.address.length; i++) {
-      if (this.editStudent.address[i].id = id) {
+      if (this.editStudent.address[i].id === id) {
       this.upAddress = this.editStudent.address[i];
       }
     }

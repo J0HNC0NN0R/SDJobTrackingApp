@@ -1,15 +1,13 @@
 <div *ngIf="editStudent">
   <ul>
-    <li> Id : {{editStudent.id}} </li>
+    <!-- <li> Id : {{editStudent.id}} </li> -->
     <li> Name : {{editStudent.firstName}} {{editStudent.lastName}}</li>
     <li> Github : {{editStudent.githubUsername}} </li>
     <li> Cohort : {{editStudent.cohort.id}} </li>
     <li> Email : {{editStudent.email}} </li>
     <li> Accepted : {{editStudent.accepted}} </li>
     <li> Employed : {{editStudent.employed}} </li>
-
     <li> Deposit Paid : {{editStudent.depositPaid}} </li>
-
     <li> GI Bill : {{editStudent.gibill}} </li>
     <li> VETTEC : {{editStudent.vettec}} </li>
     <li> Needs Loaner : {{editStudent.needsLoanerLaptop}} </li>
@@ -18,17 +16,13 @@
       Address   <button (click)='addressForm()'>  Add New Address</button>
     </li>
     <li *ngFor='let address of editStudent.address'>
-
        {{address.addressType}} :
        {{address.street}} ,
        {{address.city}} , {{address.state}} {{address.zipcode}}   <button (click)='setAddress(address.id)'>  Update </button>
-
     </li>
-
     <br>
       <button (click)='setEditStudent()'>  Update Personal Information</button>
       <br>
-
     </ul>
   </div>
 

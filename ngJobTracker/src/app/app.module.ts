@@ -19,6 +19,7 @@ import { CohortProfileComponent } from './components/cohort-profile/cohort-profi
 import { MessagingComponent } from './components/messaging/messaging.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ApplicationStatusComponent } from './components/application-status/application-status.component';
+import { ChartsModule } from 'ng2-charts';
 
 import { FormModalComponent } from './components/form-modal/form-modal.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -53,6 +54,8 @@ import { JobListingComponent } from './components/job-listing/job-listing.compon
     FormsModule,
     NgbModalModule,
     HttpClientModule,
+    ChartsModule
+
   ],
   exports: [
     FormModalComponent

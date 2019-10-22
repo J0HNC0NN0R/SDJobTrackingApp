@@ -1,7 +1,10 @@
+import { ApplicationService } from './../../services/application.service';
+
 import { Student } from 'src/app/models/student';
 import { Cohort } from './../../models/cohort';
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
+import { Application } from 'src/app/models/application';
 
 @Component({
   selector: 'app-cohort',
@@ -13,8 +16,13 @@ export class CohortComponent implements OnInit {
   students: Student[] = [];
   date: Date;
   remainingDays: number;
+  showStudent: Student = null;
+  student: Student = null;
+  upStudent: Student = null;
+  apps: Application[] = [];
+  setCohort: Cohort = null;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private appService: ApplicationService) { }
 
   ngOnInit() {
     this.reload();
@@ -63,7 +71,9 @@ export class CohortComponent implements OnInit {
     this.studentService.getStudentsByCohort(cohort).subscribe(
       lifeIsGood => {
         console.log('Cohorts Loaded');
+
         this.students = lifeIsGood;
+        this.setCohort = cohort;
 
       },
       whenThingsGoBad => {
@@ -75,5 +85,57 @@ export class CohortComponent implements OnInit {
 
   }
 
+  clearProfile() {
+this.showStudent = null;
+  }
+  showProfile(id: number) {
+    console.log(id);
+    console.log(this.students.length);
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.students.length; i++) {
+      // tslint:disable-next-line: no-conditional-assignment
+      if (this.students[i].id === id) {
+        this.showStudent = this.students[i];
+        this.refreshApps(this.showStudent);
+        console.log(this.showStudent.firstName);
+
+      }
+    }
+
+  }
+  refreshApps(student) {
+    this.appService.index(student.id).subscribe(
+    data => {
+      this.apps = data;
+    },
+
+    err => console.error('Fetch application err: ' + err)
+    );
+}
+setEditStudent() {
+  this.upStudent = Object.assign({}, this.showStudent);
+  }
+  cancelEditStudent() {
+    this.upStudent = null;
+  }
+  updateStudent() {
+    console.log('edit student' + this.upStudent);
+
+    this.studentService.update(this.upStudent).subscribe(
+      data => {
+        console.log(this.upStudent);
+        this.reload();
+        this.listStudents(this.setCohort);
+        this.cancelEditStudent();
+
+
+      },
+      err => {
+        console.error('Error updating student' + err);
+
+      }
+    );
+  }
 
 }

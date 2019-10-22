@@ -1,6 +1,7 @@
 package com.skilldistillery.jobtracking.controllers;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -433,7 +434,7 @@ public class StudentController {
 	@PostMapping("students/{sid}/applications/{aid}/progress")
 	public Progress createProgress(@RequestBody Progress progress, @PathVariable("aid") int aid,
 			HttpServletResponse resp, HttpServletRequest req) {
-		
+		progress.setUpdated(LocalDateTime.now());
 		Progress created = null;
 		try {
 			created = appServ.addProgressOnApplication(progress, aid);

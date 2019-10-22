@@ -1,3 +1,4 @@
+import { Student } from 'src/app/models/student';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
@@ -10,6 +11,7 @@ import { User } from 'src/app/models/user';
 })
 export class AdminProfileComponent implements OnInit {
   users: User [] = [];
+  selectedStudent: Student = null;
   constructor(private auth: AuthService, private user: UserService) { }
 
   ngOnInit() {

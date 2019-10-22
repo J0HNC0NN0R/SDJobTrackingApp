@@ -23,7 +23,10 @@ export class StatisticsComponent implements OnInit {
     scales: { xAxes: [{}], yAxes: [{
       display: true,
       ticks: {
-          beginAtZero: true   // minimum value will be 0.
+          beginAtZero: true,   // minimum value will be 0.
+
+          // min: 0,
+          // stepSize: 1
       }
     }] },
     plugins: {
@@ -34,18 +37,24 @@ export class StatisticsComponent implements OnInit {
     }
   };
   // tslint:disable-next-line: max-line-length
-  public barChartLabels: Label[] = ['Not Applied', 'Applied', 'Recieved Response', 'Phone Interview', 'In-Person Interview', 'Recived Offer', 'Hired'];
+  public barChartLabels: Label[] = ['Not Applied', 'Applied', 'Phone Interview', 'In-Person Interview', 'Recived Offer', 'Hired'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
+  public countNotApplied = 0;
+  public countApplied = 0;
+  public countPhoneVideo = 0;
+  public countInPerson = 0;
+  public countOffer = 0;
+  public countHired = 0;
   // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [5, 1, 1, 1, 1, 1, 0, 0], label: 'Applications' },
-    { data: [10, 2, 3, 9, 4, 6, 0, 6], label: 'Series B' }
+    // { data: [80, 50, 30, 1, 1, 0, 1], label: 'Goal stats' },
+    { data: [], label: 'Applications' }
   ];
   student: Student = null;
   appArray: Application[] = [];
-  progressArray: Progress[] = null;
+  progressArray: Progress[] = [];
   progress: Progress = null;
 
   // tslint:disable-next-line: max-line-length
@@ -53,9 +62,6 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.getStudent();
-    this.getApplications();
-    console.log(this.appArray);
-
   }
 
   // events
@@ -67,17 +73,15 @@ export class StatisticsComponent implements OnInit {
     console.log(event, active);
   }
 
-  // loadPokemon() {
-  //   this.pokeService.index().subscribe(
-  //     data => {this.pokemons = data; },
-  //     err => {console.log('Error in loadPokemon'); }
-  //   );
-  // }
 
   public getStudent() {
     this.studentService.getStudentByUsername().subscribe(
       data => {
         this.student = data;
+        this.getApplications();
+        console.log(data);
+
+
       },
       err => {
         console.log('Error seeding Graph Data');
@@ -89,19 +93,53 @@ export class StatisticsComponent implements OnInit {
       this.applicationService.index(this.student.id).subscribe (
         data => {
           this.appArray = data;
+          // console.log(this.appArray);
+          this.appArray.forEach(element => {
+            console.log(element);
+            if (element.progress !== null) {
+              console.log(element.progress[0]);
+              this.progressArray.push(element.progress[0]);
+            }
+            // this.getProgressArray(this.student.id, element.id);
+          });
+          this.fillCounts(this.progressArray);
+          this.testFillGraph();
+
+
         },
         err => { console.log('Error in getApplications');
         }
        );
       }
 
-    public getProgressArray(studentId: number, appId: number){
-      return this.progressService.getApplicationProgresses(studentId, appId);
-    }
-    public testFillGraph() {
-      const data = [1, 1, 1, 1, 1, 1, 1, 1, 1];
-      //  const data = [];
+    public fillCounts(progress: Progress[]) {
+      progress.forEach(element => {
+        if (element.state === 'Not Applied') {
+          this.countNotApplied++;
+          console.log(this.countNotApplied);
 
+        }
+        if (element.state === 'Applied') {
+          this.countApplied++;
+        }
+        if (element.state === 'Phone/Video') {
+          this.countPhoneVideo++;
+        }
+        if (element.state === 'In-Person') {
+          this.countInPerson++;
+        }
+        if (element.state === 'Offer') {
+          this.countOffer++;
+        }
+        if (element.state === 'Accepted') {
+          this.countHired++;
+        }
+      });
+    }
+
+    public testFillGraph() {
+      const data = [this.countNotApplied, this.countApplied, this.countPhoneVideo, this.countInPerson, this.countOffer, this.countHired];
+      // const data = [1,1,1,1,11,1];
       this.barChartData[0].data = data;
     }
 

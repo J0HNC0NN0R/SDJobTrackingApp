@@ -5,6 +5,7 @@ import { Cohort } from './../../models/cohort';
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Application } from 'src/app/models/application';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-cohort',
@@ -21,13 +22,32 @@ export class CohortComponent implements OnInit {
   upStudent: Student = null;
   apps: Application[] = [];
   setCohort: Cohort = null;
+  progress: string[];
+  showAddForm: boolean;
+  cohort: Cohort;
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }
 
   ngOnInit() {
+    this.progress = ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
     this.reload();
   }
 
+  createCohort(form: NgForm) {
+    console.log(form.value);
+    this.studentService.addCohort(form.value).subscribe(
+      data => {
+        this.reload();
+        console.log('Cohort Create Component createCohort() cohort created ');
+      },
+      err => {
+        console.error(
+          'Cohort Create Component createCohort() cohort create failed'
+        );
+        console.error(err);
+      }
+    );
+  }
 
   reload() {
     this.studentService.cohortsIndex().subscribe(
@@ -81,6 +101,7 @@ export class CohortComponent implements OnInit {
             app.events, app.address, app.applications);
           this.students.push(stu);
         });
+        this.clearProfile();
 
       },
       whenThingsGoBad => {
@@ -114,7 +135,12 @@ this.showStudent = null;
   refreshApps(student) {
     this.appService.index(student.id).subscribe(
     data => {
-      this.apps = data;
+      this.apps = [];
+      data.forEach(app => {
+        const newApp: Application = new Application(app.id, app.userId, app.companyId, app.position,
+          app.descriptionURL, app.interestLevel, app.progress, app.company);
+        this.apps.push(newApp);
+      });
     },
 
     err => console.error('Fetch application err: ' + err)

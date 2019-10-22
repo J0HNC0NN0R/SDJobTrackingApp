@@ -44,13 +44,10 @@ export class ApplicationService {
       })
     };
 
-    console.error(app);
-
     return this.http.put<Application>(this.url + id + '/applications/' + appId, app, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          console.log(app);
           return throwError('Failed to update application');
         })
       );
@@ -70,7 +67,6 @@ export class ApplicationService {
       .pipe(
         catchError((err: any) => {
           console.log(err);
-          console.log(app);
           return throwError('Failed to update application');
         })
       );

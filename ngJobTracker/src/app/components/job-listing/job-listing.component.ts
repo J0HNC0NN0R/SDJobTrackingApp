@@ -20,7 +20,6 @@ export class JobListingComponent implements OnInit {
     this.appService.getJobs().subscribe(
       data => {
         this.jobList = data;
-        console.log(data);
       },
 
       err => console.error('Get list of jobs err: ' + err)

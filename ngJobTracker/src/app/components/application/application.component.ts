@@ -71,9 +71,7 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
 
 
   setProgress(prog: string, app: Application) {
-    console.log(prog);
     const newProg: Progress = new Progress();
-    newProg.updated = new Date();
     const state: string = app.progress[0].state;
 
 
@@ -82,16 +80,17 @@ export class ApplicationComponent implements OnInit, AfterViewInit {
         break;
       }
     }
-    console.log(this.progress[k]);
-    if (prog !== 'x' && prog !== this.progress[k]) {
+
+    if (typeof(this.progress[k]) === 'undefined') {
+      newProg.state = this.progress[0];
+    } else if (prog !== 'x' && prog !== this.progress[k]) {
       newProg.state = this.progress[k - 1];
-    } else if (prog === 'x') {
+    } else if (prog === 'x' ) {
       newProg.state = this.progress[k + 1];
     } else {
       newProg.state = this.progress[k];
     }
 
-    console.log(newProg);
     this.appService.createProgress(this.student.id, app.id, newProg).subscribe(
       data => {
         this.refreshApps();

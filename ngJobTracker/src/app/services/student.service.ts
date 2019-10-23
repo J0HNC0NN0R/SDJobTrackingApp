@@ -89,6 +89,25 @@ export class StudentService {
       })
     );
   }
+  updateCohort(cohort: Cohort) {
+    this.credentials = this.auth.getCredentials();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Basic ${this.credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    return this.http.put(this.url + 'cohorts/' + cohort.id, cohort, httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        console.log(httpOptions);
+        console.log(cohort);
+
+        return throwError('Student Service updateCohort(); error updating cohort ');
+      })
+    );
+  }
 
   getStudentsByCohort(cohort: Cohort) {
 

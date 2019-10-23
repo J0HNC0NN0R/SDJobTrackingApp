@@ -112,23 +112,6 @@ public class Event {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Event [id=");
-		builder.append(id);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", location=");
-		builder.append(location);
-		builder.append(", date=");
-		builder.append(date);
-		builder.append(", student=");
-		builder.append(student);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

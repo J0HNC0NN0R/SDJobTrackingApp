@@ -281,57 +281,6 @@ public class Student {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Student [id=");
-		builder.append(id);
-//		builder.append(", userId=");
-//		builder.append(userId);
-		builder.append(", firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", githubUsername=");
-		builder.append(githubUsername);
-		builder.append(", isVettec=");
-		builder.append(isVettec);
-		builder.append(", isGIBill=");
-		builder.append(isGIBill);
-		builder.append(", isEmployed=");
-		builder.append(isEmployed);
-		builder.append(", isAccepted=");
-		builder.append(isAccepted);
-		builder.append(", depositPaid=");
-		builder.append(depositPaid);
-		builder.append(", needsLoanerLaptop=");
-		builder.append(needsLoanerLaptop);
-		builder.append(", educationLevel=");
-		builder.append(educationLevel);
-		builder.append(", openToRelocation=");
-		builder.append(openToRelocation);
-		builder.append(", clearance=");
-		builder.append(clearance);
-		builder.append(", applications=");
-		builder.append(applications);
-		builder.append(", cohort=");
-		builder.append(cohort);
-		builder.append(", user=");
-		builder.append(user);
-		builder.append(", companyNotes=");
-		builder.append(companyNotes);
-		builder.append(", studentDesiredLocations=");
-		builder.append(studentDesiredLocations);
-		builder.append(", events=");
-		builder.append(events);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	
 
 }

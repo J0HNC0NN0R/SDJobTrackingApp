@@ -91,20 +91,7 @@ public class CompanyLocation {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CompanyLocation [id=");
-		builder.append(id);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
-		builder.append(", company=");
-		builder.append(company);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 	
 }

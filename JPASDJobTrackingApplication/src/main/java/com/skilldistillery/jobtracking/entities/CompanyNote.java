@@ -107,21 +107,6 @@ public class CompanyNote {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CompanyNote [id=");
-		builder.append(id);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", body=");
-		builder.append(body);
-		builder.append(", company=");
-		builder.append(company);
-		builder.append(", student=");
-		builder.append(student);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

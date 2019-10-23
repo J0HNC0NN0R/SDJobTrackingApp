@@ -59,10 +59,6 @@ public class IndeedListing {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "JobPost [title=" + title + ", company=" + company + ", location=" + location + ", description="
-				+ description + ", url=" + url + "]";
-	}
+	
 	
 }

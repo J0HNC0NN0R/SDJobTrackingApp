@@ -80,6 +80,7 @@ public class StudentController {
 	@PutMapping("cohorts/{cid}")
 	public Cohort updateCohort(@RequestBody Cohort cohort, @PathVariable("cid") int cid,
 			HttpServletResponse resp, HttpServletRequest req, Principal principal) {
+		System.err.println(cohort);
 		
 		Cohort updated = null;
 		try {

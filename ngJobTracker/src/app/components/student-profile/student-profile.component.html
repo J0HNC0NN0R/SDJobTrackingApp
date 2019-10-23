@@ -1,16 +1,14 @@
 
 <div *ngIf="editStudent">
 <!-- test -->
-<div>
+<div class="container-fluid">
     <div class="row">
-      <div class="col-4">
+      <div id="profile" class="col-4">
         <table>
           <tr>
             <td><h4>{{editStudent.firstName}} {{editStudent.lastName}}</h4></td>
-
           </tr>
           <tr><td> {{mainAddress.city}}, {{mainAddress.state}} </td></tr>
-
 <tr><td> Github : {{editStudent.githubUsername}}</td></tr>
 <tr><td> Email : {{editStudent.email}}</td></tr>
 <tr><td><button class="btn btn-primary" (click)='openModalForm(editStudent)'>  Update Personal Information</button></td></tr>
@@ -18,14 +16,14 @@
         </table>
 
       </div>
-      <div class="col-8">
+      <div id="graph" class="col-8">
           <app-statistics></app-statistics>
       </div>
     </div>
   </div>
   </div>
 
-  <br>
+  <!-- <br>
 <div *ngIf='setUser'>
   <form #addPass ="ngForm" id="userPass">
 
@@ -40,7 +38,7 @@
       <ul>
         <br>
         <!-- <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li> -->
-        <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
+        <!-- <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
         <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="upStudent.lastName"></li>
         <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="upStudent.email"></li>
         <li> <input type="text" name="githubUsername" placeholder="GitHub" [(ngModel)]="upStudent.githubUsername"></li>
@@ -60,9 +58,9 @@
             <button (click)='cancelEditStudent()'>  Cancel</button>
     </ul>
   </form>
-</div>
+</div> -->
 
-    <div *ngIf='upAddress'>
+    <!-- <div *ngIf='upAddress'>
         <form>
           <ul>
             <br>
@@ -78,8 +76,8 @@
                 <button (click)='cancelEditAddress()'>  Cancel</button>
         </ul>
       </form>
-    </div>
-    <div *ngIf='showAddressForm'>
+    </div> -->
+    <!-- <div *ngIf='showAddressForm'>
         <form #aAddress ="ngForm" id="addAddress">
           <ul>
             <br>
@@ -95,6 +93,6 @@
                 <button (click)='cancelAddressForm()'>  Cancel</button>
         </ul>
       </form>
-    </div>
+    </div>  -->
 
     <app-student-modal  #modal [editStudent] = editStudent [editAddress] = editAddress [editUser] = editUser (childEvent)="reload()"></app-student-modal>

@@ -2,10 +2,11 @@ import { ApplicationService } from './../../services/application.service';
 
 import { Student } from 'src/app/models/student';
 import { Cohort } from './../../models/cohort';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Application } from 'src/app/models/application';
 import { NgForm } from '@angular/forms';
+import { CohortUpdateComponent } from '../cohort-update/cohort-update.component';
 
 @Component({
   selector: 'app-cohort',
@@ -25,8 +26,11 @@ export class CohortComponent implements OnInit {
   progress: string[];
   showAddForm: boolean;
   cohort: Cohort;
+  selectedCohort: Cohort;
+
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }
+  @ViewChild(CohortUpdateComponent, {static: false}) formComp;
 
   ngOnInit() {
     this.progress = ['Applied', 'Phone/Video', 'In-Person', 'Offer', 'Accepted'];
@@ -170,6 +174,11 @@ setEditStudent() {
 
       }
     );
+  }
+
+  openModalForm(cohort?: Cohort) {
+    this.cohort = cohort;
+    this.formComp.open();
   }
 
 }

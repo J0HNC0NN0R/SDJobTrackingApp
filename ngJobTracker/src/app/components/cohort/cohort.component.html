@@ -166,5 +166,9 @@
       </table>
   </div>
 
+  <div *ngIf="showStudent">
+    <app-admin-statistics [student]="showStudent"></app-admin-statistics>
+  </div>
+
   <app-cohort-update #modal [cohort]= cohort (childEvent)="reload()"></app-cohort-update>
 

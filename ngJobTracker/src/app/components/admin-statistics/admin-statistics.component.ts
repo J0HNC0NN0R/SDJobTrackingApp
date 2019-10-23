@@ -7,8 +7,10 @@ import { Progress } from 'src/app/models/progress';
 import { StudentService } from 'src/app/services/student.service';
 import { ApplicationService } from 'src/app/services/application.service';
 import { ProgressService } from 'src/app/services/progress.service';
+
 import { CohortComponent } from '../cohort/cohort.component';
 // import { Cohort } from 'src/app/models/cohort';
+
 @Component({
   selector: 'app-admin-statistics',
   templateUrl: './admin-statistics.component.html',
@@ -16,6 +18,7 @@ import { CohortComponent } from '../cohort/cohort.component';
 })
 export class AdminStatisticsComponent implements OnInit {
   @Input() student: Student;
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -23,6 +26,7 @@ export class AdminStatisticsComponent implements OnInit {
       display: true,
       ticks: {
           beginAtZero: true,   // minimum value will be 0.
+
           // min: 0,
           // stepSize: 1
       }
@@ -35,6 +39,7 @@ export class AdminStatisticsComponent implements OnInit {
     }
   };
   // tslint:disable-next-line: max-line-length
+
   public barChartLabels: Label[] = ['Not Applied', 'Applied', 'Phone Interview', 'In-Person Interview', 'Recived Offer', 'Hired'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
@@ -45,10 +50,12 @@ export class AdminStatisticsComponent implements OnInit {
   public countOffer = 0;
   public countHired = 0;
 
+
   public barChartData: ChartDataSets[] = [
     // { data: [80, 50, 30, 1, 1, 0, 1], label: 'Goal stats' },
     { data: [], label: 'Applications' }
   ];
+
   appArray: Application[] = [];
   progressArray: Progress[] = [];
   progress: Progress = null;
@@ -57,17 +64,19 @@ export class AdminStatisticsComponent implements OnInit {
   ngOnInit() {
     this.getApplications();
   }
+
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
+
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
   }
 
-    public getApplications() {
-      console.log(this.student);
 
+
+    public getApplications() {
       this.applicationService.index(this.student.id).subscribe (
         data => {
           this.appArray = data;
@@ -82,11 +91,13 @@ export class AdminStatisticsComponent implements OnInit {
           });
           this.fillCounts(this.progressArray);
           this.testFillGraph();
+
         },
         err => { console.log('Error in getApplications');
         }
        );
       }
+
     public fillCounts(progress: Progress[]) {
       progress.forEach(element => {
         if (element.state === 'Not Applied') {
@@ -110,9 +121,11 @@ export class AdminStatisticsComponent implements OnInit {
         }
       });
     }
+
     public testFillGraph() {
       const data = [this.countNotApplied, this.countApplied, this.countPhoneVideo, this.countInPerson, this.countOffer, this.countHired];
       // const data = [1,1,1,1,11,1];
       this.barChartData[0].data = data;
     }
+
   }

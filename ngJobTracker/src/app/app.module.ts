@@ -26,8 +26,12 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CohortComponent } from './components/cohort/cohort.component';
 import { JobListingComponent } from './components/job-listing/job-listing.component';
+
+import { AdminStatisticsComponent } from './components/admin-statistics/admin-statistics.component';
+
 import { CohortUpdateComponent } from './components/cohort-update/cohort-update.component';
 import { AdminStatisticsComponent } from './components/admin-statistics/admin-statistics.component';
+
 
 @NgModule({
   declarations: [
@@ -48,8 +52,14 @@ import { AdminStatisticsComponent } from './components/admin-statistics/admin-st
     FormModalComponent,
     CohortComponent,
     JobListingComponent,
+<<<<<<< HEAD
     CohortUpdateComponent,
     AdminStatisticsComponent
+=======
+    AdminStatisticsComponent,
+    CohortUpdateComponent
+>>>>>>> b7bbac974963156c2651ddd794194cf343cccec5
+
 
   ],
   imports: [
@@ -64,7 +74,7 @@ import { AdminStatisticsComponent } from './components/admin-statistics/admin-st
   exports: [
     FormModalComponent
   ],
-  providers: [],
+  providers: [Cohort],
   bootstrap: [AppComponent],
   entryComponents: [
     FormModalComponent

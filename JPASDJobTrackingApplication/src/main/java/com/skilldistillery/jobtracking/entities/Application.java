@@ -154,29 +154,5 @@ public class Application {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Application [id=");
-		builder.append(id);
-		builder.append(", position=");
-		builder.append(position);
-		builder.append(", descriptionURL=");
-		builder.append(descriptionURL);
-		builder.append(", interestLevel=");
-		builder.append(interestLevel);
-		builder.append(", progress=");
-		builder.append(progress);
-//		builder.append(", contacts=");
-//		builder.append(contacts);
-//		builder.append(", applicationNotes=");
-//		builder.append(applicationNotes);
-//		builder.append(", student=");
-//		builder.append(student);
-		builder.append(", company=");
-		builder.append(company);
-		builder.append("]");
-		return builder.toString();
-	}
-
+	
 }

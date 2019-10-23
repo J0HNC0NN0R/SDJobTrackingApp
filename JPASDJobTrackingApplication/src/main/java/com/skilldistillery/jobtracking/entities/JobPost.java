@@ -100,22 +100,7 @@ public class JobPost {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("JobPost [id=");
-		builder.append(id);
-		builder.append(", position=");
-		builder.append(position);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", postURL=");
-		builder.append(postURL);
-		builder.append(", company=");
-		builder.append(company);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 	
 	
 	

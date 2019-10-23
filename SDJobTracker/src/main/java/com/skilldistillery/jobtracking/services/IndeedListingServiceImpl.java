@@ -10,6 +10,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,11 @@ import com.skilldistillery.jobtracking.entities.IndeedListing;
 @Service
 public class IndeedListingServiceImpl implements IndeedListingService {
 
+	
 	@Override
 	public List<IndeedListing> getJobs(String keyword, String city, String state) {
 		List<IndeedListing> jobs = new ArrayList<>();
-		HttpClient client = HttpClientBuilder.create().build();
+		CloseableHttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet("https://www.indeed.com/jobs?q=" + keyword + "&l=" + city + "%2C+" + state + "&start=20");
 		String regex = "<div class=\"title\">.+?href=\"([^\"]+).+?title=\"([^\"]+).+?<span class=\"company\">\\s+([^<]+).+?((href=\\\"\\\\/cmp\\\\/)?cmp\\/([^\"]+)|data-rc).+?loc=\"([^\"]+).+?<div class=\"summary\">\\s+([^<]+).+?>.+?>([^<]+)";
 		try {
@@ -38,7 +40,8 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 			while (matcher.find()) {
 				IndeedListing listing = new IndeedListing();
 			    for (int i = 1; i <= matcher.groupCount(); i++) {
-			        System.out.println("Group " + i + ": " + matcher.group(i));
+			    
+			    	System.out.println("Group " + i + ": " + matcher.group(i));
 			    }
 				listing.setUrl("https://www.indeed.com" + matcher.group(1));
 				listing.setTitle(matcher.group(2));
@@ -57,6 +60,7 @@ public class IndeedListingServiceImpl implements IndeedListingService {
 
 				jobs.add(listing);
 			}
+			client.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

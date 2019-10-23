@@ -1,4 +1,4 @@
-<div>
+<div class="table-container">
   <button type="button" class="add-btn btn btn-success btn-lg btn-block" (click)="openModalForm()">Add Application</button>
   <table class="table table-sm table-bordered table-striped table-hover" >
     <thead class="thead thead-dark">
@@ -7,11 +7,11 @@
       <th>Position</th>
       <th>Job Description</th>
       <th>Interest Level</th>
-        <th>Applied</th>
-        <th>Phone/Video</th>
-        <th>In-Person</th>
-        <th>Offer</th>
-        <th>Accepted</th>
+        <th width="100" class="text-center">Applied</th>
+        <th width="100" class="text-center">Phone/Video</th>
+        <th width="100" class="text-center">In-Person</th>
+        <th width="100" class="text-center">Offer</th>
+        <th width="100" class="text-center">Accepted</th>
       <th></th>
     </thead>
     <tbody>
@@ -21,12 +21,12 @@
            {{ app.company.companyLocations[app.company.companyLocations.length -1].state}}</td>
         <td>{{ app.position}}</td>
         <td>{{ app.descriptionURL}}</td>
-        <td>{{ app.interestLevel}}</td>
+        <td class="text-center">{{ app.interestLevel}}</td>
         <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" (click)="setProgress(prog, app)"> </td>
-        <td><button class="btn btn-primary" (click)="openModalForm(app)">Update</button></td>
+        <td class="btn-td text-center"><button class="btn btn-primary" (click)="openModalForm(app)">Update</button></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<app-form-modal #modal [student] = student (childEvent)="refreshApps($event)"></app-form-modal>
+<app-form-modal #modal [student] = student (childEvent)="refreshApps()"></app-form-modal>

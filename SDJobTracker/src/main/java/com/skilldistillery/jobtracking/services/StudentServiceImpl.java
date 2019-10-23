@@ -89,8 +89,8 @@ public class StudentServiceImpl implements StudentService {
 			actualCohort = managedCohort.get();
 			actualCohort.setName(cohort.getName());
 			actualCohort.setNickname(cohort.getNickname());
-			actualCohort.setStartDate(cohort.getStartDate());
-			actualCohort.setEndDate(cohort.getEndDate());
+			actualCohort.setStartDate(cohort.getStartDate().plusDays(1));
+			actualCohort.setEndDate(cohort.getEndDate().plusDays(1));
 			cohorepo.saveAndFlush(actualCohort);
 		}
 		return actualCohort;

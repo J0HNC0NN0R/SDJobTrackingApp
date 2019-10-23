@@ -68,7 +68,7 @@ import { CohortUpdateComponent } from './components/cohort-update/cohort-update.
   exports: [
     FormModalComponent
   ],
-  providers: [],
+  providers: [Cohort],
   bootstrap: [AppComponent],
   entryComponents: [
     FormModalComponent

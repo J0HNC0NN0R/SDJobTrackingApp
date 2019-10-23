@@ -2,7 +2,7 @@ import { ApplicationService } from './../../services/application.service';
 
 import { Student } from 'src/app/models/student';
 import { Cohort } from './../../models/cohort';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { Application } from 'src/app/models/application';
 import { NgForm } from '@angular/forms';
@@ -27,6 +27,8 @@ export class CohortComponent implements OnInit {
   showAddForm: boolean;
   cohort: Cohort;
   selectedCohort: Cohort;
+
+
 
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }

@@ -46,7 +46,7 @@ export class UserService {
       })
     };
     console.log('We\'re in the update user.service');
-    return this.http.put(this.url + user.id, user, httpOptions).pipe(
+    return this.http.put<User>(this.url + user.id, user, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('user.service.ts update error');

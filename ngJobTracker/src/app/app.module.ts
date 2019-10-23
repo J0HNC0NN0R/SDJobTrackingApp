@@ -26,6 +26,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CohortComponent } from './components/cohort/cohort.component';
 import { JobListingComponent } from './components/job-listing/job-listing.component';
+import { StudentModalComponent } from './components/student-modal/student-modal.component';
 
 import { AdminStatisticsComponent } from './components/admin-statistics/admin-statistics.component';
 
@@ -51,6 +52,7 @@ import { CohortUpdateComponent } from './components/cohort-update/cohort-update.
     FormModalComponent,
     CohortComponent,
     JobListingComponent,
+    StudentModalComponent,
     AdminStatisticsComponent,
     CohortUpdateComponent
 

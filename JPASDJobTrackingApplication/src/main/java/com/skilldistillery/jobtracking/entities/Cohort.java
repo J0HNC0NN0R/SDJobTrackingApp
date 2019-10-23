@@ -1,5 +1,6 @@
 package com.skilldistillery.jobtracking.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -18,16 +19,16 @@ public class Cohort {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(name = "start_date")
-	private Date startDate;
+	private LocalDate startDate;
 	@Column(name = "end_date")
-	private Date endDate;
+	private LocalDate endDate;
 	private String name;
 	private String nickname;
 	@OneToMany(mappedBy = "cohort")
 	@JsonIgnore
 	private List<Student> students;
 
-	public Cohort(int id, Date startDate, Date endDate, String name, String nickname, List<Student> students) {
+	public Cohort(int id, LocalDate startDate, LocalDate endDate, String name, String nickname, List<Student> students) {
 		super();
 		this.id = id;
 		this.startDate = startDate;
@@ -49,19 +50,19 @@ public class Cohort {
 		this.id = id;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 

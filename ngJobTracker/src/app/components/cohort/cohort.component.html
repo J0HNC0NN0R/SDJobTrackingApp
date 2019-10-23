@@ -31,7 +31,7 @@
       </button>
     </form></span
   >
-    <div class="text-center"><strong>Cohorts</strong></div>
+    <div class="text-center"><strong><h2>Cohorts</h2></strong></div>
   <table class="table table-striped table-bordered table-sm">
     <thead class="thead-dark">
       <tr>
@@ -89,7 +89,9 @@
     </tbody>
   </table>
 </div>
-<div>
+
+<div class="row">
+    <div class="col-4">
   <table>
     <tr>
       <td>
@@ -128,130 +130,15 @@
           </ul>
         </div>
       </td>
-      <td>
-        <div *ngIf="upStudent">
-          <form>
-            <ul>
-              <br />
-              <!-- <li> <input type="text" name="id" placeholder="ID" [(ngModel)]="upStudent.id"></li> -->
-              <li>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  [(ngModel)]="upStudent.firstName"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  [(ngModel)]="upStudent.lastName"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="Email"
-                  [(ngModel)]="upStudent.email"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  name="githubUsername"
-                  placeholder="GitHub"
-                  [(ngModel)]="upStudent.githubUsername"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  name="EducationLevel"
-                  placeholder="Education"
-                  [(ngModel)]="upStudent.educationLevel"
-                />
-              </li>
-              <li>
-                <input
-                  type="text"
-                  name="Clearance"
-                  placeholder="Clearance"
-                  [(ngModel)]="upStudent.clearance"
-                />
-              </li>
-              <li>
-                Employed:
-                <input
-                  type="checkbox"
-                  name="Employed"
-                  [(ngModel)]="upStudent.employed"
-                />
-              </li>
-              <li>
-                Accepted:
-                <input
-                  type="checkbox"
-                  name="Accepted"
-                  [(ngModel)]="upStudent.accepted"
-                />
-              </li>
-              <li>
-                GiBill:
-                <input
-                  type="checkbox"
-                  name="GiBill"
-                  [(ngModel)]="upStudent.gibill"
-                />
-              </li>
-              <li>
-                Vettec:
-                <input
-                  type="checkbox"
-                  name="Vettec"
-                  [(ngModel)]="upStudent.vettec"
-                />
-              </li>
-              <li>
-                Deposit Paid:
-                <input
-                  type="checkbox"
-                  name="DepositPaod"
-                  [(ngModel)]="upStudent.depositPaid"
-                />
-              </li>
-              <li>
-                Needs Loaner Laptop:
-                <input
-                  type="checkbox"
-                  name="Needs Loaner Laptop"
-                  [(ngModel)]="upStudent.needsLoanerLaptop"
-                />
-              </li>
 
-              <li>
-                Open to Relocation:
-                <input
-                  type="checkbox"
-                  name="Open to Relocation"
-                  [(ngModel)]="upStudent.openToRelocation"
-                />
-              </li>
-
-              <button class="btn btn-success" (click)="updateStudent()">
-                Confirm Update
-              </button>
-              <button class="btn btn-secondary" (click)="cancelEditStudent()">
-                Cancel
-              </button>
-            </ul>
-          </form>
-        </div>
-      </td>
     </tr>
   </table>
+  </div>
+  <div class="col-8">
+      <div *ngIf="showStudent">
+          <app-admin-statistics [student]="showStudent"></app-admin-statistics>
+        </div>
+  </div>
 </div>
 
 <div *ngIf="showStudent">
@@ -287,8 +174,6 @@
       </table>
   </div>
 
-  <div *ngIf="showStudent">
-    <app-admin-statistics [student]="showStudent"></app-admin-statistics>
-  </div>
+
 
   <app-cohort-update #modal [cohort]= cohort (childEvent)="reload()"></app-cohort-update>

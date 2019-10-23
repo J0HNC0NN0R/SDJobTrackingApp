@@ -121,19 +121,6 @@ public class StudentDesiredLocation {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("StudentDesiredLocation [id=");
-		builder.append(id);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
-		builder.append(", student=");
-		builder.append(student);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

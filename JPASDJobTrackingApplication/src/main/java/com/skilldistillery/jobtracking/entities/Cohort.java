@@ -112,23 +112,5 @@ public class Cohort {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Cohort [id=");
-		builder.append(id);
-		builder.append(", startDate=");
-		builder.append(startDate);
-		builder.append(", endDate=");
-		builder.append(endDate);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", nickname=");
-		builder.append(nickname);
-//		builder.append(", students=");
-//		builder.append(students);
-		builder.append("]");
-		return builder.toString();
-	}
-
+	
 }

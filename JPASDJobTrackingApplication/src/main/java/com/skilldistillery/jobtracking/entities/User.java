@@ -114,21 +114,6 @@ public class User {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
-		builder.append(id);
-		builder.append(", enabled=");
-		builder.append(enabled);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", username=");
-		builder.append(username);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

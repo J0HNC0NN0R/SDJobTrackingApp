@@ -91,19 +91,6 @@ public class ApplicationNote {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ApplicationNote [id=");
-		builder.append(id);
-//		builder.append(", applicationId=");
-//		builder.append(application);
-		builder.append(", title=");
-		builder.append(title);
-		builder.append(", body=");
-		builder.append(body);
-		builder.append("]");
-		return builder.toString();
-	}
+
 
 }

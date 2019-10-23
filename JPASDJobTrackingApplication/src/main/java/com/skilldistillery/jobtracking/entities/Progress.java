@@ -99,20 +99,7 @@ public class Progress {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Progress [id=");
-		builder.append(id);
-//		builder.append(", application=");
-//		builder.append(application);
-		builder.append(", State=");
-		builder.append(State);
-		builder.append(", updated=");
-		builder.append(updated);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 
 }

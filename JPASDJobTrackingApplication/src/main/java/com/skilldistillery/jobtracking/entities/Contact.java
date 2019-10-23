@@ -110,24 +110,7 @@ public class Contact {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Contact [id=");
-		builder.append(id);
-//		builder.append(", application=");
-//		builder.append(application);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", phone=");
-		builder.append(phone);
-		builder.append(", position=");
-		builder.append(position);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 	
 

@@ -126,17 +126,6 @@ public class Company {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Company [id=");
-		builder.append(id);
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", siteURL=");
-		builder.append(siteURL);
-		builder.append("]");
-		return builder.toString();
-	}
+	
 
 }

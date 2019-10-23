@@ -54,7 +54,9 @@ export class StudentService {
     );
   }
   getStudentByUsername() {
+
     const username = this.auth.getUsername();
+    console.log(username);
 
     const httpOptions = {
       headers: new HttpHeaders({

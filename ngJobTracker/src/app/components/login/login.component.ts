@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       .login(loginForm.value.username, loginForm.value.password)
       .subscribe(
         data => {
+          window.location.reload();
           // console.log('loginComponenent.login(): user logged in.');
         },
         error => {

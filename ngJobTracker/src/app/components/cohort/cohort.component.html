@@ -255,53 +255,40 @@
 </div>
 
 <div *ngIf="showStudent">
-  <table class="table table-striped table-hover">
-    <thead class="thead thead-dark">
-      <th>Application ID</th>
-      <th>Company</th>
-      <th>Location</th>
-      <th>Position</th>
-      <th>Job Description</th>
-      <th>Interest Level</th>
-      <th>Applied</th>
-      <th>Phone/Video</th>
-      <th>In-Person</th>
-      <th>Offer</th>
-      <th>Accepted</th>
-      <!-- <th>Progress</th> -->
-      <th></th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let app of apps">
-        <td>{{ app.id }}</td>
-        <td>{{ app.company.name }}</td>
-        <td>
-          {{
-            app.company.companyLocations[
-              app.company.companyLocations.length - 1
-            ].city
-          }},
-          {{
-            app.company.companyLocations[
-              app.company.companyLocations.length - 1
-            ].state
-          }}
-        </td>
-        <td>{{ app.position }}</td>
-        <td>{{ app.descriptionURL }}</td>
-        <td>{{ app.interestLevel }}</td>
-        <td
-          *ngFor="let prog of app.progressArray"
-          [ngClass]="prog != 'x' ? 'current' : 'todo'"
-        ></td>
-        <!-- <td>{{ app.progress | json }}</td> -->
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <table class="table table-striped table-hover" >
+      <thead class="thead thead-dark">
+        <th>Application ID</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Position</th>
+        <th>Job Description</th>
+        <th>Interest Level</th>
+            <th>Applied</th>
+            <th>Phone/Video</th>
+            <th>In-Person</th>
+            <th>Offer</th>
+            <th>Accepted</th>
+            <!-- <th>Progress</th> -->
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let app of apps">
+              <td>{{ app.id }}</td>
+              <td>{{ app.company.name }}</td>
+          <td>{{ app.company.companyLocations[app.company.companyLocations.length -1].city}},
+            {{ app.company.companyLocations[app.company.companyLocations.length -1].state}}</td>
+            <td>{{ app.position}}</td>
+            <td>{{ app.descriptionURL}}</td>
+            <td>{{ app.interestLevel}}</td>
+            <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" > </td>
+            <!-- <td>{{ app.progress | json }}</td> -->
+          </tr>
+        </tbody>
+      </table>
+  </div>
 
-<app-cohort-update
-  #modal
-  [cohort]="cohort"
-  (childEvent)="reload()"
-></app-cohort-update>
+  <div *ngIf="showStudent">
+    <app-admin-statistics [student]="showStudent"></app-admin-statistics>
+  </div>
+
+  <app-cohort-update #modal [cohort]= cohort (childEvent)="reload()"></app-cohort-update>

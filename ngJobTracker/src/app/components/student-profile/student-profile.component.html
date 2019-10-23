@@ -1,7 +1,7 @@
 
 <div *ngIf="editStudent">
 <!-- test -->
-<div class="container">
+<div>
     <div class="row">
       <div class="col-4">
         <table>
@@ -10,11 +10,11 @@
 
           </tr>
           <tr><td> {{mainAddress.city}}, {{mainAddress.state}} </td></tr>
-          <tr><td> <button (click)='addressForm()'>  Add New Address</button></td></tr>
+
 <tr><td> Github : {{editStudent.githubUsername}}</td></tr>
 <tr><td> Email : {{editStudent.email}}</td></tr>
-<tr><td><button (click)='setEditStudent()'>  Update Personal Information</button></td></tr>
-<tr><td> <button (click)='setEditUserName()'>  Update Password/Username</button></td></tr>
+<tr><td><button class="btn btn-primary" (click)='openModalForm(editStudent)'>  Update Personal Information</button></td></tr>
+
         </table>
 
       </div>
@@ -89,7 +89,7 @@
             <li> <input type="text" name="city" placeholder="City" ngModel></li>
             <li> <input type="text" name="state" placeholder="State" ngModel></li>
             <li> <input type="text" name="zipcode" placeholder="Zip Code" ngModel></li>
-            <li> <input type="text" name="phone" placeholder="Street" ngModel></li>
+            <li> <input type="text" name="phone" placeholder="Phone" ngModel></li>
 
                 <button (click)="addAddress(aAddress)"> Add Address </button>
                 <button (click)='cancelAddressForm()'>  Cancel</button>
@@ -97,3 +97,4 @@
       </form>
     </div>
 
+    <app-student-modal  #modal [editStudent] = editStudent [editAddress] = editAddress [editUser] = editUser (childEvent)="reload()"></app-student-modal>

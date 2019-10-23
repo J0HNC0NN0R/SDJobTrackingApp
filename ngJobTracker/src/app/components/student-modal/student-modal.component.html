@@ -1,0 +1,102 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Student</h4>
+
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form #editForm = "ngForm">
+      <table *ngIf="isUpdate">
+        <tr>
+          <td>FirstName:</td><td><input type="text" name="firstName" [(ngModel)]="editStudent.firstName"></td>
+        </tr>
+        <tr>
+          <td>FirstName:</td><td><input type="text" name="lastName" [(ngModel)]="editStudent.lastName"></td>
+        </tr>
+        <tr>
+          <td>Email:</td><td><input type="text" name="email" [(ngModel)]="editStudent.email"></td>
+        </tr>
+        <tr>
+          <td>Github:</td><td><input type="text" name="githubUsername" [(ngModel)]="editStudent.githubUsername"></td>
+        </tr>
+        <tr>
+          <td>Education:</td><td><input type="text" name="EducationLevel" [(ngModel)]="editStudent.educationLevel"></td>
+        </tr>
+        <tr>
+          <td>Clearance:</td><td><input type="text" name="Clearance" [(ngModel)]="editStudent.clearance"></td>
+        </tr>
+        <tr>
+         <td>Employed: <input type="checkbox" name="Employed" [(ngModel)]="editStudent.employed"></td>
+        </tr>
+        <tr>
+         <td>Accepted: <input type="checkbox" name="Accepter" [(ngModel)]="editStudent.accepted"></td>
+        </tr>
+        <tr>
+         <td>Gi Bill: <input type="checkbox" name="GiBill" [(ngModel)]="editStudent.gibill"></td>
+        </tr>
+        <tr>
+         <td>VETTEC: <input type="checkbox" name="Vettec" [(ngModel)]="editStudent.vettec"></td>
+        </tr>
+        <tr>
+         <td>Deposit Paid: <input type="checkbox" name="DepositPaid" [(ngModel)]="editStudent.depositPaid"></td>
+        </tr>
+        <tr>
+         <td>Needs Loaner Laptop: <input type="checkbox" name="NeedsLoanerLaptop" [(ngModel)]="editStudent.needsLoanerLaptop"></td>
+        </tr>
+        <tr>
+         <td>Open To Reloation: <input type="checkbox" name="OpenToRelocation" [(ngModel)]="editStudent.openToRelocation"></td>
+        </tr>
+        <tr>
+        </tr>
+        <tr>
+        </tr>
+
+      </table>
+      <table *ngIf="isPassword">
+
+          <tr>
+            <td>UserName:</td><td><input type="text" name="username" [(ngModel)]="editUser.username"></td>
+          </tr>
+          <tr>
+            <td>Password:</td><td><input type="password" name="password" [(ngModel)]="editUser.password"></td>
+          </tr>
+          </table>
+      <table *ngIf="isAddress">
+        <tr>
+          <td>Address Type:</td><td><input type="text" name="street" [(ngModel)]="editAddress.addressType"></td>
+        </tr>
+        <tr>
+          <td>Street:</td><td><input type="text" name="street" [(ngModel)]="editAddress.street"></td>
+        </tr>
+          <tr>
+            <td>City:</td><td><input type="text" name="city" [(ngModel)]="editAddress.city"></td>
+          </tr>
+          <tr>
+            <td>State:</td><td><input type="text" name="state" [(ngModel)]="editAddress.state"></td>
+          </tr>
+          <tr>
+            <td>Zip Code:</td><td><input type="text" name="zipcode" [(ngModel)]="editAddress.zipcode"></td>
+          </tr>
+          <tr>
+            <td>Phone:</td><td><input type="text" name="phone" [(ngModel)]="editAddress.phone"></td>
+          </tr>
+          </table>
+    </form>
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="togglePass()"> Update Password</button>
+    <button type="button" class="btn btn-outline-primary" (click)="toggleAddress()">Add Address</button>
+    <button type="button" class="btn btn-outline-success" (click)="modal.close(); updateStudent()" *ngIf="isUpdate">Save</button>
+    <button type="button" class="btn btn-outline-success" (click)="modal.close(); createAddress()" *ngIf="isAddress">Save</button>
+    <button type="button" class="btn btn-outline-success" (click)="modal.close(); updatePass()" *ngIf="isPassword">Save</button>
+
+
+  </div>
+
+</ng-template>
+

@@ -1,7 +1,12 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div id="dummyNav">
   <span>
     <img id="SDLogo" src="https://i.imgur.com/FbtlrXK.png">
   </span>
   <span *ngIf="!checkLogin()" class="float-right"><app-login></app-login></span>
   <span *ngIf="checkLogin()" class="float-right"><app-logout></app-logout></span>
+</div>
+  <!--Scroll to top-->
+<div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <button (click)="scrollToTop()"> <i class="fa fa-chevron-up"></i></button>
 </div>

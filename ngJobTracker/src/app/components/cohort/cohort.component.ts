@@ -14,6 +14,7 @@ import { CohortUpdateComponent } from '../cohort-update/cohort-update.component'
   styleUrls: ['./cohort.component.css']
 })
 export class CohortComponent implements OnInit {
+  showCohorts: boolean;
   cohorts: Cohort[] = [];
   students: Student[] = [];
   date: Date;
@@ -27,6 +28,7 @@ export class CohortComponent implements OnInit {
   showAddForm: boolean;
   cohort: Cohort;
   selectedCohort: Cohort;
+  listStudentsBool: boolean;
 
 
   constructor(private studentService: StudentService, private appService: ApplicationService) { }
@@ -98,6 +100,7 @@ export class CohortComponent implements OnInit {
 
         // this.students = lifeIsGood;
         this.setCohort = cohort;
+        this.listStudentsBool = true;
         this.students = [];
         data.forEach(app => {
           const stu = new Student(app.id, app.cohort, app.cohortId, app.user, app.firstName, app.lastName,

@@ -34,13 +34,14 @@
     </thead>
 
     <tbody>
-      <tr *ngFor='let cohort of cohorts' (click)='listStudents(cohort)' class="table table-hover">
-        <td> {{ cohort.id }} </td>
-        <td> {{ cohort.startDate | date }}</td>
-        <td> {{ cohort.endDate | date }}</td>
-        <td> {{ cohort.name }}</td>
-        <td> {{ deadline(cohort) | date }}</td>
-        <td> {{ daysLeft() | number: '1.0-0'}}</td>
+      <tr *ngFor='let cohort of cohorts'  class="table table-hover">
+        <td (click)='listStudents(cohort)'> {{ cohort.id }} </td>
+        <td (click)='listStudents(cohort)'> {{ cohort.startDate | date }}</td>
+        <td (click)='listStudents(cohort)'> {{ cohort.endDate | date }}</td>
+        <td (click)='listStudents(cohort)'> {{ cohort.name }}</td>
+        <td (click)='listStudents(cohort)'> {{ deadline(cohort) | date }}</td>
+        <td (click)='listStudents(cohort)'> {{ daysLeft() | number: '1.0-0'}}</td>
+        <td><button (click)='openModalForm(cohort)'>Edit Cohort</button></td>
       </tr>
     </tbody>
   </table>
@@ -142,28 +143,28 @@
         <th>Job Description</th>
         <th>Interest Level</th>
             <th>Applied</th>
-        <th>Phone/Video</th>
-        <th>In-Person</th>
-        <th>Offer</th>
-        <th>Accepted</th>
-        <!-- <th>Progress</th> -->
-        <th></th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let app of apps">
-          <td>{{ app.id }}</td>
-          <td>{{ app.company.name }}</td>
+            <th>Phone/Video</th>
+            <th>In-Person</th>
+            <th>Offer</th>
+            <th>Accepted</th>
+            <!-- <th>Progress</th> -->
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let app of apps">
+              <td>{{ app.id }}</td>
+              <td>{{ app.company.name }}</td>
           <td>{{ app.company.companyLocations[app.company.companyLocations.length -1].city}},
-             {{ app.company.companyLocations[app.company.companyLocations.length -1].state}}</td>
-          <td>{{ app.position}}</td>
-          <td>{{ app.descriptionURL}}</td>
-          <td>{{ app.interestLevel}}</td>
-          <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" > </td>
-          <!-- <td>{{ app.progress | json }}</td> -->
-        </tr>
-      </tbody>
-    </table>
+            {{ app.company.companyLocations[app.company.companyLocations.length -1].state}}</td>
+            <td>{{ app.position}}</td>
+            <td>{{ app.descriptionURL}}</td>
+            <td>{{ app.interestLevel}}</td>
+            <td *ngFor="let prog of app.progressArray" [ngClass]=" prog != 'x' ? 'current': 'todo'" > </td>
+            <!-- <td>{{ app.progress | json }}</td> -->
+          </tr>
+        </tbody>
+      </table>
   </div>
 
-
+  <app-cohort-update #modal [cohort]= cohort (childEvent)="reload()"></app-cohort-update>
 

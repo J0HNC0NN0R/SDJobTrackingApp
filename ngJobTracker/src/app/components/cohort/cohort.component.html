@@ -98,10 +98,10 @@
         <div *ngIf="showStudent">
           <td>
             Student Information
-            <button (click)="clearProfile()">Clear Student</button>
+            <button class="btn btn-primary" (click)="clearProfile()">Back</button>
           </td>
           <ul>
-            <!-- <li> Id : {{editStudent.id}} </li> -->
+            <!-- <li> Id : {{editStudent.d}} </li> -->
             <li>
               Name : {{ showStudent.firstName }} {{ showStudent.lastName }}
             </li>
@@ -136,11 +136,39 @@
   </div>
   <div class="col-8">
       <div *ngIf="showStudent">
-          <app-admin-statistics [student]="showStudent"></app-admin-statistics>
+<!-- update form -->
+<div *ngIf='upStudent'>
+    <form>
+      <ul>
+        <br>
+         <li> <input type="text" name="firstName" placeholder="First Name" [(ngModel)]="upStudent.firstName"></li>
+        <li> <input type="text" name="lastName" placeholder="Last Name" [(ngModel)]="upStudent.lastName"></li>
+        <li> <input type="text" name="email" placeholder="Email" [(ngModel)]="upStudent.email"></li>
+        <li> <input type="text" name="githubUsername" placeholder="GitHub" [(ngModel)]="upStudent.githubUsername"></li>
+        <li> <input type="text" name="EducationLevel" placeholder="Education" [(ngModel)]="upStudent.educationLevel"></li>
+        <li> <input type="text" name="Clearance" placeholder="Clearance" [(ngModel)]="upStudent.clearance"></li>
+        <li> Employed: <input type="checkbox" name="Employed" [(ngModel)]="upStudent.employed"></li>
+        <li> Accepted: <input type="checkbox" name="Accepted" [(ngModel)]="upStudent.accepted"></li>
+        <li> GiBill: <input type="checkbox" name="GiBill" [(ngModel)]="upStudent.gibill"></li>
+        <li> Vettec: <input type="checkbox" name="Vettec" [(ngModel)]="upStudent.vettec"></li>
+        <li> Deposit Paid: <input type="checkbox" name="DepositPaod" [(ngModel)]="upStudent.depositPaid"></li>
+        <li> Needs Loaner Laptop: <input type="checkbox" name="Needs Loaner Laptop"
+          [(ngModel)]="upStudent.needsLoanerLaptop"></li>
+          <li> Open to Relocation: <input type="checkbox" name="Open to Relocation"
+            [(ngModel)]="upStudent.openToRelocation"></li>
+
+            <button (click)="updateStudent()"> Confirm Update</button>
+            <button (click)='cancelEditStudent()'>  Cancel</button>
+    </ul>
+  </form>
+</div>
+
+          <app-admin-statistics *ngIf="!upStudent" [student]="showStudent"></app-admin-statistics>
         </div>
   </div>
 </div>
 
+<!-- selected student apps -->
 <div *ngIf="showStudent">
     <table class="table table-striped table-hover" >
       <thead class="thead thead-dark">
@@ -173,6 +201,7 @@
         </tbody>
       </table>
   </div>
+
 
 
 

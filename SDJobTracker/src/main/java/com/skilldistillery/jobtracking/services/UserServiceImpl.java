@@ -74,7 +74,7 @@ Optional<User> use = userrepo.findById(id);
 		User deleteUser = null;
 		if(use.isPresent()) {
 			 deleteUser = use.get();
-			deleteUser.setEnabled(false);
+			deleteUser.setEnabled(!deleteUser.isEnabled());
 			userrepo.saveAndFlush(deleteUser);
 			return true;
 		}

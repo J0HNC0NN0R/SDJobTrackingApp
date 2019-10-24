@@ -43,7 +43,7 @@ export class AdminProfileComponent implements OnInit {
     // console.log(user.enabled);
 
 
-    this.user.update(user).subscribe(
+    this.user.destroy(user.id).subscribe(
       data => {
         this.reload();
       },
